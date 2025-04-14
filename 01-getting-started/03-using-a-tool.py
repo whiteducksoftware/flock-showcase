@@ -1,9 +1,10 @@
 from flock.core import Flock, FlockFactory
 from flock.core.logging.formatters.themes import OutputTheme
 from flock.core.tools import basic_tools
+from flock.config import DEFAULT_MODEL
 
-
-flock = Flock(model="openai/gpt-4o")
+# Define the DEFAULT_MODEL in your .env file
+flock = Flock(model=DEFAULT_MODEL)
 
 # --------------------------------
 # Create an agent
@@ -23,10 +24,32 @@ agent = FlockFactory.create_default_agent(
             "entities_and_metadata: list[dict[str, str]]," 
             "type:Literal['news', 'blog', 'opinion piece', 'tweet']",
     tools=[basic_tools.get_web_content_as_markdown],
-    enable_rich_tables=True,
-    output_theme=OutputTheme.aardvark_blue,
+    enable_rich_tables=True, # Instead of the json output, you can use the rich library to render the output as a table
+    output_theme=OutputTheme.aardvark_blue, # flock also comes with a few themes
+    wait_for_input=True # flock will wait for the user to press enter before continuing after this agent's run
 )
 flock.add_agent(agent)
+
+
+# --------------------------------
+# Tools = ReAct Agent
+# --------------------------------
+# If tools are used, the agent will be a ReAct Agent
+# ReAct Agents are agents that can use tools to solve tasks
+# by planning steps, executing them and evaluating the results.
+# With 'include_thought_process=True', the agent will include the thought process in the output
+# This is useful for debugging and for understanding the agent's thought process
+age_agent = FlockFactory.create_default_agent(
+    name="my_celebrity_age_agent",
+    input="a_person",
+    output="persons_age_in_days",
+    tools=[basic_tools.web_search_duckduckgo, basic_tools.code_eval],
+    enable_rich_tables=True,
+    output_theme=OutputTheme.homebrew, 
+    use_cache=True, # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
+    include_thought_process=True, # flock will include the thought process of the agent in the output if available
+)
+flock.add_agent(age_agent)
 
 
 # --------------------------------
@@ -39,5 +62,17 @@ result = flock.run(
     input={"url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"},
 )
 
+# To start a different agent, you can do so by calling flock.run() again with a different start_agent
+
+result = flock.run(
+    start_agent=age_agent,
+    input={"a_person": "Brad Pitt"},
+)
+
+# --------------------------------
+# YOUR TURN
+# --------------------------------
+# - Create a small research agent that can search the web for a given topic, convert the output to markdown and then use the markdown to create a beautiful report
+# - Explore some of the other tools flock has to offer
 
 

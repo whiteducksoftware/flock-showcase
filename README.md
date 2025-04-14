@@ -125,7 +125,7 @@ Please follow standard coding practices and ensure examples are clear and runnab
 
 ## 📜 License
 
-This showcase repository is licensed under the [Apache 2.0 License](LICENSE). <!-- Update LICENSE if different -->
+This showcase repository is licensed under the [MIT License](LICENSE). <!-- Update LICENSE if different -->
 
 ## 🔗 Links
 

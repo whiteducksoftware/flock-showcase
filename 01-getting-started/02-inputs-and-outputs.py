@@ -54,4 +54,5 @@ print_success(result.characters)
 
 # YOUR TURN!
 # Try changing the types and descriptions of the input and output fields
+# What happens if agent description is at odds with the input and output fields?
 
