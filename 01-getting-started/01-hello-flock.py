@@ -25,7 +25,7 @@ flock = Flock(name="hello_flock", description="This is your first flock!", model
 presentation_agent = FlockFactory.create_default_agent(
     name="my_presentation_agent",
     input="topic",
-    output="fun_title, fun_slide_headers: list[str], fun_slide_summaries: list[str]"
+    output="fun_title, fun_slide_headers, fun_slide_summaries"
 )
 flock.add_agent(presentation_agent)
 
