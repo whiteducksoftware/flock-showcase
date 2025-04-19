@@ -1143,7 +1143,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.0b23"
+version = "0.4.0b27"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "azure-search-documents" },
@@ -1189,9 +1189,9 @@ dependencies = [
     { name = "uvicorn" },
     { name = "zep-python" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/85/98/a90d1c7df12667a2a964a3c17b3ad9ef1613a45fc8813b6c5db1751eabd2/flock_core-0.4.0b23.tar.gz", hash = "sha256:21e31e6494e4a99a307eb0c955f5795adc48487748f5911665682900b4b4aa4c", size = 3094874 }
+sdist = { url = "https://files.pythonhosted.org/packages/13/f6/46b5782f7b73f42cf89a4d782bb1a6e225a81c7eac01ca9b9901b9799af6/flock_core-0.4.0b27.tar.gz", hash = "sha256:8d977b8a311fc57db9694ced7850a7a80c9f38a80a1efbeb8a4485500cd8f583", size = 3110680 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e6/69/e581559a9fd4cc23d95e05e2812947f949ffcaa228da549916ae60fd123d/flock_core-0.4.0b23-py3-none-any.whl", hash = "sha256:ae9c4e2d404f47a98298c2563809a08570972d0312694b436dfea46d0566d6d7", size = 482984 },
+    { url = "https://files.pythonhosted.org/packages/6f/b9/f98bbc944e02b0eb3605c60888b33a461148d7feff09de142b7ae4775e8c/flock_core-0.4.0b27-py3-none-any.whl", hash = "sha256:83d53b6bbc0a41f2c19adb50a6d6ab0b2474303de810f9c4f5e062e295333970", size = 492833 },
 ]
 
 [package.optional-dependencies]
@@ -1210,7 +1210,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "flock-core", extras = ["all"], specifier = ">=0.4.0b23" }]
+requires-dist = [{ name = "flock-core", extras = ["all"], specifier = ">=0.4.0b26" }]
 
 [[package]]
 name = "fonttools"
@@ -2080,7 +2080,7 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/8c/de/8eb6fffecd9c5f129461edcdd7e1ac944f9de15783e3d89c84ed6e0374bc/lxml-5.3.2-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:aa837e6ee9534de8d63bc4c1249e83882a7ac22bd24523f83fad68e6ffdf41ae", size = 5652903 },
     { url = "https://files.pythonhosted.org/packages/95/79/80f4102a08495c100014593680f3f0f7bd7c1333b13520aed855fc993326/lxml-5.3.2-cp310-cp310-musllinux_1_2_s390x.whl", hash = "sha256:da4c9223319400b97a2acdfb10926b807e51b69eb7eb80aad4942c0516934858", size = 5491813 },
     { url = "https://files.pythonhosted.org/packages/15/f5/9b1f7edf6565ee31e4300edb1bcc61eaebe50a3cff4053c0206d8dc772f2/lxml-5.3.2-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:dc0e9bdb3aa4d1de703a437576007d366b54f52c9897cae1a3716bb44fc1fc85", size = 5227837 },
-    { url = "https://files.pythonhosted.org/packages/5c/17/c31d94364c02e3492215658917f5590c00edce8074aeb06d05b7771465d9/lxml-5.3.2-cp310-cp310-win32.whl", hash = "sha256:5f94909a1022c8ea12711db7e08752ca7cf83e5b57a87b59e8a583c5f35016ad", size = 3477533 },
+    { url = "https://files.pythonhosted.org/packages/dd/53/a187c4ccfcd5fbfca01e6c96da39499d8b801ab5dcf57717db95d7a968a8/lxml-5.3.2-cp310-cp310-win32.win32.whl", hash = "sha256:dd755a0a78dd0b2c43f972e7b51a43be518ebc130c9f1a7c4480cf08b4385486", size = 3477533 },
     { url = "https://files.pythonhosted.org/packages/f2/2c/397c5a9d76a7a0faf9e5b13143ae1a7e223e71d2197a45da71c21aacb3d4/lxml-5.3.2-cp310-cp310-win_amd64.whl", hash = "sha256:d64ea1686474074b38da13ae218d9fde0d1dc6525266976808f41ac98d9d7980", size = 3805160 },
     { url = "https://files.pythonhosted.org/packages/84/b8/2b727f5a90902f7cc5548349f563b60911ca05f3b92e35dfa751349f265f/lxml-5.3.2-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:9d61a7d0d208ace43986a92b111e035881c4ed45b1f5b7a270070acae8b0bfb4", size = 8163457 },
     { url = "https://files.pythonhosted.org/packages/91/84/23135b2dc72b3440d68c8f39ace2bb00fe78e3a2255f7c74f7e76f22498e/lxml-5.3.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:856dfd7eda0b75c29ac80a31a6411ca12209183e866c33faf46e77ace3ce8a79", size = 4433445 },
