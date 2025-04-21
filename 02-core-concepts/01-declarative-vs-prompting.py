@@ -10,8 +10,7 @@ Use Case: Haiku Bot 🌸 - Generate a haiku about a given theme.
 import litellm # For the traditional prompt example
 from flock.core import Flock, FlockFactory
 from rich.console import Console
-
-from utils.utils import print_header, print_subheader, print_success, print_warning
+from flock.cli.utils import print_header, print_subheader, print_success, print_warning
 
 # --- Configuration ---
 console = Console()

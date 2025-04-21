@@ -1,7 +1,6 @@
 from flock.core import Flock, FlockFactory 
 from rich.console import Console
-
-from utils.utils import print_header, print_subheader, print_success    
+from flock.cli.utils import print_header, print_subheader, print_success
 
 console = Console()
 

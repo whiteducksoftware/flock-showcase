@@ -14,17 +14,14 @@ Highlights:
 
 import os
 from pprint import pprint # Using pprint for cleaner dict/list printing
-from typing import Literal, cast
+from typing import Literal
 from pydantic import BaseModel, Field # Import Pydantic components
 
 from flock.core import Flock, FlockFactory
 from flock.core.flock_registry import flock_type # Decorator for registering custom types
 from rich.console import Console
-from flock.evaluators.declarative.declarative_evaluator import DeclarativeEvaluator
 
-from utils.utils import print_header, print_subheader, print_warning
-
-
+from flock.cli.utils import print_header, print_subheader, print_warning
 
 # --- Configuration ---
 console = Console()
