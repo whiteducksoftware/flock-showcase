@@ -38,6 +38,7 @@ agent = FlockFactory.create_default_agent(
   input="query",
   output="answer",
   tools=[get_specials, get_price],
+  #include_thought_process=True, # flock will include the thought process of the agent in the output if available
 )
 
 # add the agent to the flock
