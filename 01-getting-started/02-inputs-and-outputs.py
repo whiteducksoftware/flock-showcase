@@ -1,8 +1,5 @@
 from flock.cli.utils import print_header, print_subheader, print_success
 from flock.core import Flock, FlockFactory
-from rich.console import Console
-
-console = Console()
 
 MODEL = "openai/gpt-4o"
 
