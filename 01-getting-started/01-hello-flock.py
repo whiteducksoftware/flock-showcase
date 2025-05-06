@@ -1,4 +1,4 @@
-from flock.core import Flock, FlockFactory 
+from flock.core import Flock, FlockFactory
 
 # --------------------------------
 # Define the model
@@ -25,7 +25,7 @@ flock = Flock(name="hello_flock", description="This is your first flock!", model
 presentation_agent = FlockFactory.create_default_agent(
     name="my_presentation_agent",
     input="topic",
-    output="fun_title, fun_slide_headers, fun_slide_summaries"
+    output="fun_title, fun_slide_headers, fun_slide_summaries",
 )
 flock.add_agent(presentation_agent)
 
@@ -35,10 +35,10 @@ flock.add_agent(presentation_agent)
 # --------------------------------
 # Tell the flock who the starting agent is and what input to give it
 flock.run(
-    start_agent=presentation_agent, 
-    input={"topic": "A presentation about robot kittens"}
+    start_agent=presentation_agent,
+    input={"topic": "A presentation about robot kittens"},
 )
 
 # YOUR TURN!
-# Try changing the output definition (line 29) by replacing "fun" with "boring" 
+# Try changing the output definition (line 29) by replacing "fun" with "boring"
 # (boring_title, boring_slide_headers, boring_slide_summaries)

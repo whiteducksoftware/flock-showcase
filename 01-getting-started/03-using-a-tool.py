@@ -1,7 +1,7 @@
+from flock.config import DEFAULT_MODEL
 from flock.core import Flock, FlockFactory
 from flock.core.logging.formatters.themes import OutputTheme
 from flock.core.tools import basic_tools
-from flock.config import DEFAULT_MODEL
 
 # Define the DEFAULT_MODEL in your .env file
 flock = Flock(model=DEFAULT_MODEL)
@@ -10,9 +10,9 @@ flock = Flock(model=DEFAULT_MODEL)
 # Create an agent
 # --------------------------------
 # Some additions to example 01
-# - you can define the output types of the agent with standart python type hints
+# - you can define the output types of the agent with standard python type hints
 # - you can define the tools the agent can use
-# - you can define if the agent should use the cache 
+# - you can define if the agent should use the cache
 #   results will get cached and if true and if the input is the same as before, the agent will return the cached result
 #   this is useful for expensive operations like web scraping and for debugging
 # Some people need some swag in their output
@@ -20,13 +20,13 @@ flock = Flock(model=DEFAULT_MODEL)
 agent = FlockFactory.create_default_agent(
     name="my_agent",
     input="url",
-    output="title, headings: list[str]," 
-            "entities_and_metadata: list[dict[str, str]]," 
-            "type:Literal['news', 'blog', 'opinion piece', 'tweet']",
+    output="title, headings: list[str],"
+    "entities_and_metadata: list[dict[str, str]],"
+    "type:Literal['news', 'blog', 'opinion piece', 'tweet']",
     tools=[basic_tools.get_web_content_as_markdown],
-    enable_rich_tables=True, # Instead of the json output, you can use the rich library to render the output as a table
-    output_theme=OutputTheme.aardvark_blue, # flock also comes with a few themes
-    wait_for_input=True # flock will wait for the user to press enter before continuing after this agent's run
+    enable_rich_tables=True,  # Instead of the json output, you can use the rich library to render the output as a table
+    output_theme=OutputTheme.aardvark_blue,  # flock also comes with a few themes
+    wait_for_input=True,  # flock will wait for the user to press enter before continuing after this agent's run
 )
 flock.add_agent(agent)
 
@@ -45,9 +45,9 @@ age_agent = FlockFactory.create_default_agent(
     output="persons_age_in_days",
     tools=[basic_tools.web_search_duckduckgo, basic_tools.code_eval],
     enable_rich_tables=True,
-    output_theme=OutputTheme.homebrew, 
-    use_cache=True, # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
-    include_thought_process=True, # flock will include the thought process of the agent in the output if available
+    output_theme=OutputTheme.homebrew,
+    use_cache=True,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
+    include_thought_process=True,  # flock will include the thought process of the agent in the output if available
 )
 flock.add_agent(age_agent)
 
@@ -59,7 +59,9 @@ flock.add_agent(age_agent)
 # It's worth it tho!
 result = flock.run(
     start_agent=agent,
-    input={"url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"},
+    input={
+        "url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"
+    },
 )
 
 # To start a different agent, you can do so by calling flock.run() again with a different start_agent
@@ -74,5 +76,3 @@ result = flock.run(
 # --------------------------------
 # - Create a small research agent that can search the web for a given topic, convert the output to markdown and then use the markdown to create a beautiful report
 # - Explore some of the other tools flock has to offer
-
-

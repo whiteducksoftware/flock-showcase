@@ -10,6 +10,11 @@ Highlights:
 - Use Field validation constraints to set up possible values
 - Demonstrate enum types, lists of models, and dictionaries
 - Show how Flock handles complex nested structures
+
+This example is to evaluate the max possible complexity for a Flock model.
+This currently will sometimes not work with gpt-4o! ('sometimes' like 1/10 times)
+
+A run will take ca. 50s to complete.
 """
 
 import enum
@@ -402,6 +407,8 @@ mission_agent = FlockFactory.create_default_agent(
     input="mission_parameters: dict | Parameters for mission generation including mission type and risk level and crew size.",
     output="mission: SpaceMission | A complete space mission profile with all required details.",
     temperature=0.7,
+    use_cache=False,
+    max_tokens=16384,  # 16k tokens is the max for gpt-4o
 )
 flock.add_agent(mission_agent)
 
@@ -572,3 +579,7 @@ if __name__ == "__main__":
 #    - Create a `@flock_type class AsteroidBelt(CelestialBody)` with specific asteroid properties
 #    - Change `secondary_destinations: List[CelestialBody]` to `secondary_destinations: List[Union[Planet, AsteroidBelt]]`
 #    Does Flock handle generating the correct type based on context?
+#
+# 5. Try to break the model:
+#    - Add as much complexity as possible to the model
+#    - Reduce the max_tokens to 4096 and see if it makes the model fail more often

@@ -1,13 +1,14 @@
-from flock.core import Flock, FlockFactory 
-from rich.console import Console
 from flock.cli.utils import print_header, print_subheader, print_success
+from flock.core import Flock, FlockFactory
+from rich.console import Console
 
 console = Console()
 
 MODEL = "openai/gpt-4o"
 
-flock = Flock(name="example_02", description="The flock input and output syntax", model=MODEL)
-
+flock = Flock(
+    name="example_02", description="The flock input and output syntax", model=MODEL
+)
 
 
 # --------------------------------
@@ -25,21 +26,17 @@ flock = Flock(name="example_02", description="The flock input and output syntax"
 # If you need to specify the agents behavior, you can do so with the description field.
 presentation_agent = FlockFactory.create_default_agent(
     name="my_movie_agent",
-    description="Creates a fun movie about a given topic", # Isn't just a description, but also a control mechanism
+    description="Creates a fun movie about a given topic",  # Isn't just a description, but also a control mechanism
     input="topic: str",
     output="fun_title: str | The funny title of the movie in all caps, "
     "runtime: int | The runtime of the movie in minutes, "
-    "synopsis: str | A crazy over the top synopsis of the movie, "  
-    "characters: list[dict[str, str]] | Key is character name - Value are character description, " 
+    "synopsis: str | A crazy over the top synopsis of the movie, "
+    "characters: list[dict[str, str]] | Key is character name - Value are character description, ",
 )
 flock.add_agent(presentation_agent)
 
 
-
-result = flock.run(
-    start_agent=presentation_agent, 
-    input={"topic": "AI agents"}
-)
+result = flock.run(start_agent=presentation_agent, input={"topic": "AI agents"})
 
 # --------------------------------
 # The result
@@ -54,4 +51,3 @@ print_success(result.characters)
 # YOUR TURN!
 # Try changing the types and descriptions of the input and output fields
 # What happens if agent description is at odds with the input and output fields?
-
