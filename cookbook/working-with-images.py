@@ -29,15 +29,15 @@ MODEL = os.getenv("DEFAULT_MODEL", "openai/gpt-4o")
 
 @flock_type
 class MyPetsInputModel(BaseModel):
-    name: str = Field(..., description="A creative first name.")
-    image: dspy.Image = Field(..., description="A PIL image of the pet.")
+    name: str = Field(..., description="The name of the pet.")
+    image: dspy.Image = Field(..., description="A image of the pet.")
 
 
 @flock_type
 class MyPetsOutputModel(BaseModel):
     cuteness_factor: float = Field(..., description="A number between 0 and 100.")
-    fur_color: str = Field(..., description="A color of the pet.")
-    animal_type: str = Field(..., description="A type of animal.")
+    fur_color: str = Field(..., description="The color of the fur.")
+    animal_type: str = Field(..., description="The type of animal.")
     image_description: str = Field(..., description="A description of the image.")
 
 
