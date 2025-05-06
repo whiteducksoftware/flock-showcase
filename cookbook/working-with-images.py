@@ -1,15 +1,6 @@
 # 02-core-concepts/02-pydantic-types.py
 """
-Purpose: Demonstrate using Pydantic models to define structured output.
-
-Use Case: Fantasy Character Sheet Generator 🧙‍♂️ - Generate structured character data.
-
-Highlights:
-- Define a Pydantic model (`RandomPerson`) with typed fields.
-- Use the `@flock_type` decorator to register the custom type.
-- Define a Flock agent whose `output` signature references the Pydantic model (`list[RandomPerson]`).
-- Flock automatically instructs the LLM to generate data matching the Pydantic schema.
-- The result object contains actual instances of the Pydantic model.
+Purpose: Demonstrate using images in Flock
 """
 
 import os
