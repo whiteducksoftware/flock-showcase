@@ -27,7 +27,12 @@ MODEL = os.getenv("DEFAULT_MODEL", "openai/gpt-4o")
 console.print(f"[grey50]Using model: {MODEL}[/grey50]")
 
 # --- Create Flock Instance ---
-flock = Flock(name="adventure_generator", model=MODEL, show_flock_banner=False)
+flock = Flock(
+    name="adventure_generator",
+    model=MODEL,
+    show_flock_banner=False,
+    enable_logging=True,
+)
 
 # --------------------------------
 # Step 1: Create Character Generator Agent
@@ -36,16 +41,17 @@ flock = Flock(name="adventure_generator", model=MODEL, show_flock_banner=False)
 character_agent = FlockFactory.create_default_agent(
     name="character_generator",
     description="Creates detailed fantasy characters based on user preferences.",
-    input="character_type: str | The general type of character the user wants to create (e.g., wizard, warrior, rogue)",
-    output="character_name: str | The character's full name\n"
-    "character_race: str | The character's fantasy race (e.g., human, elf, dwarf)\n"
-    "character_class: str | The character's profession or class\n"
-    "character_background: str | A brief backstory for the character\n"
-    "character_traits: list[str] | Three to five personality traits\n"
+    input="character_type: str | The general type of character the user wants to create",
+    output="character_name: str | The character's full name, "
+    "character_race: str | The character's fantasy race, "
+    "character_class: str | The character's profession or class, "
+    "character_background: str | A brief backstory for the character, "
+    "character_traits: list[str] | Three to five personality traits, "
     "character_abilities: list[str] | Special abilities or skills",
     temperature=0.7,  # Higher temperature for more creative characters
     enable_rich_tables=True,
-    output_theme=OutputTheme.monokai,
+    output_theme=OutputTheme.batman,
+    use_cache=False,
     wait_for_input=True,  # Pause after generating the character
 )
 
@@ -56,17 +62,16 @@ character_agent = FlockFactory.create_default_agent(
 adventure_agent = FlockFactory.create_default_agent(
     name="adventure_generator",
     description="Creates an adventure scenario tailored to a specific character.",
-    input="character_name: str | The character's name\n"
-    "character_race: str | The character's race\n"
-    "character_class: str | The character's class\n"
-    "character_background: str | The character's backstory\n"
-    "character_traits: list[str] | The character's personality traits\n"
+    input="character_name: str | The character's name,"
+    "character_race: str | The character's race,"
+    "character_class: str | The character's class,"
+    "character_background: str | The character's backstory,"
     "character_abilities: list[str] | The character's special abilities",
-    output="adventure_title: str | An epic title for the adventure\n"
-    "adventure_setting: str | Where the adventure takes place\n"
-    "adventure_quest: str | The main objective or quest\n"
-    "adventure_challenges: list[str] | Three to five challenges the character will face\n"
-    "adventure_allies: list[str] | One or two potential allies\n"
+    output="adventure_title: str | An epic title for the adventure,"
+    "adventure_setting: str | Where the adventure takes place,"
+    "adventure_quest: str | The main objective or quest,"
+    "adventure_challenges: list[str] | Three to five challenges the character will face,"
+    "adventure_allies: list[str] | One or two potential allies,"
     "adventure_antagonist: str | The main antagonist or obstacle",
     temperature=0.7,
     enable_rich_tables=True,
@@ -81,18 +86,18 @@ adventure_agent = FlockFactory.create_default_agent(
 conclusion_agent = FlockFactory.create_default_agent(
     name="conclusion_generator",
     description="Creates an epic conclusion to a character's adventure.",
-    input="character_name: str | The character's name\n"
-    "character_race: str | The character's race\n"
-    "character_class: str | The character's class\n"
-    "character_abilities: list[str] | The character's special abilities\n"
-    "adventure_title: str | The adventure's title\n"
-    "adventure_setting: str | The adventure's setting\n"
-    "adventure_quest: str | The main quest\n"
-    "adventure_challenges: list[str] | The challenges faced\n"
-    "adventure_allies: list[str] | The character's allies\n"
+    input="character_name: str | The character's name,"
+    "character_race: str | The character's race,"
+    "character_class: str | The character's class,"
+    "character_abilities: list[str] | The character's special abilities,"
+    "adventure_title: str | The adventure's title,"
+    "adventure_setting: str | The adventure's setting,"
+    "adventure_quest: str | The main quest,"
+    "adventure_challenges: list[str] | The challenges faced,"
+    "adventure_allies: list[str] | The character's allies,"
     "adventure_antagonist: str | The main antagonist",
-    output="epic_conclusion: str | A dramatic and satisfying conclusion to the adventure\n"
-    "character_growth: str | How the character has changed or grown\n"
+    output="epic_conclusion: str | A dramatic and satisfying conclusion to the adventure,"
+    "character_growth: str | How the character has changed or grown,"
     "sequel_hook: str | A teaser for a potential future adventure",
     temperature=0.8,  # Even higher temperature for a creative conclusion
     enable_rich_tables=True,

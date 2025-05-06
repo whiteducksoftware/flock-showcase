@@ -189,6 +189,9 @@ def run_flock_extraction(article_text: str):
     # 2. Define Agent Declaratively
     # Notice how we define WHAT we want (input, output, description)
     # We don't need to explain HOW to extract each piece of data
+    # Imagine the following:
+    # Instead of defining our complete system by natural language we describe each property of each object
+    # This granularity provides a lot of flexibility and allows us to add or change properties without changing the existing system
     article_analyzer = FlockFactory.create_default_agent(
         name="article_analyzer",
         description="Extracts structured information from news articles.",
