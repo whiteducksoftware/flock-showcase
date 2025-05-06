@@ -18,7 +18,8 @@ from flock.core import Flock, FlockFactory
 
 # All you have to do is make sure the model id matches what litellm expects
 # https://docs.litellm.ai/docs/providers/ollama
-MODEL = "ollama/qwen3"
+# Tip: the ollama_chat/model format seems to work better than ollama/model
+MODEL = "ollama_chat/qwen3"
 
 # Let's try a more difficult to set up provider
 # We will use azure open ai
