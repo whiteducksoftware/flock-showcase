@@ -6,8 +6,6 @@ from flock.core.tools.basic_tools import (
     code_eval,
     evaluate_math,
     get_web_content_as_markdown,
-    web_search_bing,
-    web_search_duckduckgo,
     web_search_tavily,
 )
 
@@ -23,8 +21,6 @@ qa_agent = FlockFactory.create_default_agent(
     output="answer: str | The concise answer to the question",
     tools=[
         web_search_tavily,
-        web_search_duckduckgo,
-        web_search_bing,
         get_web_content_as_markdown,
         code_eval,
         evaluate_math,
