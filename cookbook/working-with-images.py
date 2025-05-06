@@ -61,8 +61,14 @@ flock.add_agent(pet_agent)
 
 try:
     my_input = MyPetsInputModel(
-        name="lucy", image=dspy.Image.from_file(".assets/lucy.jpg")
+        name="luna", image=dspy.Image.from_file(".assets/luna.jpg")
     )
+
+    # also try lucy!
+
+    # my_input = MyPetsInputModel(
+    #     name="lucy", image=dspy.Image.from_file(".assets/lucy.jpg")
+    # )
     result = flock.run(
         start_agent="pet_agent",
         input={"pet_query": my_input},
