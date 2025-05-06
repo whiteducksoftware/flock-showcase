@@ -31,7 +31,6 @@ flock = Flock(
     name="adventure_generator",
     model=MODEL,
     show_flock_banner=False,
-    enable_logging=True,
 )
 
 # --------------------------------
@@ -51,7 +50,7 @@ character_agent = FlockFactory.create_default_agent(
     temperature=0.7,  # Higher temperature for more creative characters
     enable_rich_tables=True,
     output_theme=OutputTheme.batman,
-    use_cache=False,
+    use_cache=False,  # Disable caching for this agent
     wait_for_input=True,  # Pause after generating the character
 )
 
