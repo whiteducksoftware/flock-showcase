@@ -564,6 +564,54 @@ def run_pet_example():
 if __name__ == "__main__":
     run_pet_example()
 
+    # Interactive mode
+    print_header("🐱 Interactive Pet Caretaker Mode 🐱")
+    console.print("You can now interact directly with your virtual pet!")
+    console.print("Type 'exit' or 'quit' to end the session.")
+    console.print("Type 'status' to see your pet's current status.\n")
+
+    # Display current pet status
+    display_pet_status(get_pet_status())
+
+    while True:
+        try:
+            # Get user input
+            user_request = input(
+                "\n[bold cyan]What would you like to do with your pet?[/bold cyan] "
+            )
+
+            # Check for exit command
+            if user_request.lower() in ["exit", "quit"]:
+                console.print(
+                    "[bold]Thank you for taking care of your virtual pet! Goodbye![/bold]"
+                )
+                break
+
+            # Check for status command
+            if user_request.lower() == "status":
+                display_pet_status(get_pet_status())
+                continue
+
+            # Process the user request with the agent
+            console.print("[bold]Processing your request...[/bold]")
+            result = flock.run(
+                start_agent=pet_agent, input={"user_request": user_request}
+            )
+
+            # Display the agent's response
+            console.print(f"[bold green]Agent Response:[/bold green] {result.response}")
+
+            # Show updated pet status after each interaction
+            console.print("\n[bold]Updated Pet Status:[/bold]")
+            display_pet_status(get_pet_status())
+
+        except KeyboardInterrupt:
+            console.print("\n[bold]Session interrupted. Goodbye![/bold]")
+            break
+        except Exception as e:
+            console.print(f"[bold red]Error:[/bold red] {str(e)}")
+            console.print("Please try again.")
+
 # --- YOUR TURN! ---
 # 1. Add a new tool:
 #    - Create a new @flock_tool function like "give_bath" or "take_for_walk"
