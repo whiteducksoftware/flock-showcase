@@ -25,7 +25,7 @@ class MyOwnMemoryModuleConfig(FlockModuleConfig):
     """
 
     memory_file: str = Field(
-        default="memory.json", description="The file to store the memory in."
+        default="memory.txt", description="The file to store the memory in."
     )
 
 
@@ -78,7 +78,7 @@ class MyOwnMemoryModule(FlockModule):
     ##########################################################
 
     # For our module we want to save the memory when the agent is terminated
-    def on_terminate(
+    async def on_terminate(
         self,
         agent: Any,
         inputs: dict[str, Any],
@@ -91,11 +91,11 @@ class MyOwnMemoryModule(FlockModule):
         inputs = inputs.get("query", "")
         answer = result.get("answer", "")
         self.save(inputs + " " + answer)
-        logger.info("Saved memory:" + inputs + " " + answer)
+        logger.info("Saved memory: " + inputs + " " + answer)
 
     # For our module we want to load the memory when the agent is initialized
     # We load the memory and pass it in the agent's description
-    def on_initialize(
+    async def on_initialize(
         self,
         agent: FlockAgent,
         inputs: dict[str, Any],
@@ -107,7 +107,7 @@ class MyOwnMemoryModule(FlockModule):
         memory = self.load()
         agent.description = f"{agent.description}\n\nThis is your memory: {memory}"
         if memory:
-            logger.info("Loaded memory:" + memory)
+            logger.info("Loaded memory: " + memory)
         else:
             logger.info("No memory found")
 
@@ -138,7 +138,7 @@ async def main():
     flock.add_agent(agent)
 
     # Run the flock (set breakpoints in the module hooks!)
-    await flock.run(input={"query": "What is the capital of France?"})
+    await flock.run_async(input={"query": "What is the capital of France?"})
 
 
 if __name__ == "__main__":
