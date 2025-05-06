@@ -36,6 +36,9 @@ class MyPetsOutputModel(BaseModel):
     cuteness_factor: float = Field(..., description="A number between 0 and 100.")
     fur_color: str = Field(..., description="The color of the fur.")
     animal_type: str = Field(..., description="The type of animal.")
+    cuteness_reasoning: str = Field(
+        ..., description="A reasoning for the cuteness factor."
+    )
     image_description: str = Field(..., description="A description of the image.")
 
 
