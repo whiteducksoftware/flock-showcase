@@ -1,4 +1,4 @@
-# 02-core-concepts/01-declarative-vs-prompting-alt.py
+# 02-core-concepts/02-declarative-vs-prompting-alt.py
 """
 Purpose: Demonstrate the difference between Flock's declarative approach
          and traditional detailed prompting for structured data extraction.

@@ -1,4 +1,4 @@
-# 02-core-concepts/02-pydantic-types.py
+# 02-core-concepts/01-pydantic-types.py
 """
 Purpose: Demonstrate using Pydantic models to define structured output.
 
