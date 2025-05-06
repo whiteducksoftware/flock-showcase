@@ -21,9 +21,7 @@ from flock.core.flock_registry import (
     flock_type,  # Decorator for registering custom types
 )
 from pydantic import BaseModel, Field  # Import Pydantic components
-from rich.console import Console
 
-console = Console()
 MODEL = os.getenv("DEFAULT_MODEL", "openai/gpt-4o")
 
 
