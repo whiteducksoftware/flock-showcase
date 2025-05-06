@@ -7,7 +7,7 @@ Use Case: Space Exploration Game 🚀 - Generate detailed space missions with ne
 
 Highlights:
 - Define multiple nested Pydantic models with complex relationships
-- Use advanced validation with custom validators
+- Use Field validation constraints to set up possible values
 - Demonstrate enum types, lists of models, and dictionaries
 - Show how Flock handles complex nested structures
 """
@@ -58,19 +58,24 @@ class ResourceRarity(str, enum.Enum):
 class Coordinates(BaseModel):
     """3D coordinates in space."""
 
-    x: float = Field(..., description="X coordinate in light years from Sol")
-    y: float = Field(..., description="Y coordinate in light years from Sol")
-    z: float = Field(..., description="Z coordinate in light years from Sol")
-
-    @field_validator("x", "y", "z")
-    @classmethod
-    def check_coordinate_range(cls, v: float) -> float:
-        """Ensure coordinates are within reasonable range."""
-        if abs(v) > 1000:
-            raise ValueError(
-                "Coordinate values must be between -1000 and 1000 light years"
-            )
-        return v
+    x: float = Field(
+        ...,
+        description="X coordinate in light years from Sol (between -1000 and 1000)",
+        ge=-1000,
+        le=1000,
+    )
+    y: float = Field(
+        ...,
+        description="Y coordinate in light years from Sol (between -1000 and 1000)",
+        ge=-1000,
+        le=1000,
+    )
+    z: float = Field(
+        ...,
+        description="Z coordinate in light years from Sol (between -1000 and 1000)",
+        ge=-1000,
+        le=1000,
+    )
 
     def distance_from_sol(self) -> float:
         """Calculate distance from Sol (0,0,0)."""
@@ -81,12 +86,25 @@ class Coordinates(BaseModel):
 class Resource(BaseModel):
     """A resource that can be harvested from a celestial body."""
 
-    name: str = Field(..., description="Name of the resource")
+    name: str = Field(
+        ...,
+        description="Name of the resource (must be capitalized)",
+        pattern=r"^[A-Z].*",
+    )
     rarity: ResourceRarity = Field(
         ..., description="Rarity classification of the resource"
     )
-    value_per_unit: int = Field(..., description="Value per unit in credits", gt=0)
-    hazard_level: int = Field(..., description="Hazard level from 0-10", ge=0, le=10)
+    value_per_unit: int = Field(
+        ...,
+        description="Value per unit in credits. High-value resources (>1000) should have hazard level of at least 3",
+        gt=0,
+    )
+    hazard_level: int = Field(
+        ...,
+        description="Hazard level from 0-10. High hazard resources (>8) should have value of at least 500 credits",
+        ge=0,
+        le=10,
+    )
 
     @field_validator("name")
     @classmethod
@@ -125,13 +143,15 @@ class Atmosphere(BaseModel):
         ..., description="Whether the atmosphere is breathable by humans"
     )
     composition: Dict[str, float] = Field(
-        ..., description="Chemical composition as element:percentage"
+        ...,
+        description="Chemical composition as element:percentage. Percentages should sum to approximately 100%",
     )
     pressure: float = Field(
         ..., description="Atmospheric pressure in Earth atmospheres", ge=0
     )
     temperature_range: tuple[float, float] = Field(
-        ..., description="Temperature range in Celsius"
+        ...,
+        description="Temperature range in Celsius. Minimum temperature must be less than maximum temperature",
     )
 
     @field_validator("composition")
@@ -160,7 +180,11 @@ class Atmosphere(BaseModel):
 class CelestialBody(BaseModel):
     """Base class for all celestial bodies."""
 
-    name: str = Field(..., description="Name of the celestial body")
+    name: str = Field(
+        ...,
+        description="Name of the celestial body (must be capitalized)",
+        pattern=r"^[A-Z].*",
+    )
     mass: float = Field(..., description="Mass in Earth masses", gt=0)
     radius: float = Field(..., description="Radius in Earth radii", gt=0)
     coordinates: Coordinates = Field(..., description="Location in space")
@@ -183,10 +207,12 @@ class Planet(CelestialBody):
 
     type: PlanetType = Field(..., description="Type of planet")
     habitable_zone: bool = Field(
-        ..., description="Whether the planet is in the habitable zone"
+        ...,
+        description="Whether the planet is in the habitable zone. Note: Gas giants and ice giants cannot be in habitable zone",
     )
     atmosphere: Optional[Atmosphere] = Field(
-        None, description="Atmospheric conditions if present"
+        None,
+        description="Atmospheric conditions if present. Note: Gas giants and ice giants must have an atmosphere",
     )
     moons: int = Field(0, description="Number of moons", ge=0)
     rings: bool = Field(False, description="Whether the planet has rings")
@@ -223,7 +249,11 @@ class Planet(CelestialBody):
 class CrewMember(BaseModel):
     """A crew member for a space mission."""
 
-    name: str = Field(..., description="Full name of the crew member")
+    name: str = Field(
+        ...,
+        description="Full name of the crew member (must include first and last name)",
+        pattern=r"^[A-Za-z]+ [A-Za-z]+",
+    )
     specialization: Literal[
         "pilot", "engineer", "scientist", "doctor", "security", "diplomat"
     ] = Field(..., description="Primary role")
@@ -245,7 +275,11 @@ class CrewMember(BaseModel):
 class Spacecraft(BaseModel):
     """A spacecraft for interplanetary missions."""
 
-    name: str = Field(..., description="Name of the spacecraft")
+    name: str = Field(
+        ...,
+        description="Name of the spacecraft (must be capitalized)",
+        pattern=r"^[A-Z].*",
+    )
     class_type: str = Field(..., description="Class/model of the spacecraft")
     max_crew: int = Field(..., description="Maximum crew capacity", gt=0)
     range_light_years: float = Field(
@@ -273,13 +307,16 @@ class MissionObjective(BaseModel):
     title: str = Field(..., description="Title of the objective")
     description: str = Field(..., description="Detailed description")
     priority: Literal["low", "medium", "high", "critical"] = Field(
-        ..., description="Priority level"
+        ...,
+        description="Priority level. Critical priority missions must have rewards of at least 10,000 credits",
     )
     estimated_duration_days: float = Field(
         ..., description="Estimated time to complete in days", gt=0
     )
     reward_credits: int = Field(
-        ..., description="Reward for completion in credits", ge=0
+        ...,
+        description="Reward for completion in credits. Critical missions require at least 10,000 credits",
+        ge=0,
     )
 
     @model_validator(mode="after")
@@ -302,7 +339,8 @@ class SpaceMission(BaseModel):
         ..., description="Spacecraft assigned to the mission"
     )
     crew: List[CrewMember] = Field(
-        ..., description="Crew members assigned to the mission"
+        ...,
+        description="Crew members assigned to the mission. Must not exceed spacecraft capacity. Must include at least one pilot and one engineer",
     )
     destination: Planet = Field(..., description="Primary destination")
     secondary_destinations: List[CelestialBody] = Field(
@@ -310,7 +348,9 @@ class SpaceMission(BaseModel):
     )
     objectives: List[MissionObjective] = Field(..., description="Mission objectives")
     launch_date: datetime = Field(..., description="Planned launch date")
-    estimated_return_date: datetime = Field(..., description="Estimated return date")
+    estimated_return_date: datetime = Field(
+        ..., description="Estimated return date. Must be after launch date"
+    )
     mission_brief: str = Field(..., description="Brief mission summary")
     risk_assessment: str = Field(..., description="Risk assessment summary")
 
@@ -519,14 +559,14 @@ if __name__ == "__main__":
 #    - Add a new nested model, e.g., `@flock_type class MissionLog(BaseModel): entry_date: datetime; author: str; content: str`
 #    - Add a field to SpaceMission: `logs: List[MissionLog] = Field(default_factory=list)`
 #
-# 2. Add more complex validation:
-#    - Add a validator to ensure each crew specialization appears at most twice
-#    - Add a validator to ensure mission duration matches the difference between launch and return dates
+# 2. Add more complex constraints through Field descriptions:
+#    - Add a description to crew field to ensure each specialization appears at most twice
+#    - Add a description to estimated_return_date to ensure it matches expected mission duration
 #
 # 3. Create a new mission type:
 #    - Define a new `@flock_type class RescueMission(SpaceMission)` that inherits from SpaceMission
 #    - Add fields specific to rescue missions like `rescue_target: str` and `emergency_level: int`
-#    - Add validation to ensure rescue missions have a doctor in the crew
+#    - Add a description to ensure rescue missions have a doctor in the crew
 #
 # 4. Experiment with Union types:
 #    - Create a `@flock_type class AsteroidBelt(CelestialBody)` with specific asteroid properties
