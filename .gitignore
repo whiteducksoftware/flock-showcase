@@ -43,6 +43,7 @@ output/
 .env.*
 .flock/
 docs/
+pet_diary.json
 pet_state.json
 # PyInstaller
 #  Usually these files are written by a python script from a template
