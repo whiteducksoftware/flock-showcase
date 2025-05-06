@@ -10,7 +10,6 @@ from flock.core.flock_module import FlockModule, FlockModuleConfig
 from flock.core.flock_registry import flock_component
 from flock.core.logging.logging import get_logger
 from flock.evaluators.declarative.declarative_evaluator import (
-    DeclarativeEvaluator,
     DeclarativeEvaluatorConfig,
 )
 from pydantic import Field
@@ -126,7 +125,6 @@ async def main():
 
     # This agent is now missing an evaluator
     eval_config = DeclarativeEvaluatorConfig()
-    evaluator = DeclarativeEvaluator(name="default", config=eval_config)
     agent.add_component(
         config_instance=eval_config,
         component_name="default",
@@ -139,7 +137,7 @@ async def main():
 
     flock.add_agent(agent)
 
-    # Run the flock
+    # Run the flock (set breakpoints in the module hooks!)
     await flock.run(input={"query": "What is the capital of France?"})
 
 
