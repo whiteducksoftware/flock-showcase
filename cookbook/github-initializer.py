@@ -29,10 +29,7 @@ Let's see how it all comes together!
 import asyncio
 from dataclasses import dataclass
 
-from flock.core.flock import Flock
-from flock.core.flock_agent import FlockAgent
-from flock.core.logging.formatters.base_formatter import FormatterOptions
-from flock.core.logging.formatters.rich_formatters import RichTables
+from flock.core import Flock, FlockFactory
 from flock.core.tools import basic_tools
 from flock.core.tools.dev_tools import github
 
@@ -45,15 +42,9 @@ class Features:
 
 
 async def main():
-    flock = Flock(
-        local_debug=True,
-        output_formatter=FormatterOptions(
-            formatter=RichTables, wait_for_input=False, settings={}
-        ),
-        enable_logging=True,
-    )
+    flock = Flock()
 
-    idea_agent = FlockAgent(
+    idea_agent = FlockFactory.create_default_agent(
         name="idea_agent",
         input="query",
         output="software_project_idea",
@@ -61,7 +52,7 @@ async def main():
         use_cache=True,
     )
 
-    project_plan_agent = FlockAgent(
+    project_plan_agent = FlockFactory.create_default_agent(
         name="project_plan_agent",
         input="software_project_idea",
         output="catchy_project_name, project_pitch, techstack, project_implementation_plan",
@@ -69,7 +60,7 @@ async def main():
         use_cache=True,
     )
 
-    readme_agent = FlockAgent(
+    readme_agent = FlockFactory.create_default_agent(
         name="readme_agent",
         input="catchy_project_name, project_pitch, techstack, project_implementation_plan",
         output="readme",
@@ -77,7 +68,7 @@ async def main():
         use_cache=True,
     )
 
-    feature_agent = FlockAgent(
+    feature_agent = FlockFactory.create_default_agent(
         name="feature_agent",
         input="readme, catchy_project_name, project_pitch, techstack, project_implementation_plan",
         output="features : list[Features]",
@@ -85,7 +76,7 @@ async def main():
         use_cache=True,
     )
 
-    issue_agent = FlockAgent(
+    issue_agent = FlockFactory.create_default_agent(
         name="issue_agent",
         input="current_feature, readme, techstack, project_implementation_plan, all_feature_titles",
         output="user_stories_on_github, files_on_github",

@@ -12,15 +12,14 @@ This example implements https://dspy.ai/#__tabbed_2_6 to also highlight the abil
 
 import asyncio
 
-from flock.core.flock import Flock
-from flock.core.flock_agent import FlockAgent
+from flock.core import Flock, FlockFactory
 from flock.core.tools import basic_tools
 
 
 async def main():
     flock = Flock(local_debug=True, enable_logging=True)
 
-    outline_agent = FlockAgent(
+    outline_agent = FlockFactory.create_default_agent(
         name="outline_agent",
         description="Outline a thorough overview of a topic.",
         input="topic",
@@ -28,7 +27,7 @@ async def main():
         tools=[basic_tools.web_search_tavily, basic_tools.get_web_content_as_markdown],
     )
 
-    draft_agent = FlockAgent(
+    draft_agent = FlockFactory.create_default_agent(
         name="draft_agent",
         input="flock.topic,flock.section_heading,flock.section_subheadings: list[str]",
         output="content|markdown-formatted section",
