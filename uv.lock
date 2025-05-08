@@ -1230,7 +1230,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.0b33"
+version = "0.4.0b35"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "azure-search-documents" },
@@ -1276,9 +1276,9 @@ dependencies = [
     { name = "uvicorn" },
     { name = "zep-python" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2f/a6/49c5e25099ad80632206d725605682eaf50ef73670e5da0b1eed405591d8/flock_core-0.4.0b33.tar.gz", hash = "sha256:d66abff88d4fdc5b8859007e4ad23f0e50440c8dc3311209357390db73a76325", size = 3123709 }
+sdist = { url = "https://files.pythonhosted.org/packages/db/20/697cc5b12e84e30bbb79fa6d8c12001b60ebd0f392087c99fef9d89cdde3/flock_core-0.4.0b35.tar.gz", hash = "sha256:bfd71658f92bf844a100515e873e94ce1cf1de72b5e543716aa18f813232defc", size = 3151007 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8c/e7/aa7e1bfac7fb51553e0de9e9825379e1c0ebe7f513cc0df16a0932207870/flock_core-0.4.0b33-py3-none-any.whl", hash = "sha256:ab2f2e0b2ca7faa7667e45ac7350576577aa9e17cb0a90a54521af26e3a9add1", size = 494501 },
+    { url = "https://files.pythonhosted.org/packages/95/fe/02be7e4594a67e04bdbb765d1726a9542b5491567e8da5ae8af17ac2d249/flock_core-0.4.0b35-py3-none-any.whl", hash = "sha256:2e931b7a5ed0a5d49cadf5970ebff08468efbea80816e76d55819db6d7654b46", size = 538504 },
 ]
 
 [package.optional-dependencies]
@@ -1300,7 +1300,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", extras = ["all"], specifier = ">=0.4.0b33" },
+    { name = "flock-core", extras = ["all"], specifier = ">=0.4.0b35" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "mem0ai", specifier = ">=0.1.97" },
 ]
