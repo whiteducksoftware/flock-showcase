@@ -256,7 +256,7 @@ class CrewMember(BaseModel):
 
     name: str = Field(
         ...,
-        description="Full name of the crew member (must include first and last name)",
+        description="Full name of the crew member (must include first and last name and nothing else so no titles or nicknames)",
         pattern=r"^[A-Za-z]+ [A-Za-z]+",
     )
     specialization: Literal[
@@ -434,6 +434,8 @@ def run_example():
     }
 
     console.print("[yellow]Generating space mission profile...[/yellow]")
+
+    flock.start_api(create_ui=True)
 
     try:
         result = flock.run(
