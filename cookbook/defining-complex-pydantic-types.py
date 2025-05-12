@@ -435,8 +435,6 @@ def run_example():
 
     console.print("[yellow]Generating space mission profile...[/yellow]")
 
-    flock.start_api(create_ui=True)
-
     try:
         result = flock.run(
             start_agent="mission_agent",

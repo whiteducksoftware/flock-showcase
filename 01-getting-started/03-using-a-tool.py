@@ -25,6 +25,7 @@ agent = FlockFactory.create_default_agent(
     tools=[basic_tools.get_web_content_as_markdown],
     enable_rich_tables=True,  # Instead of the json output, you can use the rich library to render the output as a table
     output_theme=OutputTheme.aardvark_blue,  # flock also comes with a few themes
+    use_cache=True,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
     wait_for_input=True,  # flock will wait for the user to press enter before continuing after this agent's run
 )
 flock.add_agent(agent)

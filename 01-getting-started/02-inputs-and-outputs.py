@@ -28,7 +28,7 @@ presentation_agent = FlockFactory.create_default_agent(
     output="fun_title: str | The funny title of the movie in all caps, "
     "runtime: int | The runtime of the movie in minutes, "
     "synopsis: str | A crazy over the top synopsis of the movie, "
-    "characters: list[dict[str, str]] | Key is character name - Value are character description, ",
+    "characters: list[dict[str, str]] | Key is character name, Value are character description ",
 )
 flock.add_agent(presentation_agent)
 

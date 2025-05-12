@@ -13,6 +13,8 @@ presentation_agent = FlockFactory.create_default_agent(
     name="my_presentation_agent",
     input="topic, audience, number_of_slides",
     output="fun_title, fun_slide_headers, fun_slide_summaries",
+    use_cache=False,
+    no_output=True,
 )
 flock.add_agent(presentation_agent)
 
@@ -48,8 +50,8 @@ silent_results = flock.run_batch(
     batch_inputs=batch_data,
     static_inputs=static_data,
     parallel=True,
-    max_workers=2,
-    silent_mode=False,
+    max_workers=5,
+    silent_mode=True,
     return_errors=True,
     write_to_csv=".flock/batch_results.csv",
 )
