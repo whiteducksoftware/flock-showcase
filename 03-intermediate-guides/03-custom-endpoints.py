@@ -16,7 +16,7 @@ MODEL = os.getenv("DEFAULT_MODEL", "openai/gpt-4o")
 # --------------------------------
 # Create a new Flock instance
 # --------------------------------
-flock = Flock(name="image_example", model=MODEL)
+flock = Flock(name="endpoint_example", model=MODEL)
 
 
 # --------------------------------
