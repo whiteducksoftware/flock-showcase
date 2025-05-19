@@ -30,10 +30,9 @@ flock.add_agent(yoda_agent)
 # --------------------------------
 
 
-# This will start the Flock as a REST API
+# This will start the Flock as a REST API and a UI
 # It will also create a OpenAPI spec
 # http://localhost:8344/docs
-flock.start_api()
-
-# With UI!
-# flock.start_api(create_ui=True)
+# set chat=True to enable the chat interface
+# http://localhost:8344/chat
+flock.serve()

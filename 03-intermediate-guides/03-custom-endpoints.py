@@ -98,14 +98,10 @@ yoda_route = FlockEndpoint(
 
 class ImageUrlParams(BaseModel):
     img_url: str
-    img_path: str
 
 
 async def image_endpoint(query: ImageUrlParams, flock: Flock) -> MyPetsOutputModel:
-    if query.img_path:
-        my_input = MyPetsInputModel(image=dspy.Image.from_file(query.img_path))
-    else:
-        my_input = MyPetsInputModel(image=dspy.Image.from_url(query.img_url))
+    my_input = MyPetsInputModel(image=dspy.Image.from_url(query.img_url))
     result = await flock.run_async(
         start_agent="pet_agent",
         input={"pet_query": my_input},
@@ -150,4 +146,4 @@ word_count_route = FlockEndpoint(
 )
 
 
-flock.start_api(custom_endpoints=[img_url_route, word_count_route, yoda_route])
+flock.serve(custom_endpoints=[img_url_route, word_count_route, yoda_route], chat=True)

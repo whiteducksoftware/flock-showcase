@@ -1,6 +1,6 @@
 from flock.core import Flock, FlockFactory
 from flock.core.logging.formatters.themes import OutputTheme
-from flock.core.tools import basic_tools
+from flock.tools import code_tools, web_tools
 
 # Define the DEFAULT_MODEL in your .env file
 flock = Flock(model="openai/gpt-4o")
@@ -20,9 +20,9 @@ agent = FlockFactory.create_default_agent(
     name="my_agent",
     input="url",
     output="title, headings: list[str],"
-    "entities_and_metadata: list[dict[str, str]],"
+    "entities_and_metadata: list[dict[]],"
     "type:Literal['news', 'blog', 'opinion piece', 'tweet']",
-    tools=[basic_tools.get_web_content_as_markdown],
+    tools=[web_tools.web_content_as_markdown],
     enable_rich_tables=True,  # Instead of the json output, you can use the rich library to render the output as a table
     output_theme=OutputTheme.aardvark_blue,  # flock also comes with a few themes
     use_cache=True,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
@@ -43,7 +43,7 @@ age_agent = FlockFactory.create_default_agent(
     name="my_celebrity_age_agent",
     input="a_person",
     output="persons_age_in_days",
-    tools=[basic_tools.web_search_duckduckgo, basic_tools.code_eval],
+    tools=[web_tools.web_search_duckduckgo, code_tools.code_code_eval],
     enable_rich_tables=True,
     output_theme=OutputTheme.homebrew,
     use_cache=True,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
