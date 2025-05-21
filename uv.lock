@@ -1334,8 +1334,8 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.4"
-source = { path = ".flock/flock_core-0.4.4-py3-none-any.whl" }
+version = "0.4.5"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
     { name = "chromadb" },
@@ -1349,12 +1349,10 @@ dependencies = [
     { name = "litellm" },
     { name = "loguru" },
     { name = "markdown2" },
-    { name = "markdownify" },
     { name = "matplotlib" },
     { name = "mcp" },
     { name = "mem0ai", extra = ["graph"] },
     { name = "msgpack" },
-    { name = "notion-client" },
     { name = "openai" },
     { name = "opentelemetry-api" },
     { name = "opentelemetry-exporter-jaeger" },
@@ -1377,7 +1375,6 @@ dependencies = [
     { name = "rich" },
     { name = "rouge-score" },
     { name = "sentence-transformers" },
-    { name = "tavily-python" },
     { name = "temporalio" },
     { name = "thefuzz" },
     { name = "tiktoken" },
@@ -1387,8 +1384,9 @@ dependencies = [
     { name = "wd-di" },
     { name = "zep-python" },
 ]
+sdist = { url = "https://files.pythonhosted.org/packages/12/d6/761f6bcb6db5b95752df199b38687bfea97cad9333aba95f2f47e46fca31/flock_core-0.4.5.tar.gz", hash = "sha256:e3c9c859f65c88f4fb362d7e8615881aca99e4e010548b834131e5a96ac54887", size = 4334551 }
 wheels = [
-    { filename = "flock_core-0.4.4-py3-none-any.whl", hash = "sha256:fa0e46d947b5f3d6e4db5f54ee12a47279e6d9911d8797ebd09ef5ac3b760aee" },
+    { url = "https://files.pythonhosted.org/packages/8d/fa/e6a087d126a3a7270c8d0e41479fae9402f67ec5f7936ba8edd9eec5156d/flock_core-0.4.5-py3-none-any.whl", hash = "sha256:657096b6051f2c7693dd73291f5e59489a32daa7ccf74b69f95b6c7c3cd7a4b4", size = 664422 },
 ]
 
 [package.optional-dependencies]
@@ -1403,76 +1401,6 @@ all-tools = [
     { name = "tavily-python" },
 ]
 
-[package.metadata]
-requires-dist = [
-    { name = "aiosqlite", specifier = ">=0.21.0" },
-    { name = "azure-identity", marker = "extra == 'all-tools'", specifier = ">=1.23.0" },
-    { name = "azure-identity", marker = "extra == 'azure-tools'", specifier = ">=1.23.0" },
-    { name = "azure-search-documents", marker = "extra == 'all-tools'", specifier = ">=11.5.2" },
-    { name = "azure-search-documents", marker = "extra == 'azure-tools'", specifier = ">=11.5.2" },
-    { name = "azure-storage-blob", marker = "extra == 'all-tools'", specifier = ">=12.25.1" },
-    { name = "azure-storage-blob", marker = "extra == 'azure-tools'", specifier = ">=12.25.1" },
-    { name = "chromadb", specifier = ">=0.6.3" },
-    { name = "cloudpickle", specifier = ">=3.1.1" },
-    { name = "datasets", specifier = ">=3.2.0" },
-    { name = "devtools", specifier = ">=0.12.2" },
-    { name = "docling", marker = "extra == 'all-tools'", specifier = ">=2.18.0" },
-    { name = "docling", marker = "extra == 'basic-tools'", specifier = ">=2.18.0" },
-    { name = "dspy", specifier = "==2.6.23" },
-    { name = "duckduckgo-search", marker = "extra == 'all-tools'", specifier = ">=7.3.2" },
-    { name = "duckduckgo-search", marker = "extra == 'basic-tools'", specifier = ">=7.3.2" },
-    { name = "fastapi", specifier = ">=0.115.8" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "inspect-ai", specifier = ">=0.3.88" },
-    { name = "litellm", specifier = "==1.69.3" },
-    { name = "loguru", specifier = ">=0.7.3" },
-    { name = "markdown2", specifier = ">=2.5.3" },
-    { name = "markdownify", specifier = ">=0.14.1" },
-    { name = "markdownify", marker = "extra == 'all-tools'", specifier = ">=0.14.1" },
-    { name = "markdownify", marker = "extra == 'basic-tools'", specifier = ">=0.14.1" },
-    { name = "matplotlib", specifier = ">=3.10.0" },
-    { name = "mcp", specifier = ">=1.7.1" },
-    { name = "mem0ai", extras = ["graph"], specifier = ">=0.1.101" },
-    { name = "msgpack", specifier = ">=1.1.0" },
-    { name = "nltk", marker = "extra == 'all-tools'", specifier = ">=3.9.1" },
-    { name = "nltk", marker = "extra == 'llm-tools'", specifier = ">=3.9.1" },
-    { name = "notion-client", specifier = ">=2.3.0" },
-    { name = "openai", specifier = "==1.75.0" },
-    { name = "opentelemetry-api", specifier = ">=1.30.0" },
-    { name = "opentelemetry-exporter-jaeger", specifier = ">=1.21.0" },
-    { name = "opentelemetry-exporter-jaeger-proto-grpc", specifier = ">=1.21.0" },
-    { name = "opentelemetry-exporter-otlp", specifier = ">=1.30.0" },
-    { name = "opentelemetry-instrumentation-logging", specifier = ">=0.51b0" },
-    { name = "opentelemetry-sdk", specifier = ">=1.30.0" },
-    { name = "pandas", specifier = ">=2.2.3" },
-    { name = "pillow", specifier = ">=10.4.0" },
-    { name = "prometheus-client", specifier = ">=0.21.1" },
-    { name = "psutil", specifier = ">=6.1.1" },
-    { name = "pydantic", specifier = ">=2.10.5" },
-    { name = "pydantic-settings", specifier = ">=2.7.1" },
-    { name = "python-box", specifier = ">=7.3.2" },
-    { name = "python-decouple", specifier = ">=3.8" },
-    { name = "python-dotenv", specifier = ">=1.0.1" },
-    { name = "python-fasthtml", specifier = ">=0.12.6" },
-    { name = "pyyaml", specifier = ">=6.0" },
-    { name = "questionary", specifier = ">=2.1.0" },
-    { name = "rich", specifier = ">=13.9.4" },
-    { name = "rouge-score", specifier = ">=0.1.2" },
-    { name = "sentence-transformers", specifier = ">=3.4.1" },
-    { name = "tavily-python", specifier = ">=0.5.1" },
-    { name = "tavily-python", marker = "extra == 'all-tools'", specifier = ">=0.5.0" },
-    { name = "tavily-python", marker = "extra == 'basic-tools'", specifier = ">=0.5.0" },
-    { name = "temporalio", specifier = ">=1.9.0" },
-    { name = "thefuzz", specifier = ">=0.22.1" },
-    { name = "tiktoken", specifier = ">=0.8.0" },
-    { name = "toml", specifier = ">=0.10.2" },
-    { name = "tqdm", specifier = ">=4.67.1" },
-    { name = "uvicorn", specifier = ">=0.34.0" },
-    { name = "wd-di", specifier = ">=0.2.14" },
-    { name = "zep-python", specifier = ">=2.0.2" },
-]
-provides-extras = ["all-tools", "azure-tools", "basic-tools", "llm-tools"]
-
 [[package]]
 name = "flock-showcase"
 version = "0.1.0"
@@ -1485,7 +1413,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", extras = ["all-tools"], path = ".flock/flock_core-0.4.4-py3-none-any.whl" },
+    { name = "flock-core", extras = ["all-tools"], specifier = ">=0.4.5" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "mem0ai", specifier = ">=0.1.97" },
 ]
@@ -3392,18 +3320,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/3c/87/db8be88ad32c2d042420b6fd9ffd4a149f9a0d7f0e86b3f543be2eeeedd2/nltk-3.9.1.tar.gz", hash = "sha256:87d127bd3de4bd89a4f81265e5fa59cb1b199b27440175370f7417d2bc7ae868", size = 2904691 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4d/66/7d9e26593edda06e8cb531874633f7c2372279c3b0f46235539fe546df8b/nltk-3.9.1-py3-none-any.whl", hash = "sha256:4fa26829c5b00715afe3061398a8989dc643b92ce7dd93fb4585a70930d168a1", size = 1505442 },
-]
-
-[[package]]
-name = "notion-client"
-version = "2.3.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "httpx" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/b2/67/c1284de4877496a669ef3a5be36726491dace66261a78a78f73555bffe84/notion-client-2.3.0.tar.gz", hash = "sha256:c4b4ae04ce182eb89611d41544dac710049683a4d7309c4b22fde52f81cbcb39", size = 18790 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/61/ea/03f2fc5d3f5a42397c0ca5a210d5ed605959bc60d7f13d6e5bfa84d31488/notion_client-2.3.0-py2.py3-none-any.whl", hash = "sha256:6696bb057b7872477077d6a3bb4299c4a7924450e7d168174e79cbf8e01d9576", size = 13928 },
 ]
 
 [[package]]

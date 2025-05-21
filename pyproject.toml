@@ -9,6 +9,3 @@ dependencies = [
     "ipykernel>=6.29.5",
     "mem0ai>=0.1.97",
 ]
-
-[tool.uv.sources]
-flock-core = { path = ".flock/flock_core-0.4.4-py3-none-any.whl" }
