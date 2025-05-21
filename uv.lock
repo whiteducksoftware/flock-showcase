@@ -1325,7 +1325,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.0b50"
+version = "0.4.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -1370,10 +1370,12 @@ dependencies = [
     { name = "toml" },
     { name = "tqdm" },
     { name = "uvicorn" },
+    { name = "wd-di" },
+    { name = "zep-python" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e0/f1/d3ddf522b7fb7cba4ab9977b04aa1e9f372bd025f8ebf3407a07a696f9eb/flock_core-0.4.0b50.tar.gz", hash = "sha256:39a5220e298fc9723d033b1eb24047acb86215710f24d14adf4be57625c74586", size = 3248426 }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/f9/d20c289df2f19a62bdf69fc73cfacf28db188a9f3f7b0023e0569761148d/flock_core-0.4.3.tar.gz", hash = "sha256:fbd06298d6842c0ebfe628f7f0056f1cdd9a747b6112a9f9cb0a03cc91f889b8", size = 4273243 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b7/82/15eb02fddb709fbcac5cb619cbea47a0e65e1b244084464789fb295de44c/flock_core-0.4.0b50-py3-none-any.whl", hash = "sha256:230b51cb1ff2e63e3b76dec93f3f67961910252c6e5ad4af501176a031100494", size = 604110 },
+    { url = "https://files.pythonhosted.org/packages/7b/62/2666e55cd015a68bd6878ebc3e6375248dda7d181a45405596d6ab07744e/flock_core-0.4.3-py3-none-any.whl", hash = "sha256:4c94c077c93972091b9f45553b2c7ba96340bd920ffbb4b79127ea93dcea4a89", size = 627239 },
 ]
 
 [package.optional-dependencies]
@@ -1400,7 +1402,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", extras = ["all-tools"], specifier = ">=0.4.0b50" },
+    { name = "flock-core", extras = ["all-tools"], specifier = ">=0.4.1" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "mem0ai", specifier = ">=0.1.97" },
 ]
@@ -2869,7 +2871,7 @@ wheels = [
 
 [[package]]
 name = "mem0ai"
-version = "0.1.100"
+version = "0.1.101"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "openai" },
@@ -2879,9 +2881,9 @@ dependencies = [
     { name = "qdrant-client" },
     { name = "sqlalchemy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0e/cb/0cc870c22b4de26286ffdd38ee14b3278b7baf20e7c388fac1072dcca10d/mem0ai-0.1.100.tar.gz", hash = "sha256:976369ed00729b207b7a6619108877046adf764127569e41e3904e7e1031a2fe", size = 100813 }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/39/c95c72a406e5f5091966af195aab275007a6e3bedd544bf14a0a0fa14f3c/mem0ai-0.1.101.tar.gz", hash = "sha256:d5f284348585774e5f1417dd208b6d3a5ef2c6e2887868442905320d81ebb906", size = 99600 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/57/33/b88b10fe2336477047a3f36c8531f97a87c96a64b2eb1fda3abb21dd4fd6/mem0ai-0.1.100-py3-none-any.whl", hash = "sha256:63a9719444928f6dbbf30729764d0711b679f5086055b5e00e4dfcc9fb865005", size = 151505 },
+    { url = "https://files.pythonhosted.org/packages/5f/38/d12e05aff1736cb0f3d615b0e47df23fe79ba6d376122c7f250b8e8418b9/mem0ai-0.1.101-py3-none-any.whl", hash = "sha256:05b716c1048253fbb2159b417ae7f236775799c6df1fcbf4fb028205a4e43fd5", size = 154924 },
 ]
 
 [package.optional-dependencies]
@@ -6355,6 +6357,15 @@ wheels = [
 ]
 
 [[package]]
+name = "wd-di"
+version = "0.2.14"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9b/42/a07cabcdd8e4cdf95bf26a1a125b0d54df9d8c24721b47feca20631c5a45/wd_di-0.2.14.tar.gz", hash = "sha256:9d81b23dadd480df607202b152bbbdb60b9224722d8aeb2e9867d153e16757a3", size = 1016380 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8f/c3/888e7a3d787a56a09e2abce1f867c06f261a51d6ba015758db7ec5a02ba4/wd_di-0.2.14-py3-none-any.whl", hash = "sha256:cfe1ce957d8cb7624f3517029117cae8f81319746652523e82e996ece16f8857", size = 30129 },
+]
+
+[[package]]
 name = "websocket-client"
 version = "1.8.0"
 source = { registry = "https://pypi.org/simple" }
@@ -6657,6 +6668,20 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/a9/4a/4833a134c76af987eff3ce8cb71e42932234120e6be061eb2555061e8844/yarl-1.19.0-cp313-cp313-win32.whl", hash = "sha256:24e4c367ad69988a2283dd45ea88172561ca24b2326b9781e164eb46eea68345", size = 85878 },
     { url = "https://files.pythonhosted.org/packages/32/e9/59327daab3af8f79221638a8f0d11474d20f6a8fbc41e9da80c5ef69e688/yarl-1.19.0-cp313-cp313-win_amd64.whl", hash = "sha256:0110f91c57ab43d1538dfa92d61c45e33b84df9257bd08fcfcda90cce931cbc9", size = 92448 },
     { url = "https://files.pythonhosted.org/packages/a4/06/ae25a353e8f032322df6f30d6bb1fc329773ee48e1a80a2196ccb8d1206b/yarl-1.19.0-py3-none-any.whl", hash = "sha256:a727101eb27f66727576630d02985d8a065d09cd0b5fcbe38a5793f71b2a97ef", size = 45990 },
+]
+
+[[package]]
+name = "zep-python"
+version = "2.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b5/64/1b0c4afa6d0e8f35e1072eacdfe8ec216871be5f2dfd569942f69232482f/zep_python-2.0.2.tar.gz", hash = "sha256:919fd635ad5801f30d9ef6da0bb99e854ed4c3cd1357dc8ada4a39b8171a41bc", size = 22273 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1c/d4/09a6bc0c32f91b7b5b93322513d51299ca9b35bdd6b0560b39104c296f39/zep_python-2.0.2-py3-none-any.whl", hash = "sha256:d7b2cadf1eb15007825362cae5ddff9c9d0ada5b4f75cf91e5b87986459f7817", size = 40011 },
 ]
 
 [[package]]
