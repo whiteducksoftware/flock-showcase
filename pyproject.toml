@@ -5,7 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "flock-core[all-tools]>=0.4.1",
+    "flock-core[all-tools]>=0.4.5",
     "ipykernel>=6.29.5",
     "mem0ai>=0.1.97",
 ]
+
+[tool.uv.sources]
+flock-core = { path = ".flock/flock_core-0.4.4-py3-none-any.whl" }

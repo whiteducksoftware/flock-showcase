@@ -6,6 +6,7 @@
             "type": "debugpy",
             "request": "launch",
             "justMyCode": false,
+            "subProcess": true,
             "program": "${file}",
             "console": "integratedTerminal"
         },
