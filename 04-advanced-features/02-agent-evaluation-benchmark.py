@@ -49,7 +49,7 @@ judge_agent = FlockFactory.create_default_agent(
 )
 
 # --- 3. Create the Flock Instance ---
-flock = Flock(name="evaluation_flock", enable_logging=False)
+flock = Flock(name="evaluation_flock")
 flock.add_agent(qa_agent)
 flock.add_agent(judge_agent)  # Add the judge agent if using it as a metric
 

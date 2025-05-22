@@ -1334,8 +1334,8 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.5"
-source = { registry = "https://pypi.org/simple" }
+version = "0.4.506"
+source = { path = ".flock/flock_core-0.4.506-py3-none-any.whl" }
 dependencies = [
     { name = "aiosqlite" },
     { name = "chromadb" },
@@ -1384,9 +1384,8 @@ dependencies = [
     { name = "wd-di" },
     { name = "zep-python" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/12/d6/761f6bcb6db5b95752df199b38687bfea97cad9333aba95f2f47e46fca31/flock_core-0.4.5.tar.gz", hash = "sha256:e3c9c859f65c88f4fb362d7e8615881aca99e4e010548b834131e5a96ac54887", size = 4334551 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8d/fa/e6a087d126a3a7270c8d0e41479fae9402f67ec5f7936ba8edd9eec5156d/flock_core-0.4.5-py3-none-any.whl", hash = "sha256:657096b6051f2c7693dd73291f5e59489a32daa7ccf74b69f95b6c7c3cd7a4b4", size = 664422 },
+    { filename = "flock_core-0.4.506-py3-none-any.whl", hash = "sha256:222b6222b43f0236bb9ea5d56826228b07e9cf172cf31ec06ff5f007441fe5d3" },
 ]
 
 [package.optional-dependencies]
@@ -1401,6 +1400,73 @@ all-tools = [
     { name = "tavily-python" },
 ]
 
+[package.metadata]
+requires-dist = [
+    { name = "aiosqlite", specifier = ">=0.21.0" },
+    { name = "azure-identity", marker = "extra == 'all-tools'", specifier = ">=1.23.0" },
+    { name = "azure-identity", marker = "extra == 'azure-tools'", specifier = ">=1.23.0" },
+    { name = "azure-search-documents", marker = "extra == 'all-tools'", specifier = ">=11.5.2" },
+    { name = "azure-search-documents", marker = "extra == 'azure-tools'", specifier = ">=11.5.2" },
+    { name = "azure-storage-blob", marker = "extra == 'all-tools'", specifier = ">=12.25.1" },
+    { name = "azure-storage-blob", marker = "extra == 'azure-tools'", specifier = ">=12.25.1" },
+    { name = "chromadb", specifier = ">=0.6.3" },
+    { name = "cloudpickle", specifier = ">=3.1.1" },
+    { name = "datasets", specifier = ">=3.2.0" },
+    { name = "devtools", specifier = ">=0.12.2" },
+    { name = "docling", marker = "extra == 'all-tools'", specifier = ">=2.18.0" },
+    { name = "docling", marker = "extra == 'basic-tools'", specifier = ">=2.18.0" },
+    { name = "dspy", specifier = "==2.6.23" },
+    { name = "duckduckgo-search", marker = "extra == 'all-tools'", specifier = ">=7.3.2" },
+    { name = "duckduckgo-search", marker = "extra == 'basic-tools'", specifier = ">=7.3.2" },
+    { name = "fastapi", specifier = ">=0.115.8" },
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "inspect-ai", specifier = ">=0.3.88" },
+    { name = "litellm", specifier = "==1.69.3" },
+    { name = "loguru", specifier = ">=0.7.3" },
+    { name = "markdown2", specifier = ">=2.5.3" },
+    { name = "markdownify", marker = "extra == 'all-tools'", specifier = ">=0.14.1" },
+    { name = "markdownify", marker = "extra == 'basic-tools'", specifier = ">=0.14.1" },
+    { name = "matplotlib", specifier = ">=3.10.0" },
+    { name = "mcp", specifier = ">=1.7.1" },
+    { name = "mem0ai", extras = ["graph"], specifier = ">=0.1.101" },
+    { name = "msgpack", specifier = ">=1.1.0" },
+    { name = "nltk", marker = "extra == 'all-tools'", specifier = ">=3.9.1" },
+    { name = "nltk", marker = "extra == 'llm-tools'", specifier = ">=3.9.1" },
+    { name = "openai", specifier = "==1.75.0" },
+    { name = "opentelemetry-api", specifier = ">=1.30.0" },
+    { name = "opentelemetry-exporter-jaeger", specifier = ">=1.21.0" },
+    { name = "opentelemetry-exporter-jaeger-proto-grpc", specifier = ">=1.21.0" },
+    { name = "opentelemetry-exporter-otlp", specifier = ">=1.30.0" },
+    { name = "opentelemetry-instrumentation-logging", specifier = ">=0.51b0" },
+    { name = "opentelemetry-sdk", specifier = ">=1.30.0" },
+    { name = "pandas", specifier = ">=2.2.3" },
+    { name = "pillow", specifier = ">=10.4.0" },
+    { name = "prometheus-client", specifier = ">=0.21.1" },
+    { name = "psutil", specifier = ">=6.1.1" },
+    { name = "pydantic", specifier = "==2.10.5" },
+    { name = "pydantic-settings", specifier = ">=2.7.1" },
+    { name = "python-box", specifier = ">=7.3.2" },
+    { name = "python-decouple", specifier = ">=3.8" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
+    { name = "python-fasthtml", specifier = ">=0.12.6" },
+    { name = "pyyaml", specifier = ">=6.0" },
+    { name = "questionary", specifier = ">=2.1.0" },
+    { name = "rich", specifier = ">=13.9.4" },
+    { name = "rouge-score", specifier = ">=0.1.2" },
+    { name = "sentence-transformers", specifier = ">=3.4.1" },
+    { name = "tavily-python", marker = "extra == 'all-tools'", specifier = ">=0.5.0" },
+    { name = "tavily-python", marker = "extra == 'basic-tools'", specifier = ">=0.5.0" },
+    { name = "temporalio", specifier = ">=1.9.0" },
+    { name = "thefuzz", specifier = ">=0.22.1" },
+    { name = "tiktoken", specifier = ">=0.8.0" },
+    { name = "toml", specifier = ">=0.10.2" },
+    { name = "tqdm", specifier = ">=4.67.1" },
+    { name = "uvicorn", specifier = ">=0.34.0" },
+    { name = "wd-di", specifier = ">=0.2.14" },
+    { name = "zep-python", specifier = ">=2.0.2" },
+]
+provides-extras = ["all-tools", "azure-tools", "basic-tools", "llm-tools"]
+
 [[package]]
 name = "flock-showcase"
 version = "0.1.0"
@@ -1413,7 +1479,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", extras = ["all-tools"], specifier = ">=0.4.5" },
+    { name = "flock-core", extras = ["all-tools"], path = ".flock/flock_core-0.4.506-py3-none-any.whl" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "mem0ai", specifier = ">=0.1.97" },
 ]

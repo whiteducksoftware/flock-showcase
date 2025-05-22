@@ -30,7 +30,7 @@ MODEL = "openai/gpt-4o"
 #     }
 # }
 
-flock = Flock(name="memory_graph_flock", model=MODEL, enable_logging=True)
+flock = Flock(name="memory_graph_flock", model=MODEL)
 
 
 simple_web_scraper = FlockFactory.create_default_agent(
@@ -38,9 +38,11 @@ simple_web_scraper = FlockFactory.create_default_agent(
     description="A simple web scraper that collects the content of a given url",
     input="url",
     output="content",
-    tools=[web_tools.web_content_as_markdown]
+    tools=[web_tools.web_content_as_markdown],
 )
-simple_web_scraper.add_component(config_instance=MemoryModuleConfig(enable_write_only_mode=True))
+simple_web_scraper.add_component(
+    config_instance=MemoryModuleConfig(enable_write_only_mode=True)
+)
 flock.add_agent(simple_web_scraper)
 
 
@@ -50,12 +52,16 @@ memory_agent = FlockFactory.create_default_agent(
     input="query, memory",
     output="answer",
 )
-memory_agent.add_component(config_instance=MemoryModuleConfig(enable_read_only_mode=True))
+memory_agent.add_component(
+    config_instance=MemoryModuleConfig(enable_read_only_mode=True)
+)
 flock.add_agent(memory_agent)
 
 flock.run(
     start_agent=simple_web_scraper,
-    input={"url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"},
+    input={
+        "url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"
+    },
 )
 
 
@@ -63,5 +69,3 @@ flock.run(
 #     start_agent=memory_agent,
 #     input={"query": "What can you tell me about Alexander the Great?"},
 # )
-
-

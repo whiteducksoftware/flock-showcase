@@ -90,7 +90,7 @@ def serialization():
     """Run the serialization demo."""
 
     # Create a Flock instance
-    flock = Flock(name="file_path_demo", enable_logging=True)
+    flock = Flock(name="file_path_demo")
 
     greeting_module = GreetingModule(
         name="greeting_module", config=GreetingModuleConfig(language="es")

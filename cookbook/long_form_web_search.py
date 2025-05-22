@@ -17,7 +17,7 @@ from flock.core.tools import basic_tools
 
 
 async def main():
-    flock = Flock(local_debug=True, enable_logging=True)
+    flock = Flock(local_debug=True)
 
     outline_agent = FlockFactory.create_default_agent(
         name="outline_agent",
