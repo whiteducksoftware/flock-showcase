@@ -648,7 +648,7 @@ wheels = [
 [[package]]
 name = "flock-core"
 version = "0.4.508"
-source = { path = ".flock/flock_core-0.4.508-py3-none-any.whl" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
     { name = "cloudpickle" },
@@ -690,91 +690,10 @@ dependencies = [
     { name = "wd-di" },
     { name = "websockets" },
 ]
+sdist = { url = "https://files.pythonhosted.org/packages/89/db/29a7633cd5d16428fe9c5219b1a042fe1556291c7b0aca6262ef82757ac6/flock_core-0.4.508.tar.gz", hash = "sha256:68977c6ac3b959f181cbdb11d064cfd6ffd997a82e683b834c62f8c72649ade6", size = 4411539 }
 wheels = [
-    { filename = "flock_core-0.4.508-py3-none-any.whl", hash = "sha256:c20b7e1eb9fb28386536c1c289e2c255f4f3905e2410f400965a2c77ef97a749" },
+    { url = "https://files.pythonhosted.org/packages/75/1a/35ae86e9fcfc5f613050251f96ae8bc326d87e8e0b2ec7d51064fea3bfc6/flock_core-0.4.508-py3-none-any.whl", hash = "sha256:2d5f5359acb0d3886bb2f3b1ab7b890a4485737df8401c5849060dd38d22bbc0", size = 660888 },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "aiosqlite", specifier = ">=0.21.0" },
-    { name = "azure-identity", marker = "extra == 'all'", specifier = ">=1.23.0" },
-    { name = "azure-identity", marker = "extra == 'all-tools'", specifier = ">=1.23.0" },
-    { name = "azure-identity", marker = "extra == 'azure-tools'", specifier = ">=1.23.0" },
-    { name = "azure-search-documents", marker = "extra == 'all'", specifier = ">=11.5.2" },
-    { name = "azure-search-documents", marker = "extra == 'all-tools'", specifier = ">=11.5.2" },
-    { name = "azure-search-documents", marker = "extra == 'azure-tools'", specifier = ">=11.5.2" },
-    { name = "azure-storage-blob", marker = "extra == 'all'", specifier = ">=12.25.1" },
-    { name = "azure-storage-blob", marker = "extra == 'all-tools'", specifier = ">=12.25.1" },
-    { name = "azure-storage-blob", marker = "extra == 'azure-tools'", specifier = ">=12.25.1" },
-    { name = "chromadb", marker = "extra == 'all'", specifier = ">=0.6.3" },
-    { name = "chromadb", marker = "extra == 'memory'", specifier = ">=0.6.3" },
-    { name = "cloudpickle", specifier = ">=3.1.1" },
-    { name = "datasets", marker = "extra == 'all'", specifier = ">=3.2.0" },
-    { name = "datasets", marker = "extra == 'evaluation'", specifier = ">=3.2.0" },
-    { name = "devtools", specifier = ">=0.12.2" },
-    { name = "docling", marker = "extra == 'all'", specifier = ">=2.18.0" },
-    { name = "docling", marker = "extra == 'all-tools'", specifier = ">=2.18.0" },
-    { name = "docling", marker = "extra == 'basic-tools'", specifier = ">=2.18.0" },
-    { name = "dspy", specifier = "==2.6.23" },
-    { name = "duckduckgo-search", marker = "extra == 'all'", specifier = ">=7.3.2" },
-    { name = "duckduckgo-search", marker = "extra == 'all-tools'", specifier = ">=7.3.2" },
-    { name = "duckduckgo-search", marker = "extra == 'basic-tools'", specifier = ">=7.3.2" },
-    { name = "fastapi", specifier = ">=0.115.8" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "litellm", specifier = "==1.69.3" },
-    { name = "loguru", specifier = ">=0.7.3" },
-    { name = "markdown2", specifier = ">=2.5.3" },
-    { name = "markdownify", marker = "extra == 'all'", specifier = ">=0.14.1" },
-    { name = "markdownify", marker = "extra == 'all-tools'", specifier = ">=0.14.1" },
-    { name = "markdownify", marker = "extra == 'basic-tools'", specifier = ">=0.14.1" },
-    { name = "matplotlib", marker = "extra == 'all'", specifier = ">=3.10.0" },
-    { name = "matplotlib", marker = "extra == 'memory'", specifier = ">=3.10.0" },
-    { name = "mcp", specifier = ">=1.7.1" },
-    { name = "mem0ai", extras = ["graph"], marker = "extra == 'all'", specifier = ">=0.1.101" },
-    { name = "mem0ai", extras = ["graph"], marker = "extra == 'memory'", specifier = ">=0.1.101" },
-    { name = "msgpack", specifier = ">=1.1.0" },
-    { name = "nltk", marker = "extra == 'all'", specifier = ">=3.9.1" },
-    { name = "nltk", marker = "extra == 'all-tools'", specifier = ">=3.9.1" },
-    { name = "nltk", marker = "extra == 'llm-tools'", specifier = ">=3.9.1" },
-    { name = "openai", specifier = "==1.75.0" },
-    { name = "opentelemetry-api", specifier = ">=1.30.0" },
-    { name = "opentelemetry-exporter-jaeger", specifier = ">=1.21.0" },
-    { name = "opentelemetry-exporter-jaeger-proto-grpc", specifier = ">=1.21.0" },
-    { name = "opentelemetry-exporter-otlp", specifier = ">=1.30.0" },
-    { name = "opentelemetry-instrumentation-logging", specifier = ">=0.51b0" },
-    { name = "opentelemetry-sdk", specifier = ">=1.30.0" },
-    { name = "opik", specifier = ">=1.7.26" },
-    { name = "pandas", specifier = ">=2.2.3" },
-    { name = "pillow", specifier = ">=10.4.0" },
-    { name = "prometheus-client", specifier = ">=0.21.1" },
-    { name = "psutil", specifier = ">=6.1.1" },
-    { name = "pydantic", specifier = "==2.10.5" },
-    { name = "pydantic-settings", specifier = ">=2.7.1" },
-    { name = "python-box", specifier = ">=7.3.2" },
-    { name = "python-decouple", specifier = ">=3.8" },
-    { name = "python-dotenv", specifier = ">=1.0.1" },
-    { name = "pyyaml", specifier = ">=6.0" },
-    { name = "questionary", specifier = ">=2.1.0" },
-    { name = "rich", specifier = ">=13.9.4" },
-    { name = "rouge-score", marker = "extra == 'all'", specifier = ">=0.1.2" },
-    { name = "rouge-score", marker = "extra == 'evaluation'", specifier = ">=0.1.2" },
-    { name = "sentence-transformers", marker = "extra == 'all'", specifier = ">=3.4.1" },
-    { name = "sentence-transformers", marker = "extra == 'evaluation'", specifier = ">=3.4.1" },
-    { name = "tavily-python", marker = "extra == 'all'", specifier = ">=0.5.0" },
-    { name = "tavily-python", marker = "extra == 'all-tools'", specifier = ">=0.5.0" },
-    { name = "tavily-python", marker = "extra == 'basic-tools'", specifier = ">=0.5.0" },
-    { name = "temporalio", specifier = ">=1.9.0" },
-    { name = "thefuzz", specifier = ">=0.22.1" },
-    { name = "tiktoken", specifier = ">=0.8.0" },
-    { name = "toml", specifier = ">=0.10.2" },
-    { name = "tqdm", specifier = ">=4.67.1" },
-    { name = "uvicorn", specifier = ">=0.34.0" },
-    { name = "wd-di", specifier = ">=0.2.14" },
-    { name = "websockets", specifier = ">=15.0.1" },
-    { name = "zep-python", marker = "extra == 'all'", specifier = ">=2.0.2" },
-    { name = "zep-python", marker = "extra == 'memory'", specifier = ">=2.0.2" },
-]
-provides-extras = ["all", "all-tools", "azure-tools", "basic-tools", "evaluation", "llm-tools", "memory"]
 
 [[package]]
 name = "flock-showcase"
@@ -787,7 +706,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", path = ".flock/flock_core-0.4.508-py3-none-any.whl" },
+    { name = "flock-core", specifier = ">=0.4.508" },
     { name = "ipykernel", specifier = ">=6.29.5" },
 ]
 
