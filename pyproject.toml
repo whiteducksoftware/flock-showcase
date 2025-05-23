@@ -4,4 +4,10 @@ version = "0.4.507"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["flock-core>=0.4.507", "ipykernel>=6.29.5"]
+dependencies = [
+    "flock-core>=0.4.507",
+ "ipykernel>=6.29.5",
+]
+
+[tool.uv.sources]
+flock-core = { path = ".flock/flock_core-0.4.508-py3-none-any.whl" }
