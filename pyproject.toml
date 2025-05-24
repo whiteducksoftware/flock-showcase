@@ -4,4 +4,4 @@ version = "0.4.507"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["flock-core>=0.4.508", "ipykernel>=6.29.5"]
+dependencies = ["flock-core[all]>=0.4.510", "ipykernel>=6.29.5"]
