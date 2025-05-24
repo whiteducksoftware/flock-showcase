@@ -239,7 +239,7 @@ def run_traditional_extraction(article_text: str):
 
     # 1. Craft the Detailed Prompt
     # Notice how much more explicit instruction is needed compared to the
-    # Flock agent's declarative approach
+    # Flock agent's declarative approach - also the data structure needs to be defined in the prompt AND in the code
     system_prompt = """You are an expert system for extracting structured information from news articles.
 Your task is to analyze the provided article and extract specific data points in a JSON format."""
 
