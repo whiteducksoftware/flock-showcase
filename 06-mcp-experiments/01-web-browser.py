@@ -3,7 +3,7 @@ import sys
 
 import pydantic
 from flock.core import Flock, FlockFactory, flock_type
-from flock.tools import web_tools
+from flock.tools import file_tools, web_tools
 
 # In case you experience issues with MCPs on Windows, you can try the following:
 # Set up proper event loop policy for Windows
@@ -23,6 +23,7 @@ class FactuallyWrongComment(pydantic.BaseModel):
     author: str
     link: str
     answer: str
+    answer_sources: list[str]
     date: str
 
 
@@ -43,7 +44,7 @@ playwright_agent = FlockFactory.create_default_agent(
     input="input: InputModel",
     output="output: list[FactuallyWrongComment]",
     servers=[playwright_mcp_server],
-    tools=[web_tools.web_search_tavily],
+    tools=[web_tools.web_search_tavily, file_tools.file_save_to_file],
     enable_rich_tables=True,
     include_thought_process=True,
     use_cache=False,
@@ -58,7 +59,7 @@ if __name__ == "__main__":
     try:
         input_model = InputModel(
             url="https://old.reddit.com/r/singularity/",
-            task="Hello my dear agent! Visit threads and collect comments that are factually wrong. Do collect 5 comments. For each comment generate an answer disproving the comment with sources found with web_search_tavily",
+            task="Hello my dear agent! Visit threads and collect comments that are factually wrong. Do collect 5 comments. For each comment generate an answer disproving the comment with sources found with web_search_tavily. Save the results to a file called 'comments.md'",
         )
 
         result = flock.run(
