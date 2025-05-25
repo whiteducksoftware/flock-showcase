@@ -1,6 +1,5 @@
 from typing import Any
 
-import dspy
 import matplotlib.pyplot as plt
 import numpy as np
 from dspy import Image
@@ -10,10 +9,9 @@ from flock.routers.default.default_router import DefaultRouterConfig
 from pydantic import BaseModel, Field
 
 
-# Just so flock knows dspy.Image is a valid type
 @flock_type
 class FlockImage(BaseModel):
-    image: dspy.Image
+    image: Image
 
 
 @flock_type
@@ -26,6 +24,11 @@ class ImagePart(BaseModel):
     matplotlib_color: str = Field(
         default="b", description="Color of the line in the plot"
     )
+
+
+############################################################
+# MatplotDrawerModule
+############################################################
 
 
 class MatplotDrawerModuleConfig(FlockModuleConfig):
@@ -70,6 +73,7 @@ class MatplotDrawerModule(FlockModule):
         plt.show()
 
     # if there is a previous image, load it and give it to the agent
+    # manipulate agent input and description
     async def load_prev_image(self, agent: FlockAgent, inputs):
         if self.image is not None:
             agent.description = "Improves the image by adding new parts to the previous image and/or changing them. Will ALWAYS do some changes to the image."
@@ -100,33 +104,32 @@ class MatplotDrawerModule(FlockModule):
         return await self.load_prev_image(agent, inputs)
 
 
+############################################################
+
+
 # global variables
 MODEL = "azure/gpt-4.1"
 
 
-# draws the image by iterating over the list of image parts and connecting the coordinates
+flock = Flock(model=MODEL)
 
 
-# Generate the plot
-
-flock = Flock(local_debug=True)
-
-
-agent = FlockFactory.create_default_agent(
+the_painter = FlockFactory.create_default_agent(
     name="the_painter",
     input="subject_to_draw: str",
     description="Draws an image by connecting the coordinates of the image parts. 0/0 is bottom left corner - 10/10 is top right corner",
     output="list_of_all_image_parts: list[ImagePart] | list of all image parts to draw by connecting the coordinates",
 )
 
-agent.add_component(
+
+the_painter.add_component(
     config_instance=DefaultRouterConfig(hand_off="the_painter"), component_name="router"
 )
 
-agent.add_component(
+the_painter.add_component(
     config_instance=MatplotDrawerModuleConfig(), component_name="matplot_drawer"
 )
 
-flock.add_agent(agent)
+flock.add_agent(the_painter)
 
-result = flock.run(start_agent=agent, input={"subject_to_draw": "a house"})
+result = flock.run(start_agent=the_painter, input={"subject_to_draw": "a house"})
