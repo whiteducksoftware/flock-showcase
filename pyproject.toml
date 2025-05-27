@@ -1,7 +1,7 @@
 [project]
 name = "flock-showcase"
-version = "0.4.507"
+version = "0.4.519"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["flock-core[all]>=0.4.510", "ipykernel>=6.29.5"]
+dependencies = ["flock-core[all]>=0.4.519", "ipykernel>=6.29.5"]

@@ -274,6 +274,21 @@ wheels = [
 ]
 
 [[package]]
+name = "azure-data-tables"
+version = "12.7.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "azure-core" },
+    { name = "isodate" },
+    { name = "typing-extensions" },
+    { name = "yarl" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ad/b8/e76cfa7f5f847722664c6f8108c391deadcb9d9aad579650c128affd4669/azure_data_tables-12.7.0.tar.gz", hash = "sha256:b14fc94a3223a2835ff5688e17d8e107b27c7cd7c4114138f2ac81373723705d", size = 258650 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/3e/2b8da274b49402659cd732def2ae217f2e86312278feb56b55ccbffbbc26/azure_data_tables-12.7.0-py3-none-any.whl", hash = "sha256:24ed9b5690aa46c213182e32bb1b39a68dd9f526d84f447c287e3a401b437c10", size = 133178 },
+]
+
+[[package]]
 name = "azure-identity"
 version = "1.23.0"
 source = { registry = "https://pypi.org/simple" }
@@ -762,6 +777,19 @@ wheels = [
 ]
 
 [[package]]
+name = "croniter"
+version = "6.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "python-dateutil" },
+    { name = "pytz" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ad/2f/44d1ae153a0e27be56be43465e5cb39b9650c781e001e7864389deb25090/croniter-6.0.0.tar.gz", hash = "sha256:37c504b313956114a983ece2c2b07790b1f1094fe9d81cc94739214748255577", size = 64481 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/4b/290b4c3efd6417a8b0c284896de19b1d5855e6dbdb97d2a35e68fa42de85/croniter-6.0.0-py2.py3-none-any.whl", hash = "sha256:2f878c3856f17896979b2a4379ba1f09c83e374931ea15cc835c5dd2eee9b368", size = 25468 },
+]
+
+[[package]]
 name = "cryptography"
 version = "45.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1208,11 +1236,13 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.510"
+version = "0.4.518"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
+    { name = "azure-data-tables" },
     { name = "cloudpickle" },
+    { name = "croniter" },
     { name = "devtools" },
     { name = "dspy" },
     { name = "fastapi" },
@@ -1251,9 +1281,9 @@ dependencies = [
     { name = "wd-di" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/40/55/059e03eeba8417838ea56f18ab9d54817516fecc2bb03139d048b58fe3d3/flock_core-0.4.510.tar.gz", hash = "sha256:513b3d8285cc5de6a4b7f4f2cff70a86965813fa9219705b580c10f4d52fe1a0", size = 4435508 }
+sdist = { url = "https://files.pythonhosted.org/packages/00/43/4ba3cab376e8341d4f349028cc7aef94bd10d92db13b72cdd4c56296f06f/flock_core-0.4.518.tar.gz", hash = "sha256:ae4020da7d671606e45418618abd3ebfc1b4440802642ff88ca4e6b4e9ada8c4", size = 4427914 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c2/43/b89b9e23828e9db1211d1692ee4bc9d0dd65f175dc9216add78469fce395/flock_core-0.4.510-py3-none-any.whl", hash = "sha256:91df46fd6bc27b2999b3dad0814eccb855c34b57f09ecfc282e8e591c9c57e76", size = 660333 },
+    { url = "https://files.pythonhosted.org/packages/ba/c4/99e0cdc5c70b4a5057a7d1536e90fa172d2f17397c462d64e250793b85b5/flock_core-0.4.518-py3-none-any.whl", hash = "sha256:af8560af3e4590c3505fd4a8d582c509ce2120ca1b6ac46e6034d774e9306377", size = 678802 },
 ]
 
 [package.optional-dependencies]
@@ -1286,7 +1316,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", extras = ["all"], specifier = ">=0.4.510" },
+    { name = "flock-core", extras = ["all"], specifier = ">=0.4.518" },
     { name = "ipykernel", specifier = ">=6.29.5" },
 ]
 
