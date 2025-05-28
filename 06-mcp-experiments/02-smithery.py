@@ -8,7 +8,7 @@ github_mcp_server = FlockFactory.create_mcp_server(
     ),
 )
 
-flock = Flock(name="github_flock", servers=[github_mcp_server], model="openai/gpt-4.1")
+flock = Flock(name="github_flock", servers=[github_mcp_server])
 
 github_agent = FlockFactory.create_default_agent(
     name="github_agent",

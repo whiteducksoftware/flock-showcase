@@ -35,9 +35,7 @@ playwright_mcp_server = FlockFactory.create_mcp_server(
     ),
 )
 
-flock = Flock(
-    name="playwright_flock", servers=[playwright_mcp_server], model="azure/gpt-4.1"
-)
+flock = Flock(name="playwright_flock", servers=[playwright_mcp_server])
 
 playwright_agent = FlockFactory.create_default_agent(
     name="playwright_agent",
@@ -59,9 +57,10 @@ if __name__ == "__main__":
     try:
         input_model = InputModel(
             url="https://old.reddit.com/r/singularity/",
-            task="Hello my dear agent! Visit threads and collect comments that are factually wrong. Do collect 5 comments. For each comment generate an answer disproving the comment with sources found with web_search_tavily. Save the results to a file called 'comments.md'",
+            task="Hello my dear agent! Visit threads and collect comments that are factually wrong."
+            "Do collect 5 comments. For each comment generate an answer disproving the comment with sources found with web_search_tavily."
+            "Save the results to a file called 'comments.md'",
         )
-        
 
         result = flock.run(
             start_agent=playwright_agent,
