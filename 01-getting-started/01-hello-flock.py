@@ -1,3 +1,5 @@
+import os
+
 from flock.core import Flock, FlockFactory
 
 # --------------------------------
@@ -6,14 +8,20 @@ from flock.core import Flock, FlockFactory
 # Flock uses litellm to talk to LLMs
 # Please consult the litellm documentation for valid IDs:
 # https://docs.litellm.ai/docs/providers
+# You can use any model that is compatible with litellm.
+# and also use DEFAULT_MODEL to use the default model
 MODEL = "openai/gpt-4o"
 
 
+os.environ["LM_STUDIO_API_BASE"] = ""
 # --------------------------------
 # Create the flock and context
 # --------------------------------
 # The flock is the place where all the agents are at home
-flock = Flock(name="hello_flock", description="This is your first flock!", model=MODEL)
+flock = Flock(
+    name="hello_flock",
+    description="This is your first flock!",
+)
 
 # --------------------------------
 # Create an agent
@@ -36,7 +44,7 @@ flock.add_agent(presentation_agent)
 # Tell the flock who the starting agent is and what input to give it
 flock.run(
     start_agent=presentation_agent,
-    input={"topic": "A presentation about robot kittens"},
+    input={"topic": "A presentation about robot kittens!"},
 )
 
 # YOUR TURN!
