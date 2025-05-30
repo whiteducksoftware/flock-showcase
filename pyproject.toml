@@ -1,11 +1,11 @@
 [project]
 name = "flock-showcase"
-version = "0.5.0b2"
+version = "0.5.0b3"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "flock-core[all]>=0.5.0b2",
+    "flock-core[all]>=0.5.0b3",
     "ipykernel>=6.29.5",
     "ipywidgets>=8.1.7",
     "jupyter>=1.1.1",
