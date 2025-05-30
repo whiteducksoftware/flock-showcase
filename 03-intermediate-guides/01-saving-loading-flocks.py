@@ -18,18 +18,20 @@ from flock.core import (
     FlockAgent,
     FlockContext,
     FlockFactory,
-    FlockModule,
-    FlockModuleConfig,
     flock_component,
     flock_tool,
     flock_type,
+)
+from flock.core.component.agent_component_base import (
+    AgentComponent,
+    AgentComponentConfig,
 )
 from pydantic import BaseModel, Field
 
 
 # Define a simple module
 # The config defines a language
-class GreetingModuleConfig(FlockModuleConfig):
+class GreetingModuleConfig(AgentComponentConfig):
     language: str = Field(default="en")
 
 
@@ -37,23 +39,11 @@ class GreetingModuleConfig(FlockModuleConfig):
 # and will replace the result["greeting"] with the appropriate greeting
 # decoraters add the decorated entity to the registry
 @flock_component
-class GreetingModule(FlockModule):
+class GreetingModule(AgentComponent):
     """A simple module that generates greetings."""
 
     config: GreetingModuleConfig = Field(default_factory=GreetingModuleConfig)
     greetings: dict[str, str] = Field(default_factory=dict)
-
-    # The initialize method is called when the agent is initialized
-    async def initialize(
-        self, agent: FlockAgent, inputs: Dict, context: FlockContext
-    ) -> None:
-        """Initialize the module."""
-        self.greetings = {
-            "en": "Hello",
-            "es": "Hola",
-            "fr": "Bonjour",
-            "de": "Guten Tag",
-        }
 
     # The post_evaluate method is called after the agent has evaluated
     # we modify the result before it is returned
@@ -93,7 +83,9 @@ def serialization():
     flock = Flock(name="file_path_demo")
 
     greeting_module = GreetingModule(
-        name="greeting_module", config=GreetingModuleConfig(language="es")
+        name="greeting_module",
+        config=GreetingModuleConfig(language="es"),
+        greetings={"en": "Hello", "es": "Hola", "fr": "Bonjour", "de": "Guten Tag"},
     )
 
     # Create an agent using our GreetingModule
@@ -104,7 +96,7 @@ def serialization():
         tools=[get_mobile_number],
     )
 
-    agent.add_module(greeting_module)
+    agent.add_component(greeting_module)
     # Add the agent to the Flock
     flock.add_agent(agent)
 
@@ -128,3 +120,8 @@ def serialization():
 
 if __name__ == "__main__":
     serialization()
+    deserialization_flock = Flock.from_yaml_file(".flock/file_path_demo.flock.yaml")
+    deserialization_flock.run(
+        start_agent="greeter",
+        input={"name": "Alice"},
+    )
