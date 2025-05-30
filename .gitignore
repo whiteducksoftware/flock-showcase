@@ -10,7 +10,7 @@ __pycache__/
 *.env*
 !*.env_template
 
-
+.local/
 # Distribution / packaging
 .Python
 build/

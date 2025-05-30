@@ -1236,7 +1236,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.4.519"
+version = "0.5.0b2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -1281,9 +1281,9 @@ dependencies = [
     { name = "wd-di" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3e/e9/9a36e9176f6bbc6aaf367706538c5d09613b4bdf658fe65e4532181bba50/flock_core-0.4.519.tar.gz", hash = "sha256:3f2b4a41f6af574aeb523f4eeb1abe066cdd07fc779e39fdc778f38c60a3cb31", size = 4453375 }
+sdist = { url = "https://files.pythonhosted.org/packages/1f/67/205dfbe26727c0a1a7b5b2aff8271de8c020c656b6756c4239a60d96db21/flock_core-0.5.0b2.tar.gz", hash = "sha256:59e8b84540be42c5a767086f88dcc901803b1b6d6f9db5f99ad06248977673c6", size = 4531167 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/01/65/aa6eb5588506f47f499677347ec9cde90c53b6295af3d22269d5095c0098/flock_core-0.4.519-py3-none-any.whl", hash = "sha256:2145c9fe15005db81797f9a7a5e4ae35964ac157be9d91246e40412b0b31c44e", size = 679031 },
+    { url = "https://files.pythonhosted.org/packages/c0/44/f15cd572ccf1625d0b29add292532e905ae8ad8e50fbb603cbf0700d46f7/flock_core-0.5.0b2-py3-none-any.whl", hash = "sha256:81820c46219c67023df3b4a7f321124c14c38af707ddee9eb75ef40c8c66dab3", size = 672854 },
 ]
 
 [package.optional-dependencies]
@@ -1316,7 +1316,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", extras = ["all"], specifier = ">=0.4.519" },
+    { name = "flock-core", extras = ["all"], specifier = ">=0.5.0b2" },
     { name = "ipykernel", specifier = ">=6.29.5" },
 ]
 

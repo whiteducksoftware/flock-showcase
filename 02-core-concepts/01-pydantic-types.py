@@ -18,7 +18,7 @@ from typing import Literal
 
 from flock.cli.utils import print_header, print_subheader, print_warning
 from flock.core import Flock, FlockFactory
-from flock.core.flock_registry import (
+from flock.core.registry import (
     flock_type,  # Decorator for registering custom types
 )
 from pydantic import BaseModel, Field  # Import Pydantic components

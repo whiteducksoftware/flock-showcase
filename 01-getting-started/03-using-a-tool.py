@@ -3,7 +3,7 @@ from flock.core.logging.formatters.themes import OutputTheme
 from flock.tools import code_tools, web_tools
 
 # Define the DEFAULT_MODEL in your .env file
-flock = Flock(model="openai/gpt-4o")
+flock = Flock()
 
 # --------------------------------
 # Create an agent
