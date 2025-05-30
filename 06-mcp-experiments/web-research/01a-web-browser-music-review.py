@@ -37,5 +37,5 @@ flock.add_agent(playwright_agent)
 
 result = flock.run(
     start_agent=playwright_agent,
-    input={"musical_artist": "Nina Chuba"},
+    input={"musical_artist": "God is an Astronaut"},
 )
