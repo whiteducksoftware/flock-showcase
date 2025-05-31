@@ -83,6 +83,6 @@ req = ResearchRequest(
 todays_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
 result = flock.run(
-    start_agent=playwright_agent,
+    agent=playwright_agent,
     input={"req": req, "date": todays_date},
 )

@@ -95,7 +95,7 @@ async def main():
     flock.add_agent(issue_agent)
 
     features: Features = await flock.run_async(
-        start_agent=idea_agent,
+        agent=idea_agent,
     )
 
 

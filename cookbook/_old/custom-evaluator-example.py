@@ -403,13 +403,13 @@ file_content_analyzer.hand_off = documentation_generator
 """
 # Instead of using hand_off, we could do:
 result = flock.run(
-    start_agent=repo_structure_analyzer,
+    agent=repo_structure_analyzer,
     input={"repo_path": repo_path}
 )
 
 # Then process the result and run the next agent
 file_analysis_result = flock.run(
-    start_agent=file_content_analyzer,
+    agent=file_content_analyzer,
     input={
         "repo_path": repo_path,
         "key_files": result["key_files"]
@@ -418,7 +418,7 @@ file_analysis_result = flock.run(
 
 # Then process the result and run the next agent
 documentation_result = flock.run(
-    start_agent=documentation_generator,
+    agent=documentation_generator,
     input={
         "repo_path": repo_path,
         "repo_name": result["repo_name"],
@@ -720,9 +720,7 @@ def main():
     flock.add_agent(documentation_generator)
 
     # Run the flock
-    result = flock.run(
-        start_agent=repo_structure_analyzer, input={"repo_path": repo_path}
-    )
+    result = flock.run(agent=repo_structure_analyzer, input={"repo_path": repo_path})
 
     # Create the output directory if it doesn't exist
     os.makedirs(output_path, exist_ok=True)

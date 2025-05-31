@@ -85,9 +85,7 @@ def run_pet_example():
     print_subheader("Example 1: Simple Tool Usage")
     console.print("[bold]User Request:[/bold] How is my pet doing?")
 
-    result = flock.run(
-        start_agent=pet_agent, input={"user_request": "How is my pet doing?"}
-    )
+    result = flock.run(agent=pet_agent, input={"user_request": "How is my pet doing?"})
     console.print(f"[bold]Agent Response:[/bold] {result.response}")
 
     # Example 2: Tool composition (using multiple tools together)
@@ -95,7 +93,7 @@ def run_pet_example():
     console.print("[bold]User Request:[/bold] My pet seems unhappy, what should I do?")
 
     result = flock.run(
-        start_agent=pet_agent,
+        agent=pet_agent,
         input={"user_request": "My pet seems unhappy, what should I do?"},
     )
     console.print(f"[bold]Agent Response:[/bold] {result.response}")
@@ -107,7 +105,7 @@ def run_pet_example():
     )
 
     result = flock.run(
-        start_agent=pet_agent,
+        agent=pet_agent,
         input={
             "user_request": "I want to teach my pet a new trick, but I'm not sure if it's ready."
         },
@@ -121,7 +119,7 @@ def run_pet_example():
     )
 
     result = flock.run(
-        start_agent=pet_agent,
+        agent=pet_agent,
         input={
             "user_request": "Feed my pet, play with it using the toy mouse, and then check if it can learn to roll over."
         },
@@ -205,9 +203,7 @@ if __name__ == "__main__":
 
             # Process the user request with the agent
             console.print("[bold]Processing your request...[/bold]")
-            result = flock.run(
-                start_agent=pet_agent, input={"user_request": user_request}
-            )
+            result = flock.run(agent=pet_agent, input={"user_request": user_request})
 
             # Display the agent's response
             console.print(f"[bold green]Agent Response:[/bold green] {result.response}")

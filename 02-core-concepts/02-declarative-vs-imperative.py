@@ -207,9 +207,7 @@ def run_flock_extraction(article_text: str):
         console.print("Running Flock agent for structured data extraction...")
         start_time = datetime.now()
 
-        result = flock.run(
-            start_agent=article_analyzer, input={"article_text": article_text}
-        )
+        result = flock.run(agent=article_analyzer, input={"article_text": article_text})
 
         end_time = datetime.now()
         execution_time = (end_time - start_time).total_seconds()

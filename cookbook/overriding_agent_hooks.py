@@ -74,7 +74,7 @@ async def main():
     # Run the agent chain
     # --------------------------------
     # Start the workflow with the doubler agent and provide the initial input.
-    result = await flock.run_async(start_agent=doubler, input={"value": 10})
+    result = await flock.run_async(agent=doubler, input={"value": 10})
 
     # Print the final result. Expected output: result should be (10*2)+5 = 25.
     print(result)

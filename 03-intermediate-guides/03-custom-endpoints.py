@@ -78,7 +78,7 @@ flock.add_agent(yoda_agent)
 # Endpoint with body
 async def yoda_endpoint(body: YodaRequest, flock: Flock | None = None) -> YodaResponse:  # type: ignore[valid-type]
     """Translate :pyattr:`YodaRequest.text` into the wisdom of Master Yoda."""
-    result = await flock.run_async(start_agent=yoda_agent, input={"text": body.text})
+    result = await flock.run_async(agent=yoda_agent, input={"text": body.text})
     return YodaResponse(yoda_text=result["yoda_text"])
 
 
@@ -103,7 +103,7 @@ class ImageUrlParams(BaseModel):
 async def image_endpoint(query: ImageUrlParams, flock: Flock) -> MyPetsOutputModel:
     my_input = MyPetsInputModel(image=dspy.Image.from_url(query.img_url))
     result = await flock.run_async(
-        start_agent="pet_agent",
+        agent="pet_agent",
         input={"pet_query": my_input},
     )
     return result.answer

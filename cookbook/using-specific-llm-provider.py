@@ -46,6 +46,6 @@ flock.add_agent(presentation_agent)
 
 
 flock.run(
-    start_agent=presentation_agent,
+    agent=presentation_agent,
     input={"topic": "A presentation about robot kittens"},
 )

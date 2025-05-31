@@ -58,7 +58,7 @@ flock.add_agent(age_agent)
 # ATTENTION: Big table incoming
 # It's worth it tho!
 result = flock.run(
-    start_agent=agent,
+    agent=agent,
     input={
         "url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"
     },
@@ -67,7 +67,7 @@ result = flock.run(
 # To start a different agent, you can do so by calling flock.run() again with a different start_agent
 
 result = flock.run(
-    start_agent=age_agent,
+    agent=age_agent,
     input={"a_person": "Brad Pitt"},
 )
 

@@ -25,6 +25,6 @@ github_agent = FlockFactory.create_default_agent(
 flock.add_agent(github_agent)
 
 flock.run(
-    start_agent=github_agent,
+    agent=github_agent,
     input={"project_idea": "A puzzle game about cats as a web app!!"},
 )

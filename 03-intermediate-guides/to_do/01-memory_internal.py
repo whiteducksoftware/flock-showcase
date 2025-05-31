@@ -19,12 +19,12 @@ chatty_agent.add_component(config_instance=MemoryModuleConfig())
 flock.add_agent(chatty_agent)
 
 # flock.run(
-#     start_agent=chatty_agent,
+#     agent=chatty_agent,
 #     input={"query": "Please remember the main news of today as seen on https://lite.cnn.com/"},
 # )
 
 
 flock.run(
-    start_agent=chatty_agent,
+    agent=chatty_agent,
     input={"query": "What Trump news do you remember without using the web?"},
 )

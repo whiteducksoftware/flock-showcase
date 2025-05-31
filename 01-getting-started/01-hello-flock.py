@@ -43,7 +43,7 @@ flock.add_agent(presentation_agent)
 # --------------------------------
 # Tell the flock who the starting agent is and what input to give it
 flock.run(
-    start_agent=presentation_agent,
+    agent=presentation_agent,
     input={"topic": "A presentation about robot kittens!"},
 )
 

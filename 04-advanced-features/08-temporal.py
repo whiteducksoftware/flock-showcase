@@ -11,7 +11,6 @@ from flock.workflow.temporal_config import (
 
 
 async def main():
- 
     # --------------------------------
     # Create the flock with Temporal config
     # --------------------------------
@@ -24,9 +23,7 @@ async def main():
         temporal_config=TemporalWorkflowConfig(
             task_queue="flock-test-queue",
             workflow_execution_timeout=timedelta(minutes=10),
-            default_activity_retry_policy=TemporalRetryPolicyConfig(
-                maximum_attempts=2
-            ),
+            default_activity_retry_policy=TemporalRetryPolicyConfig(maximum_attempts=2),
         ),
     )
 
@@ -41,7 +38,6 @@ async def main():
 
     flock.add_agent(agent)
 
-   
     # --------------------------------
     # Create a Temporal ready agent
     # --------------------------------
@@ -80,7 +76,7 @@ async def main():
     # --------------------------------
     # This is the main function that will be used to run the flock
     result = await flock.run_async(
-        start_agent="my_presentation_agent",
+        agent="my_presentation_agent",
         input={
             "topic": "A presentation about how good of an idea it is to combine ai agents with temporal.io"
         },

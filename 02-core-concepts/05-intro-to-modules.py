@@ -350,7 +350,7 @@ async def run_pet_diary_example():
     # Example 1: Show diary entries
     console.print("\n[bold cyan]Example 1: Showing pet diary entries[/bold cyan]")
     result = await flock.run_async(
-        start_agent=pet_agent,
+        agent=pet_agent,
         input={"user_request": "What has my pet been up to recently?"},
     )
     console.print(f"[bold]Agent Response:[/bold] {result.response}")
@@ -358,7 +358,7 @@ async def run_pet_diary_example():
     # Example 2: Add a custom diary note
     console.print("\n[bold cyan]Example 2: Adding a custom diary note[/bold cyan]")
     result = await flock.run_async(
-        start_agent=pet_agent,
+        agent=pet_agent,
         input={"user_request": "Add a note that Pixel caught a virtual mouse today!"},
     )
     console.print(f"[bold]Agent Response:[/bold] {result.response}")
@@ -366,7 +366,7 @@ async def run_pet_diary_example():
     # Example 3: Show updated diary
     console.print("\n[bold cyan]Example 3: Showing updated diary[/bold cyan]")
     result = await flock.run_async(
-        start_agent=pet_agent,
+        agent=pet_agent,
         input={"user_request": "Show me Pixel's diary entries"},
     )
     console.print(f"[bold]Agent Response:[/bold] {result.response}")
@@ -524,7 +524,7 @@ async def interactive_mode():
             # Process the user request with the agent
             console.print("[bold]Processing your request...[/bold]")
             result = await flock.run_async(
-                start_agent=pet_agent, input={"user_request": user_request}
+                agent=pet_agent, input={"user_request": user_request}
             )
 
             # Display the agent's response

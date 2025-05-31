@@ -190,26 +190,26 @@ def run_story_collaboration(genre: str):
 
     # Step 1: Generate theme and setting
     print_subheader("Step 1: Generating Theme and Setting")
-    theme_result = flock.run(start_agent=theme_agent, input={"genre": genre})
+    theme_result = flock.run(agent=theme_agent, input={"genre": genre})
 
     # Step 2: Create characters based on theme
     print_subheader("Step 2: Creating Characters")
     # We could manually pass the theme agent's outputs, but instead
     # we'll let the character agent use its input definition to pull them from context
-    character_result = flock.run(start_agent=character_agent)
+    character_result = flock.run(agent=character_agent)
 
     # Step 3: Create plot outline based on theme and characters
     print_subheader("Step 3: Creating Plot Outline")
     # Again, the plot agent will pull what it needs from the context
-    plot_result = flock.run(start_agent=plot_agent)
+    plot_result = flock.run(agent=plot_agent)
 
     # Step 4: Write the opening paragraph
     print_subheader("Step 4: Writing Opening Paragraph")
-    opener_result = flock.run(start_agent=opener_agent)
+    opener_result = flock.run(agent=opener_agent)
 
     # Step 5: Get critique of the whole story development
     print_subheader("Step 5: Story Critique")
-    critic_result = flock.run(start_agent=critic_agent)
+    critic_result = flock.run(agent=critic_agent)
 
     # Display the final story elements
     print_header("Final Story Elements")
