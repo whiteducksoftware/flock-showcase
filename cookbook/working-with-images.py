@@ -62,7 +62,7 @@ try:
     #     name="lucy", image=dspy.Image.from_file(".assets/lucy.jpg")
     # )
     result = flock.run(
-        start_agent="pet_agent",
+        agent="pet_agent",
         input={"pet_query": my_input},
     )
 

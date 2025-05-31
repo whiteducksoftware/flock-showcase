@@ -132,4 +132,4 @@ the_painter.add_component(
 
 flock.add_agent(the_painter)
 
-result = flock.run(start_agent=the_painter, input={"subject_to_draw": "a house"})
+result = flock.run(agent=the_painter, input={"subject_to_draw": "a house"})

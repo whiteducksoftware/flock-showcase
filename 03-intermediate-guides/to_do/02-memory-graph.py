@@ -58,7 +58,7 @@ memory_agent.add_component(
 flock.add_agent(memory_agent)
 
 flock.run(
-    start_agent=simple_web_scraper,
+    agent=simple_web_scraper,
     input={
         "url": "https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"
     },
@@ -66,6 +66,6 @@ flock.run(
 
 
 # flock.run(
-#     start_agent=memory_agent,
+#     agent=memory_agent,
 #     input={"query": "What can you tell me about Alexander the Great?"},
 # )

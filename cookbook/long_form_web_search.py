@@ -39,7 +39,7 @@ async def main():
 
     # Instead defining handoff between agents, we just use flock to run the outline agent
     result = await flock.run_async(
-        start_agent=outline_agent,
+        agent=outline_agent,
     )
 
     sections = []
@@ -55,7 +55,7 @@ async def main():
                 "section_heading": section,
                 "section_subheadings": subheadings,
             },
-            start_agent=draft_agent,
+            agent=draft_agent,
         )
         sections.append(result_content.content)
         with open("output.md", "w") as f:

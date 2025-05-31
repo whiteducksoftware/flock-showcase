@@ -437,7 +437,7 @@ def run_example():
 
     try:
         result = flock.run(
-            start_agent="mission_agent",
+            agent="mission_agent",
             input={"mission_parameters": mission_params},
         )
 

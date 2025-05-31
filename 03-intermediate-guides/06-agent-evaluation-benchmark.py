@@ -96,7 +96,7 @@ try:
     evaluation_df = flock.evaluate(
         dataset=DATASET_ID,  # HF Dataset ID
         # dataset_split=DATASET_SPLIT,            # TODO: Add support for dataset splits
-        start_agent=qa_agent.name,  # Agent to run
+        agent=qa_agent.name,  # Agent to run
         input_mapping=input_mapping,  # How inputs map
         answer_mapping=answer_mapping,  # How outputs map to answers
         metrics=metrics_to_run,  # What metrics to compute

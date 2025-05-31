@@ -122,6 +122,6 @@ if __name__ == "__main__":
     serialization()
     deserialization_flock = Flock.from_yaml_file(".flock/file_path_demo.flock.yaml")
     deserialization_flock.run(
-        start_agent="greeter",
+        agent="greeter",
         input={"name": "Alice"},
     )

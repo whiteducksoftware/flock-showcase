@@ -33,7 +33,7 @@ presentation_agent = FlockFactory.create_default_agent(
 flock.add_agent(presentation_agent)
 
 
-result = flock.run(start_agent=presentation_agent, input={"topic": "AI agents"})
+result = flock.run(agent=presentation_agent, input={"topic": "AI agents"})
 
 # --------------------------------
 # The result

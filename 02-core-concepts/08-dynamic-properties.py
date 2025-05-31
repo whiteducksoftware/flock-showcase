@@ -8,6 +8,7 @@ MODEL = "azure/gpt-4.1"
 # -------------------------------------------------
 flock = Flock(name="dynamic_demo", description="Dynamic-spec example", model=MODEL)
 
+
 # -------------------------------------------------
 # 1) Agent that builds a haiku from a topic
 # -------------------------------------------------
@@ -15,15 +16,17 @@ def haiku_description(ctx: FlockContext) -> str:
     topic = ctx.get_variable("topic")
     return f"Haiku generator about “{topic}”"
 
+
 haiku_agent = FlockFactory.create_default_agent(
     name="haiku_agent",
     input="topic",
     output="haiku",
 )
 # plug dynamic pieces into the *_spec attributes via the property setters
-haiku_agent.description = haiku_description           # callable
-haiku_agent.next_agent = "judge_agent"                # static str
+haiku_agent.description = haiku_description  # callable
+haiku_agent.next_agent = "judge_agent"  # static str
 flock.add_agent(haiku_agent)
+
 
 # -------------------------------------------------
 # 2) Agent that judges the haiku and decides what to do next
@@ -34,13 +37,14 @@ def choose_next(ctx: FlockContext) -> str:
     length = ctx.get_variable("judge_agent.length")
     return "cheer_agent" if length == "long" else "apology_agent"
 
+
 judge_agent = FlockFactory.create_default_agent(
     name="judge_agent",
     input="haiku",
     output="length : str | 'long' if >40chars or 'short'",
 )
-judge_agent.description = "Length judge"              # plain string also OK
-judge_agent.next_agent = choose_next                  # callable
+judge_agent.description = "Length judge"  # plain string also OK
+judge_agent.next_agent = choose_next  # callable
 flock.add_agent(judge_agent)
 
 # -------------------------------------------------
@@ -66,7 +70,7 @@ flock.add_agent(cheer_agent)
 # Run
 # -------------------------------------------------
 result = flock.run(
-    start_agent=haiku_agent,
+    agent=haiku_agent,
     input={"topic": "robot kittens exploring Mars"},
 )
 

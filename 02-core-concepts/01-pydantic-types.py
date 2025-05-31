@@ -102,7 +102,7 @@ console.print(f"Requesting {num_to_generate} character profiles...")
 
 try:
     result = flock.run(
-        start_agent="character_agent",
+        agent="character_agent",
         input={"number_of_characters": num_to_generate},
     )
 

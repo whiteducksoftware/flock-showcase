@@ -145,7 +145,7 @@ def run_adventure_generator(character_type):
     try:
         # Start with the character generator and the chain will continue automatically
         result = flock.run(
-            start_agent=character_agent,
+            agent=character_agent,
             input={"character_type": character_type},
         )
 

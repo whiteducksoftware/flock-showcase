@@ -1,10 +1,9 @@
-from pydantic import BaseModel, Field
-
 from flock.core import Flock, FlockFactory, flock_type
 from flock.routers.default.default_router import (
     DefaultRouter,
     DefaultRouterConfig,
 )
+from pydantic import BaseModel, Field
 
 
 @flock_type
@@ -31,12 +30,8 @@ class SchemaElement(BaseModel):
         allowed_children (Dict[str, str]): Mapping of child types to cardinality ('single' or 'multiple')
     """
 
-    node_type: str = Field(
-        description="The internal type identifier for this element"
-    )
-    display_name: str = Field(
-        description="Human-readable name for display purposes"
-    )
+    node_type: str = Field(description="The internal type identifier for this element")
+    display_name: str = Field(description="Human-readable name for display purposes")
     emoji: str = Field(
         default="",
         description="Emoji text representation used in the tree view",
@@ -84,7 +79,6 @@ Task:
 async def generate_planning_structure(user_input: str):
     flock = Flock(model="gpt-4.1-2025-04-14")
 
-
     project_type_agent = FlockFactory.create_default_agent(
         name="project_type_agent",
         description="A helpful assistant that determines the type of project based on the user's input.",
@@ -94,7 +88,6 @@ async def generate_planning_structure(user_input: str):
         no_output=True,
     )
 
-
     planning_schema_agent = FlockFactory.create_default_agent(
         name="planning_schema_agent",
         description=DESCRIPTION,
@@ -103,7 +96,6 @@ async def generate_planning_structure(user_input: str):
         write_to_file=True,
         no_output=True,
     )
-
 
     template_agent = FlockFactory.create_default_agent(
         name="template_agent",
@@ -137,12 +129,9 @@ async def generate_planning_structure(user_input: str):
     #     ),
     # )
 
-
     result = await flock.run_async(
-        start_agent="project_type_agent",
-        input={
-            "user_input": user_input
-        },
+        agent="project_type_agent",
+        input={"user_input": user_input},
     )
 
     return result

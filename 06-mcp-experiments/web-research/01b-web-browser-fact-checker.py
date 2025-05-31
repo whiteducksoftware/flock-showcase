@@ -63,7 +63,7 @@ if __name__ == "__main__":
         )
 
         result = flock.run(
-            start_agent=playwright_agent,
+            agent=playwright_agent,
             input={"input": input_model},
         )
 

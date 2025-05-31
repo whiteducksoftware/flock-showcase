@@ -104,7 +104,7 @@ async def main():
 
     chatty.hand_off = chat_helper.hand_off
 
-    await flock.run_async(start_agent=chatty, input={"user_query": ""})
+    await flock.run_async(agent=chatty, input={"user_query": ""})
 
 
 if __name__ == "__main__":

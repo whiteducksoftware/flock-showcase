@@ -137,7 +137,7 @@ flock.add_agent(summary_agent)
 # Run with explicit workflow state tracking
 print(f"   Starting with: {research_agent.name}")
 result = flock.run(
-    start_agent=research_agent,
+    agent=research_agent,
     input={"topic": "The future of AI agent orchestration frameworks"},
 )
 
