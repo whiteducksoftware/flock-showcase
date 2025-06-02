@@ -1,7 +1,7 @@
 from flock.core import Flock, FlockFactory
 
 # 1. Create the main orchestrator
-my_flock = Flock(model="openai/gpt-4.1")
+my_flock = Flock(model="azure/gpt-4.1")
 
 # 2. Declaratively define an agent
 brainstorm_agent = FlockFactory.create_default_agent(
@@ -16,5 +16,5 @@ input_data = {"topic": "The future of AI agents"}
 result = my_flock.run(agent="idea_generator", input=input_data)
 
 # The result is a dot-accessible object ready for downstream tasks
-print(f"Generated Title: {result.catchy_title}")
-print(f"Key Points: {result.key_points}")
+print(f"\nGenerated Title:\n{result.catchy_title}")
+print(f"\nKey Points:\n{result.key_points}")

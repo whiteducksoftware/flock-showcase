@@ -6,27 +6,25 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-        "source.organizeImports.ruff": "always",
-        "source.fixAll.ruff": "always"
+        "source.organizeImports.ruff": "never",
+        "source.fixAll.ruff": "never"
     },
-    "editor.fontFamily": "'Jetbrains Mono', 'FiraCode Nerd Font', 'Hack Nerd Font', 'monospace'",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font',  'Hack Nerd Font', 'monospace'",
     "editor.smoothScrolling": true,
-    "terminal.integrated.fontFamily": "'Jetbrains Mono', 'FiraCode Nerd Font', 'Hack Nerd Font', 'monospace'",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font',  'Hack Nerd Font', 'monospace'",
     "editor.renderWhitespace": "none",
-    //"terminal.integrated.lineHeight": 1.5,
-    "editor.fontSize": 15.5,
+    "terminal.integrated.lineHeight": 1.2,
+    "editor.fontSize": 16,
     "editor.fontLigatures": true,
-    //"editor.lineHeight": 1.5,
+    "editor.lineHeight": 1.5,
     "editor.minimap.enabled": true,
     "editor.tabSize": 2,
     "editor.semanticTokenColorCustomizations": {
         "enabled": true
     },
     "editor.semanticHighlighting.enabled": true,
-    // we try to make semantic highlighting look good
-    // prevent VSCode from modifying the terminal colors
     "terminal.integrated.minimumContrastRatio": 1,
     "cSpell.words": [
         "deptry",
