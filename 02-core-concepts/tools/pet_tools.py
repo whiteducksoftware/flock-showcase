@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List
 
-from flock.core.flock_registry import flock_tool
+from flock.core.registry import flock_tool
 from rich.console import Console
 from rich.table import Table
 

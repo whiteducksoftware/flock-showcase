@@ -82,13 +82,13 @@ theme_agent = FlockFactory.create_default_agent(
     name="theme_generator",
     description="Generates creative story themes and settings.",
     input="genre: str | The genre of story to create",
-    output="theme_generator_theme: str | The central theme of the story\n"
-    "theme_generator_setting: str | The setting where the story takes place\n"
-    "theme_generator_time_period: str | The time period of the story\n"
+    output="theme_generator_theme: str | The central theme of the story,"
+    "theme_generator_setting: str | The setting where the story takes place,"
+    "theme_generator_time_period: str | The time period of the story,"
     "theme_generator_mood: str | The overall mood or tone",
     temperature=0.7,
     enable_rich_tables=True,
-    output_theme=OutputTheme.monokai,
+    output_theme=OutputTheme.monokai_remastered,
     wait_for_input=True,
 )
 
@@ -100,12 +100,12 @@ theme_agent = FlockFactory.create_default_agent(
 character_agent = FlockFactory.create_default_agent(
     name="character_creator",
     description="Creates compelling characters that fit the story theme and setting.",
-    input="theme_generator_theme: str | The central theme of the story\n"
-    "theme_generator_setting: str | The setting where the story takes place\n"
-    "theme_generator_time_period: str | The time period of the story\n"
-    "theme_generator_mood: str | The overall mood or tone",
-    output="cc_protagonist: dict | The main character of the story\n"
-    "cc_antagonist: dict | The opposing character or force\n"
+    input="theme_generator.theme_generator_theme: str | The central theme of the story,"
+    "theme_generator.theme_generator_setting: str | The setting where the story takes place,"
+    "theme_generator.theme_generator_time_period: str | The time period of the story,"
+    "theme_generator.theme_generator_mood: str | The overall mood or tone",
+    output="cc_protagonist: dict | The main character of the story,"
+    "cc_antagonist: dict | The opposing character or force,"
     "cc_supporting_character: dict | An important supporting character",
     temperature=0.7,
     enable_rich_tables=True,
@@ -168,7 +168,7 @@ critic_agent = FlockFactory.create_default_agent(
     "sc_suggestions: list[str] | Specific suggestions for improvement",
     temperature=0.7,
     enable_rich_tables=True,
-    output_theme=OutputTheme.fruity,
+    output_theme=OutputTheme.frontenddelight,
 )
 
 # --------------------------------

@@ -1,7 +1,7 @@
 from flock.cli.utils import print_header, print_subheader, print_success
 from flock.core import Flock, FlockFactory
 
-MODEL = "openai/gpt-4o"
+MODEL = "azure/gpt-4.1"
 
 flock = Flock(
     name="example_02", description="The flock input and output syntax", model=MODEL
@@ -28,7 +28,7 @@ presentation_agent = FlockFactory.create_default_agent(
     output="fun_title: str | The funny title of the movie in all caps, "
     "runtime: int | The runtime of the movie in minutes, "
     "synopsis: str | A crazy over the top synopsis of the movie, "
-    "characters: list[dict[str, str]] | Key is character name, Value are character description ",
+    "characters: list[dict[str, str]] | Key is character name, Value is a character description ",
 )
 flock.add_agent(presentation_agent)
 

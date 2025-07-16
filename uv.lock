@@ -878,6 +878,20 @@ wheels = [
 ]
 
 [[package]]
+name = "ddgs"
+version = "9.2.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "lxml" },
+    { name = "primp" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/57/e1/8154854084b24908ec782f1c2713a66b205bdcd2b20a9bc3ce274afccc24/ddgs-9.2.3.tar.gz", hash = "sha256:5ec4e0bf0a9055a991c958695b1c0194c2511d254449ab88eb874297879ed1a5", size = 26553 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1d/af/d42b3f4eff55cdcddf8b33631be602e40d63d7cf0cffcf15503166a46b22/ddgs-9.2.3-py3-none-any.whl", hash = "sha256:4b658edf52db3bfe80c12492077e7cc9d39312b0dbb03f8669753ac1313d3784", size = 30148 },
+]
+
+[[package]]
 name = "debugpy"
 version = "1.8.14"
 source = { registry = "https://pypi.org/simple" }
@@ -1148,20 +1162,6 @@ wheels = [
 ]
 
 [[package]]
-name = "duckduckgo-search"
-version = "8.0.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "click" },
-    { name = "lxml" },
-    { name = "primp" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ad/c0/e18c2148d33a9d87f6a0cc00acba30b4e547be0f8cb85ccb313a6e8fbac7/duckduckgo_search-8.0.2.tar.gz", hash = "sha256:3109a99967b29cab8862823bbe320d140d5c792415de851b9d6288de2311b3ec", size = 21807 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bf/6c/e36d22e76f4aa4e1ea7ea9b443bd49b5ffd2f13d430840f47e35284f797a/duckduckgo_search-8.0.2-py3-none-any.whl", hash = "sha256:b5ff8b6b8f169b8e1b15a788a5749aa900ebcefd6e1ab485787582f8d5b4f1ef", size = 18184 },
-]
-
-[[package]]
 name = "durationpy"
 version = "0.10"
 source = { registry = "https://pypi.org/simple" }
@@ -1275,7 +1275,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.5.0b7"
+version = "0.5.0b9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -1325,18 +1325,21 @@ dependencies = [
     { name = "wd-di" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/89/e9/568ec6d27d7fa7df237bbae6ecdbac987712671f864519276740e9f6f96a/flock_core-0.5.0b7.tar.gz", hash = "sha256:e0242f011d793a03290bf0e8c562a24a0748e364458acc930e2f4f6b5360db57", size = 4468157 }
+sdist = { url = "https://files.pythonhosted.org/packages/7c/d3/72741ace4863039295242414f1f07458df36a0c00a462788764259db51e9/flock_core-0.5.0b9.tar.gz", hash = "sha256:33e7d2f4fc40cd86ab7169cdfbe019eb5a8a2017f1fe282cb4c993187e147cf5", size = 4440518 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ac/9d/0a32e1d056e52157fe4bc0853f4073feb89f80c312c957c04c9ed49b47b3/flock_core-0.5.0b7-py3-none-any.whl", hash = "sha256:44d8cfb77e43e4968a21812ecedf115ca0bfb3407b61269b2113a0940106611b", size = 642803 },
+    { url = "https://files.pythonhosted.org/packages/ff/39/1ed8205d38ab8b1c7a3a0d1a647bd99867592fe64f77437e7131c15fac6e/flock_core-0.5.0b9-py3-none-any.whl", hash = "sha256:51e638a37db06f1c1d09377b78b46fb29036e0a8d6b7c3032fb9ae8db23e99d5", size = 640087 },
 ]
 
 [[package]]
 name = "flock-mcp"
-version = "0.1.3"
+version = "0.1.5"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e0/95/d1f98085da970e934d2e50ce53abe61b08d7150b1f13372b8e0eb260b1b2/flock_mcp-0.1.3.tar.gz", hash = "sha256:0d4a2e1533694e3b12abf59f4f44426de03b98b5f7e45d528f3d73c016073f2d", size = 278129 }
+dependencies = [
+    { name = "flock-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3d/66/c1fdd17d14df1ef6f15ee6541524b2acef40b0ab2d25afc55743fb4652a6/flock_mcp-0.1.5.tar.gz", hash = "sha256:d0808f0fd15d4dc69f0869e4b91e3b9e6865c871a8fa4efe18854d914ed05032", size = 309420 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/03/0e5f87345da27abb6c41043dc6b780dd966396eb1b35b3f3eb3395e7454d/flock_mcp-0.1.3-py3-none-any.whl", hash = "sha256:2f07009fe3038a713326a6c7af56d415c529918d8ef0099ff3c1c4b8c43c28cf", size = 23843 },
+    { url = "https://files.pythonhosted.org/packages/4c/88/156aa608e5c2ae8352cac5ab73447f35bf490e640380e7186a3c4ca9daea/flock_mcp-0.1.5-py3-none-any.whl", hash = "sha256:d51e67fb5004a6ab44dfae05c6d018e7589147a6b8e7ea3b1c9652446f4faf19", size = 22368 },
 ]
 
 [package.optional-dependencies]
@@ -1344,9 +1347,9 @@ all-tools = [
     { name = "azure-identity" },
     { name = "azure-search-documents" },
     { name = "azure-storage-blob" },
+    { name = "ddgs" },
     { name = "docker" },
     { name = "docling" },
-    { name = "duckduckgo-search" },
     { name = "markdownify" },
     { name = "nltk" },
     { name = "tavily-python" },
@@ -1354,7 +1357,7 @@ all-tools = [
 
 [[package]]
 name = "flock-showcase"
-version = "0.5.0b5"
+version = "0.5.0b9"
 source = { virtual = "." }
 dependencies = [
     { name = "flock-core" },
@@ -1366,8 +1369,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flock-core", specifier = ">=0.5.0b7" },
-    { name = "flock-mcp", extras = ["all-tools"], specifier = ">=0.1.3" },
+    { name = "flock-core", specifier = ">=0.5.0b9" },
+    { name = "flock-mcp", extras = ["all-tools"], specifier = ">=0.1.5" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "ipywidgets", specifier = ">=8.1.7" },
     { name = "jupyter", specifier = ">=1.1.1" },
