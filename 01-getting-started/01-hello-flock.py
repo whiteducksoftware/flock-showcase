@@ -1,52 +1,20 @@
-import os
-
 from flock.core import Flock, FlockFactory
 
-# --------------------------------
-# Define the model
-# --------------------------------
-# Flock uses litellm to talk to LLMs
-# Please consult the litellm documentation for valid IDs:
-# https://docs.litellm.ai/docs/providers
-# You can use any model that is compatible with litellm.
-# and also use DEFAULT_MODEL to use the default model
-MODEL = "openai/gpt-4o"
+# 1. Create the main orchestrator
+my_flock = Flock(model="azure/gpt-4.1")
 
-
-os.environ["LM_STUDIO_API_BASE"] = ""
-# --------------------------------
-# Create the flock and context
-# --------------------------------
-# The flock is the place where all the agents are at home
-flock = Flock(
-    name="hello_flock",
-    description="This is your first flock!",
+# 2. Declaratively define an agent
+brainstorm_agent = FlockFactory.create_default_agent(
+    name="idea_generator", input="topic", output="catchy_title, key_points"
 )
 
-# --------------------------------
-# Create an agent
-# --------------------------------
-# The Flock doesn't believe in prompts (see the docs for more info)
-# The Flock just declares what agents get in and what agents produce
-# my_presentation_agent takes in a topic and outputs a
-# funny_title, fun_slide_headers and fun_slide_summaries
-presentation_agent = FlockFactory.create_default_agent(
-    name="my_presentation_agent",
-    input="topic",
-    output="fun_title, fun_slide_headers, fun_slide_summaries",
-)
-flock.add_agent(presentation_agent)
+# 3. Add the agent to the Flock
+my_flock.add_agent(brainstorm_agent)
 
+# 4. Run the agent!
+input_data = {"topic": "The future of AI agents"}
+result = my_flock.run(agent="idea_generator", input=input_data)
 
-# --------------------------------
-# Run the flock
-# --------------------------------
-# Tell the flock who the starting agent is and what input to give it
-flock.run(
-    agent=presentation_agent,
-    input={"topic": "A presentation about robot kittens!"},
-)
-
-# YOUR TURN!
-# Try changing the output definition (line 29) by replacing "fun" with "boring"
-# (boring_title, boring_slide_headers, boring_slide_summaries)
+# The result is a dot-accessible object ready for downstream tasks
+print(f"\nGenerated Title:\n{result.catchy_title}")
+print(f"\nKey Points:\n{result.key_points}")

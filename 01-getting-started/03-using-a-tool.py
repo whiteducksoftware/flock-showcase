@@ -25,7 +25,7 @@ agent = FlockFactory.create_default_agent(
     tools=[web_tools.web_content_as_markdown],
     enable_rich_tables=True,  # Instead of the json output, you can use the rich library to render the output as a table
     output_theme=OutputTheme.aardvark_blue,  # flock also comes with a few themes
-    use_cache=True,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
+    use_cache=False,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
     wait_for_input=True,  # flock will wait for the user to press enter before continuing after this agent's run
 )
 flock.add_agent(agent)
@@ -46,7 +46,7 @@ age_agent = FlockFactory.create_default_agent(
     tools=[web_tools.web_search_duckduckgo, code_tools.code_code_eval],
     enable_rich_tables=True,
     output_theme=OutputTheme.homebrew,
-    use_cache=True,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
+    use_cache=False,  # flock will cache the result of the agent and if the input is the same as before, the agent will return the cached result
     include_thought_process=True,  # flock will include the thought process of the agent in the output if available
 )
 flock.add_agent(age_agent)
