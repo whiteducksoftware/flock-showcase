@@ -1,7 +1,7 @@
 from flock.cli.utils import print_header, print_subheader, print_success
 from flock.core import Flock, FlockFactory
 
-MODEL = "azure/gpt-4.1"
+MODEL = "ollama_chat/gpt-oss"
 
 flock = Flock(
     name="example_02", description="The flock input and output syntax", model=MODEL
@@ -29,6 +29,8 @@ presentation_agent = FlockFactory.create_default_agent(
     "runtime: int | The runtime of the movie in minutes, "
     "synopsis: str | A crazy over the top synopsis of the movie, "
     "characters: list[dict[str, str]] | Key is character name, Value is a character description ",
+    stream=True,
+    temperature=1,
 )
 flock.add_agent(presentation_agent)
 

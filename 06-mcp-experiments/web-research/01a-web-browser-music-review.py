@@ -28,7 +28,7 @@ playwright_agent = FlockFactory.create_default_agent(
     enable_rich_tables=True,
     include_thought_process=True,
     use_cache=False,
-    temperature=0.8,
+    temperature=1.0,
     max_tokens=32000,
     max_tool_calls=100,
 )
