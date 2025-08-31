@@ -10,10 +10,8 @@ from flock.core import Flock, FlockFactory
 # https://docs.litellm.ai/docs/providers
 # You can use any model that is compatible with litellm.
 # and also use DEFAULT_MODEL to use the default model
-MODEL = "openai/gpt-4o"
+MODEL = "openai/gpt-5"
 
-
-os.environ["LM_STUDIO_API_BASE"] = ""
 # --------------------------------
 # Create the flock and context
 # --------------------------------
@@ -21,6 +19,7 @@ os.environ["LM_STUDIO_API_BASE"] = ""
 flock = Flock(
     name="hello_flock",
     description="This is your first flock!",
+    model=MODEL,
 )
 
 # --------------------------------
@@ -34,6 +33,7 @@ presentation_agent = FlockFactory.create_default_agent(
     name="my_presentation_agent",
     input="topic",
     output="fun_title, fun_slide_headers, fun_slide_summaries",
+    use_cache=False,
 )
 flock.add_agent(presentation_agent)
 
