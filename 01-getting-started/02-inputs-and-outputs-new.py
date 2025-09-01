@@ -1,9 +1,33 @@
+from typing import Literal
+
+from pydantic import BaseModel, Field
 
 from flock.cli.utils import print_header, print_subheader, print_success
 from flock.core import Flock, FlockFactory
 from flock.core.logging.logging import configure_logging
+from flock.core.registry import (
+    flock_type,  # Decorator for registering custom types
+)
 
 configure_logging("DEBUG", "DEBUG")
+
+@flock_type
+class MovieIdea(BaseModel):
+    topic: str = Field(..., description="The topic of the movie.")
+    genre: Literal["comedy", "drama", "horror", "action", "adventure"] = Field(
+        ..., description="The genre of the movie."
+    )
+
+@flock_type
+class Movie(BaseModel):
+    fun_title: str = Field(..., description="The topic of the movie.")
+    runtime: int = Field(..., description="The runtime of the movie.")
+    synopsis: str = Field(..., description="The synopsis of the movie.")
+    characters: list[dict[str, str]] = Field(
+        ..., description="The characters of the movie."
+    )
+
+
 MODEL = "ollama_chat/gpt-oss"
 
 flock = Flock(
@@ -27,16 +51,13 @@ flock = Flock(
 presentation_agent = FlockFactory.create_default_agent(
     name="my_movie_agent",
     description="Creates a fun movie about a given topic",  # Isn't just a description, but also a control mechanism
-    input="topic: str",
-    output="fun_title: str | The funny title of the movie in all caps, "
-    "runtime: int | The runtime of the movie in minutes, "
-    "synopsis: str | A crazy over the top synopsis of the movie, "
-    "characters: list[dict[str, str]] | Key is character name, Value is a character description ",
+    input=MovieIdea,
+    output=Movie,
 )
 flock.add_agent(presentation_agent)
 
 
-result = flock.run(agent=presentation_agent, input={"topic": "AI agents"})
+result = flock.run(agent=presentation_agent, input=MovieIdea(topic="AI agents", genre="comedy"))
 
 # --------------------------------
 # The result

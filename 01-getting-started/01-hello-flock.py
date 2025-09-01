@@ -1,7 +1,7 @@
 from flock.core import Flock, FlockFactory
 
 # 1. Create the main orchestrator
-my_flock = Flock(model="ollama_chat/gpt-oss")
+my_flock = Flock(model="openai/gpt-5")
 
 # 2. Declaratively define an agent
 brainstorm_agent = FlockFactory.create_default_agent(
@@ -14,7 +14,7 @@ brainstorm_agent = FlockFactory.create_default_agent(
 my_flock.add_agent(brainstorm_agent)
 
 # 4. Run the agent!
-input_data = {"topic": "A story about robot kittens"}
+input_data = {"topic": "Cats"}
 result = my_flock.run(agent="idea_generator", input=input_data)
 
 # The result is a dot-accessible object ready for downstream tasks
