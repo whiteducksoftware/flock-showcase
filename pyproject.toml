@@ -10,6 +10,9 @@ dependencies = [
     "ipykernel>=6.29.5",
     "ipywidgets>=8.1.7",
     "jupyter>=1.1.1",
+    "markitdown[all]>=0.1.3",
+    "azure-storage-blob>=12.25.1",
+    "azure-ai-translation-document>=1.1.0",
 ]
 
 
