@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import logging
 import os
 import sys
 from typing import Optional
@@ -10,17 +9,19 @@ import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
 from time import sleep
-import argparse
 import mimetypes
-import os
-import sys
 import time
 import requests
-from flock.core import Flock, FlockFactory, flock_type, flock_tool
+from flock.core import flock_tool
 from flock.core.logging.logging import get_logger as _get_logger
 from flock.core.logging.logging import configure_logging
 from azure.core.credentials import AzureKeyCredential
-from azure.ai.translation.document import DocumentTranslationClient, TranslationGlossary
+from azure.ai.translation.document import (
+    DocumentTranslationClient,
+    TranslationGlossary,
+    DocumentTranslationInput,
+    TranslationTarget,
+)
 from azure.storage.blob import (
     BlobServiceClient,
     ContainerSasPermissions,
@@ -145,6 +146,44 @@ def _guess_content_type(p: Path) -> str:
 
 def _backoff_sleep(attempt: int) -> None:
     time.sleep(min(20, 2 ** attempt))
+
+def _normalize_language_code(language: Optional[str]) -> Optional[str]:
+    if not language:
+        return None
+    lang = language.strip().lower()
+    # Common names to ISO codes
+    name_map = {
+        "german": "de",
+        "deutsch": "de",
+        "english": "en",
+        "englisch": "en",
+        "french": "fr",
+        "français": "fr",
+        "spanish": "es",
+        "español": "es",
+        "italian": "it",
+        "japanese": "ja",
+        "chinese": "zh-hans",
+        "simplified chinese": "zh-hans",
+        "traditional chinese": "zh-hant",
+        "portuguese": "pt",
+        "russian": "ru",
+        "korean": "ko",
+        "arabic": "ar",
+    }
+    if lang in name_map:
+        return name_map[lang]
+    # If already a BCP-47 like xx or xx-YY use lower-case primary subtag
+    if len(lang) == 2 and lang.isalpha():
+        return lang
+    if "-" in lang and len(lang.split("-", 1)[0]) == 2:
+        primary = lang.split("-", 1)[0]
+        return primary
+    # Fallback: take first two alphabetic characters
+    letters = [c for c in lang if c.isalpha()]
+    if len(letters) >= 2:
+        return (letters[0] + letters[1]).lower()
+    return lang
 
 @flock_tool
 def extract_markdown(in_path: str, out_path: str) -> str:
@@ -305,7 +344,7 @@ def translate_pdf_inplace(
     try:
         # 1) Upload the PDF
         blob_name = in_path.name
-        log.info("Uploading source PDF %s to container %s", blob_name, src_container)
+        log.info(f"Uploading source PDF {blob_name} to container {src_container}")
         _upload_blob(src_client, in_path, blob_name)
 
         # 2) (Optional) upload glossary and build its SAS URL
@@ -316,7 +355,7 @@ def translate_pdf_inplace(
             if not gpath.is_file():
                 raise RuntimeError(f"Glossary not found: {glossary_path}")
             g_blob = gpath.name
-            log.info("Uploading glossary %s", g_blob)
+            log.info(f"Uploading glossary {g_blob}")
             _upload_blob(src_client, gpath, g_blob)
             g_sas = _blob_sas(
                 account, account_key, src_container, g_blob, BlobSasPermissions(read=True), minutes=sas_minutes
@@ -342,41 +381,63 @@ def translate_pdf_inplace(
         )
         source_url = f"https://{account}.blob.core.windows.net/{src_container}?{src_sas}"
         target_url = f"https://{account}.blob.core.windows.net/{tgt_container}?{tgt_sas}"
-        log.info("Source URL: %s", source_url)
-        log.info("Target URL: %s", target_url)
+        log.info(f"Source URL: {source_url}")
+        log.info(f"Target URL: {target_url}")
 
         # 4) Start batch translation for exactly this blob (prefix filter)
         client = DocumentTranslationClient(endpoint, AzureKeyCredential(key))
         log.info("Starting batch translation (PDF supported only in batch).")
-        # Note: prefix limits to our single blob; glossary/category optional. :contentReference[oaicite:6]{index=6}
-        poller = client.begin_translation(
-            source_url,
-            target_url,
-            target_language,
-            source_language=source_language,
-            prefix=blob_name,  # restrict to this file name
-            category_id=category_id,
-            glossaries=[glossary_obj] if glossary_obj else None,
-        )
+        normalized_target = _normalize_language_code(target_language)
+        normalized_source = _normalize_language_code(source_language)
+        targets = [
+            TranslationTarget(
+                target_url=target_url,
+                language=normalized_target,
+                category_id=category_id,
+                glossaries=[glossary_obj] if glossary_obj else None,
+            )
+        ]
+        inputs = [
+            DocumentTranslationInput(
+                source_url=source_url,
+                targets=targets,
+                source_language=normalized_source,
+                prefix=blob_name,
+            )
+        ]
+        poller = client.begin_translation(inputs)
 
         # 5) Wait for completion and check per-document status
         result_iter = poller.result(timeout=poll_timeout_s)
         succeeded = 0
         failed = 0
+        def _status_is_success(st) -> bool:
+            try:
+                name = getattr(st, "name", None)
+                if isinstance(name, str) and name.lower() == "succeeded":
+                    return True
+            except Exception:
+                pass
+            s = str(st).lower()
+            return "succeeded" in s
+
         for doc in result_iter:
-            if str(doc.status).lower() == "succeeded":
+            status = getattr(doc, "status", None)
+            if _status_is_success(status):
                 succeeded += 1
-                log.info("Translated: %s -> %s", doc.source_document_url, doc.translated_to)
+                log.info(f"Translated: {getattr(doc, 'source_document_url', '?')} -> {getattr(doc, 'translated_document_url', '')} [{getattr(doc, 'translated_to', '')}]")
             else:
                 failed += 1
                 err = getattr(doc, "error", None)
-                log.error("Failed: %s | %s", getattr(doc, "source_document_url", "?"), getattr(err, "message", ""))
+                code = getattr(err, "code", "") if err else ""
+                msg = getattr(err, "message", "") if err else ""
+                log.error(f"Failed: {getattr(doc, 'source_document_url', '?')} | status={status} | code={code} | {msg}")
         if succeeded == 0:
             raise RuntimeError("Translation did not produce any output; see logs above.")
 
         # 6) Download the translated PDF from the target container
         #    There can be a short delay before the blob is visible. :contentReference[oaicite:7]{index=7}
-        out_path = Path(output_path) if output_path else in_path.with_stem(f"{in_path.stem}.{target_language}")
+        out_path = Path(output_path) if output_path else in_path.with_stem(f"{in_path.stem}.{_normalize_language_code(target_language) or target_language}")
         out_path = out_path.with_suffix(".pdf")
 
         blob_to_download = None
@@ -396,14 +457,14 @@ def translate_pdf_inplace(
         if not blob_to_download:
             raise RuntimeError("Translated blob not found in target container (eventual consistency delay?).")
 
-        log.info("Downloading translated PDF: %s", blob_to_download)
+        log.info(f"Downloading translated PDF: {blob_to_download}")
         blob_client = tgt_client.get_blob_client(blob_to_download)
         data = blob_client.download_blob().readall()
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             f.write(data)
 
-        log.info("Saved: %s", out_path)
+        log.info(f"Saved: {out_path}")
         return str(out_path)
 
     finally:
