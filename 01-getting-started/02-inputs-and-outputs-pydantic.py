@@ -3,7 +3,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 from flock.cli.utils import print_header, print_subheader, print_success
-from flock.core import Flock, FlockFactory
+from flock.core import DefaultAgent, Flock
 from flock.core.logging.logging import configure_logging
 from flock.core.registry import (
     flock_type,  # Decorator for registering custom types
@@ -28,7 +28,7 @@ class Movie(BaseModel):
     )
 
 
-MODEL = "ollama_chat/gpt-oss"
+MODEL = "azure/gpt-4.1"
 
 flock = Flock(
     name="example_02", description="The flock input and output syntax", model=MODEL
@@ -48,13 +48,15 @@ flock = Flock(
 # "field_name: type | description"
 #
 # If you need to specify the agents behavior, you can do so with the description field.
-presentation_agent = FlockFactory.create_default_agent(
+presentation_agent = DefaultAgent(
     name="my_movie_agent",
     description="Creates a fun movie about a given topic",  # Isn't just a description, but also a control mechanism
     input=MovieIdea,
     output=Movie,
 )
 flock.add_agent(presentation_agent)
+
+
 
 
 result = flock.run(agent=presentation_agent, input=MovieIdea(topic="AI agents", genre="comedy"))

@@ -1,14 +1,16 @@
-from flock.core import Flock, FlockFactory
+from flock.core import DefaultAgent, Flock
 
 # 1. Create the main orchestrator
-my_flock = Flock(model="openai/gpt-5")
+my_flock = Flock(model="openai/gpt-5")  # Uses DEFAULT_MODEL from environment if set
 
 # 2. Declaratively define an agent
-brainstorm_agent = FlockFactory.create_default_agent(
+brainstorm_agent = DefaultAgent(
     name="idea_generator",
     input="topic",
     output="catchy_title, key_points",
 )
+
+
 
 # 3. Add the agent to the Flock
 my_flock.add_agent(brainstorm_agent)

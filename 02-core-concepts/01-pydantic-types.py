@@ -1,6 +1,5 @@
 # 02-core-concepts/01-pydantic-types.py
-"""
-Purpose: Demonstrate using Pydantic models to define structured output.
+"""Purpose: Demonstrate using Pydantic models to define structured output.
 
 Use Case: Fantasy RPG Character Generator 🧙‍♂️ - Generate structured fantasy character data.
 
@@ -16,13 +15,14 @@ import os
 from pprint import pprint  # Using pprint for cleaner dict/list printing
 from typing import Literal
 
+from pydantic import BaseModel, Field  # Import Pydantic components
+from rich.console import Console
+
 from flock.cli.utils import print_header, print_subheader, print_warning
 from flock.core import Flock, FlockFactory
 from flock.core.registry import (
     flock_type,  # Decorator for registering custom types
 )
-from pydantic import BaseModel, Field  # Import Pydantic components
-from rich.console import Console
 
 # --- Configuration ---
 console = Console()
@@ -49,7 +49,7 @@ class FantasyCharacter(BaseModel):
     class_type: Literal["warrior", "mage", "rogue", "cleric", "ranger"] = Field(
         ..., description="The character's class."
     )
-    level: int = Field(..., description="Character level")
+    level: int = Field(..., description="Character level", ge=100, le=200)
     strength: int = Field(..., description="Strength stat")
     dexterity: int = Field(..., description="Dexterity stat")
     constitution: int = Field(..., description="Constitution stat")
