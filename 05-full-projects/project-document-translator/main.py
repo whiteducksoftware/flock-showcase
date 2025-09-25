@@ -15,16 +15,16 @@ class DocumentTranslator(BaseModel):
     output_pages: list[str] = Field(..., description="The translated output pages of the document. Decided by the agent.")
     unsure_translations: list[str] = Field(..., description="The unsure translations of the document. Decided by the agent.")
 
-# "groq/qwen-qwq-32b"    #"openai/gpt-4o" #
 
-flock = Flock(model="openai/gpt-5")
+
+flock = Flock(model="openai/gpt-4.1")
 
 translation_agent = FlockFactory.create_default_agent(
     name="translation_agent",
     description="An agent that translates a document from one language to another."
     "This agent uses translate_pdf_inplace for pdf files and translate_document_sync for other file types",
     input="path: str, output_language: str, output_dir: str",
-    output=f"output_path: str | formatted as a markdown link",
+    output="output_path: str | formatted as a markdown link",
     tools=[translate_document_sync, translate_pdf_inplace],
     stream=True,
     temperature=1.0,
@@ -33,13 +33,10 @@ translation_agent = FlockFactory.create_default_agent(
 
 flock.add_agent(translation_agent)
 
-path = "data/JOBFIT Nova Introduction EN.pdf"
+path = "data/1706.03762v7.pdf"
 output_language = "Deutsch"
 output_dir = "data_translated/"
 
-#translate_document_sync(path, "de", output_dir + "test.pdf")
-
-#flock.serve()
 
 result = flock.run(
     agent=translation_agent,

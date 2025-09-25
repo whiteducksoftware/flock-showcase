@@ -58,8 +58,7 @@ pip-delete-this-directory.txt
 
 .flock_ui_projects/
 
-data/
-data_translated/
+
 
 # Unit test / coverage reports
 htmlcov/
