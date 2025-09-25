@@ -1145,7 +1145,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.5.0b17"
+version = "0.5.0b18"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -1198,9 +1198,9 @@ dependencies = [
     { name = "werkzeug" },
     { name = "xlsxwriter" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b7/57/8c893b3233b32a396bd2e08781c8f52d36982d0b09e06d9e067bb4dea48e/flock_core-0.5.0b17.tar.gz", hash = "sha256:288a87cb997b5f6352fc6e76fa6566b631149f82444abbd4542f23c85fdc7295", size = 4582132, upload-time = "2025-09-25T19:31:56.116Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/20/b6/21bfbbedac79abc1eb2e033d338d3196e1d864af9f250d32b0d982905513/flock_core-0.5.0b18.tar.gz", hash = "sha256:61b9cd33a9a1f2aaf2fb6252c97eb40dff22e4800730608368f40e69a31579bf", size = 4582157, upload-time = "2025-09-25T20:02:09.669Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/79/62/488d6ce68fcb433b69ea02583ea7e52332f393ae69a1622fbd2c9fabd2ff/flock_core-0.5.0b17-py3-none-any.whl", hash = "sha256:a61f131eb455d73426c4b03191680ef5332e96d1d116d38ec31f690f3854c6bc", size = 650872, upload-time = "2025-09-25T19:31:54.452Z" },
+    { url = "https://files.pythonhosted.org/packages/69/7f/fff5ebb86c75c62e0116fea836b1d837d3fc33abeb327fb26cac64d6dbd4/flock_core-0.5.0b18-py3-none-any.whl", hash = "sha256:e03a77c9dbe45416532daedb00d83fa1d5a9572ccd24165c8008cd3178129009", size = 650885, upload-time = "2025-09-25T20:02:07.837Z" },
 ]
 
 [[package]]
@@ -1222,7 +1222,7 @@ dependencies = [
 requires-dist = [
     { name = "azure-ai-translation-document", specifier = ">=1.1.0" },
     { name = "azure-storage-blob", specifier = ">=12.25.1" },
-    { name = "flock-core", specifier = ">=0.5.0b17" },
+    { name = "flock-core", specifier = ">=0.5.0b18" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "ipywidgets", specifier = ">=8.1.7" },
     { name = "jupyter", specifier = ">=1.1.1" },
