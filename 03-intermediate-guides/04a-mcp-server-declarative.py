@@ -1,20 +1,14 @@
-import os
 
 from flock.core import Flock, FlockFactory
 
 github_mcp_server = FlockFactory.create_mcp_server(
-    name="github-mcp-server",
+    name="read-website-fast-mcp-server",
     enable_tools_feature=True,
     connection_params=FlockFactory.StdioParams(
-        command="docker",
+        command="npx",
         args=[
-            "run",
-            "-i",
-            "--init",
-            "--rm",
-            "-e",
-            "GITHUB_PERSONAL_ACCESS_TOKEN=" + os.getenv("GITHUB_PERSONAL_ACCESS_TOKEN"),
-            "mcp/github-mcp-server:latest",
+            "-y",
+            "@just-every/mcp-read-website-fast"
         ],
     ),
 )

@@ -3,9 +3,11 @@ import asyncio
 
 from pydantic import BaseModel, Field
 
-from flock.core.flock_registry import flock_type
+from flock.core.logging.logging import configure_logging
+from flock.core.registry.decorators import flock_type
 from flock.core.util.hydrator import flockclass
 
+configure_logging("DEBUG", "DEBUG")
 
 @flock_type
 class Movie(BaseModel):
@@ -17,7 +19,7 @@ class Movie(BaseModel):
 
 
 # --- Define your Pydantic Models ---
-@flockclass(model="openai/gpt-4o") 
+@flockclass(model="openai/gpt-5")
 class RandomPerson(BaseModel):
     name: str | None = None
     age: int | None = None
@@ -30,7 +32,7 @@ class RandomPerson(BaseModel):
     )
 
 
-@flockclass(model="openai/gpt-4o")
+@flockclass(model="openai/gpt-5")
 class BlogPostIdea(BaseModel):
     topic: str | None = None
     target_audience: str | None = None

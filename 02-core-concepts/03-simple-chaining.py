@@ -15,9 +15,9 @@ Highlights:
 import os
 
 from flock.cli.utils import print_header, print_subheader, print_success, print_warning
+from flock.components.routing import DefaultRoutingConfig, DefaultRoutingComponent
 from flock.core import Flock, FlockFactory
 from flock.core.logging.formatters.themes import OutputTheme
-from flock.routers.default.default_router import DefaultRouterConfig
 from rich.console import Console
 from rich.panel import Panel
 
@@ -112,14 +112,18 @@ console.print("Character Generator → Adventure Generator → Conclusion Genera
 
 # Method 1: Using Default Router (simple, deterministic chaining)
 console.print("\n[bold]Chaining Method:[/bold] Default Router (deterministic)")
+
+
 character_agent.add_component(
-    config_instance=DefaultRouterConfig(hand_off=adventure_agent.name),
-    component_name="adventure_router",
+    DefaultRoutingComponent(
+    name="adventure_router", config=DefaultRoutingConfig(next_agent="adventure_generator")
+)
 )
 
 adventure_agent.add_component(
-    config_instance=DefaultRouterConfig(hand_off=conclusion_agent.name),
-    component_name="conclusion_router",
+    DefaultRoutingComponent(
+    name="conclusion_router", config=DefaultRoutingConfig(next_agent="conclusion_generator")
+)
 )
 
 # Alternative Method (commented out): Using LLM Router

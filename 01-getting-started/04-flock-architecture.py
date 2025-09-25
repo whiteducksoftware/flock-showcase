@@ -105,7 +105,7 @@ print(
 
 # Now add routing to the research agent to chain to summary agent
 routing_component = DefaultRoutingComponent(
-    name="default_router", config=DefaultRoutingConfig(hand_off=summary_agent.name)
+    name="default_router", config=DefaultRoutingConfig(next_agent=summary_agent.name)
 )
 research_agent.components.append(routing_component)
 print(f"   Added routing: {research_agent.name} -> {summary_agent.name}")
