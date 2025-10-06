@@ -1,6 +1,6 @@
 import asyncio
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
@@ -33,7 +33,7 @@ pizza_master = (
 
 # 4. Run!
 async def main():
-    pizza_idea = MyDreamPizza(pizza_idea="the ultimate spicy pepperoni pizza")
+    pizza_idea = MyDreamPizza(pizza_idea="the ultimate pineapple pizza")
     await flock.publish(pizza_idea)
     await flock.run_until_idle()
     print("✅ Pizza recipe generated!")
