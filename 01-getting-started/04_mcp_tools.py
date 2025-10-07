@@ -1,5 +1,4 @@
 import asyncio
-from typing import Literal
 
 from pydantic import BaseModel
 
@@ -15,17 +14,17 @@ def write_file(string: str, file_path: str) -> None:
 
 
 @flock_type
-class Url(BaseModel):
-    url: str
+class Task(BaseModel):
+    description: str
 
 
 @flock_type
-class WebsiteAnalysis(BaseModel):
-    url: str
+class Report(BaseModel):
+    file_path: str
     title: str
+    researched_urls: list[str]
     headings: list[str]
-    entities: dict[str, str]
-    site_type: Literal["news", "blog", "opinion piece", "tweet"]
+    summary: str
 
 
 flock = Flock(model="openai/gpt-4.1")
@@ -41,23 +40,23 @@ flock.add_mcp(
 
 
 (
-    flock.agent("website_analyzer")
-    .description("Analysis of a website and writes a report to report.md")
-    .consumes(Url)
+    flock.agent("web_researcher")
+    .description("Researches info on the web with playwright and writes a report to report.md")
+    .consumes(Task)
     .with_mcps(["read-website-fast-mcp-server"])
     .with_tools([write_file])
-    .publishes(WebsiteAnalysis)
+    .publishes(Report)
 )
 
 
 # 4. Run!
 async def main():
-    idea = Url(
-        url="https://lite.cnn.com/travel/alexander-the-great-macedon-persian-empire-darius/index.html"
+    task = Task(
+        description="Find the latest news articles about AI advancements and summarize it. Search at least 3 different websites and include the headings of each article."
     )
-    await flock.publish(idea)
+    await flock.publish(task)
     await flock.run_until_idle()
-    print("✅ Website analysis report generated!")
+    print("✅ Website research report generated!")
 
 
 asyncio.run(main())

@@ -10,8 +10,7 @@ __pycache__/
 *.env*
 !*.env_template
 !*.env_minimal
-
-.local/
+report.md
 # Distribution / packaging
 .Python
 build/
