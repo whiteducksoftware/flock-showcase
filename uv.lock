@@ -484,7 +484,7 @@ wheels = [
 
 [[package]]
 name = "flock-core"
-version = "0.5.0b52"
+version = "0.5.0b53"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "devtools" },
@@ -508,21 +508,21 @@ dependencies = [
     { name = "uvicorn" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9f/e9/4d4c6e89bcd5cd40b903e503b4097f9287d8ac94c39816a80c5312d17eb9/flock_core-0.5.0b52.tar.gz", hash = "sha256:2d6f3f9b3a91d0c93b6c9a2d62069ddc83b5cb5ae1bc5afb35ca078714632e2b", size = 2012778, upload-time = "2025-10-06T23:46:46.533Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0a/ac/b4e71528ab2f055c636521dfc0f52d30d52680cf255beef9ac29ee37312b/flock_core-0.5.0b53.tar.gz", hash = "sha256:95e01eefbf9e7bf86036bd0797c334774937571d406d8f1f439b0e2bb87a649c", size = 2012987, upload-time = "2025-10-07T00:17:05.957Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/b5/bb6793b3132671aece9eb45674aae3aac52b6532bc49f3d153d0386dab1d/flock_core-0.5.0b52-py3-none-any.whl", hash = "sha256:410792cb9d5ff389a2e9cafee19ce1289cac8575331f25d30a8dfd86d0892995", size = 605544, upload-time = "2025-10-06T23:46:44.849Z" },
+    { url = "https://files.pythonhosted.org/packages/32/72/3b1726b2700479b1ceff6533c5bcdd16d09468987a88a992596e28962ef2/flock_core-0.5.0b53-py3-none-any.whl", hash = "sha256:d996453e78c9bf55e939dab3f5e9d0b82e2411eba2267ab661e10d9a93dbc5a4", size = 605584, upload-time = "2025-10-07T00:17:04.502Z" },
 ]
 
 [[package]]
 name = "flock-showcase"
-version = "0.5.0b52"
+version = "0.5.0b53"
 source = { virtual = "." }
 dependencies = [
     { name = "flock-core" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "flock-core", specifier = ">=0.5.0b52" }]
+requires-dist = [{ name = "flock-core", specifier = ">=0.5.0b53" }]
 
 [[package]]
 name = "frozenlist"
