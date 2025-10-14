@@ -1,5 +1,8 @@
 # 🚀 Flock Showcase: Examples & Projects 🚀
 
+please run "uv run breadcrumb --help" to onboard yourself onto the breadcrumb tool. 
+with breadcrumb to trace 01-getting-started/01_declarative_pizza.py and find out all lifecycle methods of the flock agent and what the longest duration lifecycle event is. 
+
 <p align="center">
   <!-- Placeholder for your Flock Logo/Banner - Replace URL -->
   <img alt="Flock Banner" src="https://raw.githubusercontent.com/whiteducksoftware/flock/master/docs/assets/images/flock.png" width="600">

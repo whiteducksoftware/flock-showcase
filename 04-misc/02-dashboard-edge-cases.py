@@ -1,7 +1,7 @@
 """
 Dashboard Edge Case Showcase
 ========================
-This example demonstrates advanced features of the Flock Flow dashboard, including:
+This example demonstrates advanced features of the Flock dashboard, including:
 - Conditional consumption of artifacts based on their content
 - Dynamic updates to the dashboard as new artifacts are published
 - Virtual agent edge persistence (e.g., edges from orchestrator.publish())
@@ -9,7 +9,7 @@ This example demonstrates advanced features of the Flock Flow dashboard, includi
 
 How to use:
 1. Run this script: `uv run examples/showcase/04b_dashboard_edge_cases.py`
-2. Open http://localhost:8000 in your browser
+2. Open http://localhost:8344 in your browser
 3. Click "Show Controls" to publish an initial Idea artifact
 4. Observe the workflow:
    - book_writer creates 3 BookHooks from the Idea
@@ -30,19 +30,18 @@ import asyncio
 
 from pydantic import BaseModel, Field
 
-from flock.logging.logging import configure_logging
 from flock.orchestrator import Flock
 from flock.registry import flock_type
 
 
 # 1. Define typed artifacts
 @flock_type
-class Topic(BaseModel):
-    topic: str = Field(description="The topic of the book")
+class Idea(BaseModel):
+    idea: str
 
 
 @flock_type
-class BookIdea(BaseModel):
+class BookHook(BaseModel):
     title: str = Field(description="Title in CAPS")
     summary: str = Field(description="Concise summary of the book")
 
@@ -62,21 +61,21 @@ class BookOutline(BaseModel):
 
 
 # 2. Create orchestrator
-flock = Flock("openai/gpt-4.1")
+flock = Flock()
 
 # 3. Define agents (they auto-connect through the blackboard!)
 book_idea_agent = (
     flock.agent("book_idea_agent")
     .description("Generates a compelling book idea.")
-    .consumes(Topic)
+    .consumes(Idea)
     .consumes(Review, where=lambda r: r.score <= 8)  # Conditional consumption
-    .publishes(BookIdea)
+    .publishes(BookHook)
 )
 
 reviewer_agent = (
     flock.agent("reviewer_agent")
     .description("A harsh critic. Reviews the book idea quality.")
-    .consumes(BookIdea)
+    .consumes(BookHook)
     .publishes(Review)
 )
 
@@ -90,19 +89,7 @@ chapter_agent = (
 
 # 4. Run!
 async def main():
-    # Configure logging to INFO level to enable dashboard event broadcasting
-    configure_logging(
-        flock_level="INFO",
-        external_level="WARNING",
-        specific_levels={
-            "dashboard.collector": "INFO",
-            "dashboard.websocket": "INFO",
-            "dashboard.service": "INFO",
-        },
-    )
-
     await flock.serve(dashboard=True)
-    print("✅ Book outline generated!")
 
 
 asyncio.run(main())

@@ -6,7 +6,6 @@ from flock.orchestrator import Flock
 from flock.registry import flock_type
 
 
-# 1. Define typed artifacts
 @flock_type
 class MyDreamPizza(BaseModel):
     pizza_idea: str
@@ -20,23 +19,17 @@ class Pizza(BaseModel):
     step_by_step_instructions: list[str]
 
 
-# 2. Create orchestrator
-flock = Flock("openai/gpt-4.1")
+# Use OPENAI_BASE_URL="http://localhost:1234/v1" in .env to point to LM Studio
+flock = Flock("openai/gpt-oss-20b")
 
-# 3. Define agent with 0 natural language
-pizza_master = (
-    flock.agent("pizza_master")
-    .consumes(MyDreamPizza)
-    .publishes(Pizza)
-)
+pizza_master = flock.agent("pizza_master").consumes(MyDreamPizza).publishes(Pizza)
 
 
-# 4. Run!
 async def main():
-    pizza_idea = MyDreamPizza(pizza_idea="the ultimate pineapple pizza")
+    pizza_idea = MyDreamPizza(pizza_idea="pizza with tartufo")
     await flock.publish(pizza_idea)
     await flock.run_until_idle()
-    print("✅ Pizza recipe generated!")
 
 
-asyncio.run(main(), debug=True)
+if __name__ == "__main__":
+    asyncio.run(main(), debug=True)
