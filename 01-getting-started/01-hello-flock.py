@@ -10,7 +10,7 @@ from flock.core import Flock, FlockFactory
 # https://docs.litellm.ai/docs/providers
 # You can use any model that is compatible with litellm.
 # and also use DEFAULT_MODEL to use the default model
-MODEL = "openai/gpt-5"
+MODEL = "openai/gpt-4.1"
 
 # --------------------------------
 # Create the flock and context
@@ -32,7 +32,7 @@ flock = Flock(
 presentation_agent = FlockFactory.create_default_agent(
     name="my_presentation_agent",
     input="topic",
-    output="fun_title, fun_slide_headers, fun_slide_summaries",
+    output="sad_title, sad_slide_headers, sad_slide_summaries, sad_emoji",
     use_cache=False,
 )
 flock.add_agent(presentation_agent)
