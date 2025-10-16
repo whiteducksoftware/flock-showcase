@@ -1,141 +1,262 @@
-# 🚀 Flock Showcase: Examples & Projects 🚀
+# 🦆 Flock Showcase 🦆
 
-please run "uv run breadcrumb --help" to onboard yourself onto the breadcrumb tool. 
-with breadcrumb to trace 01-getting-started/01_declarative_pizza.py and find out all lifecycle methods of the flock agent and what the longest duration lifecycle event is. 
+Welcome to the Flock examples! This directory contains a carefully curated learning path that takes you from your first "Hello World" agent to advanced multi-agent systems with security controls.
 
-<p align="center">
-  <!-- Placeholder for your Flock Logo/Banner - Replace URL -->
-  <img alt="Flock Banner" src="https://raw.githubusercontent.com/whiteducksoftware/flock/master/docs/assets/images/flock.png" width="600">
-</p>
-<p align="center">
-  <!-- Add relevant badges if you have them -->
-  <img alt="Python Version" src="https://img.shields.io/badge/python-3.10%2B-blue?style=for-the-badge&logo=python">
-  <a href="https://github.com/whiteducksoftware/flock" target="_blank"><img alt="Core Repo" src="https://img.shields.io/badge/Core%20Repo-flock-brightgreen?style=for-the-badge&logo=github"></a>
-  <!-- <a href="YOUR_LICENSE_URL" target="_blank"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge"></a> -->
-</p>
+## 📁 Two Flavors: CLI and Dashboard
 
----
+Each example comes in **two versions**:
 
-**Welcome to the Flock Showcase!** This repository is the official collection of examples, guides, and mini-projects demonstrating the capabilities of the [Flock Framework](https://github.com/whiteducksoftware/flock).
+- **`01-cli/`** - Run examples from the command line with detailed console output
+- **`02-dashboard/`** - Launch the interactive web dashboard to visualize agent execution
 
-Flock is a declarative AI agent framework designed to make building robust, scalable, and maintainable agent systems easier by focusing on *what* you want to achieve, rather than getting lost in complex prompt engineering.
+Both versions demonstrate the same concepts, just with different interfaces. Start with CLI to see what's happening under the hood, then switch to dashboard to visualize complex multi-agent interactions.
 
-This showcase will guide you from your very first simple agent ("Hello Flock!") all the way to building more complex, multi-agent applications and utilizing advanced features.
+## 🎓 Learning Path
 
-## ✨ Why Flock?
+The examples are ordered by complexity. Start at `01` and work your way up!
 
-Flock offers a different approach to agent development:
+### 01 - Declarative Pizza 🍕
+**Concept**: Your first Flock agent - declarative agent creation
 
-*   **Declarative:** Define agents by their inputs, outputs, tools, and descriptions. Let Flock handle the LLM interaction details.
-*   **Robust:** Built with production in mind, including optional Temporal integration for fault tolerance.
-*   **Modular:** Extend agent capabilities easily with pluggable Modules, Evaluators, and Routers.
-*   **Type-Safe:** Leverage Pydantic and Python type hints for clear contracts and validation.
-*   **Less Prompt Fuss:** Spend more time designing your system and less time tweaking brittle mega-prompts.
+The simplest possible Flock application. One agent, one task, pure magic. Shows you how to:
+- Create a Flock orchestrator
+- Define an agent declaratively
+- Publish a message and let the agent handle it
 
-Dive into the [Core Flock Documentation](https://whiteducksoftware.github.io/flock/) for a deeper understanding of the concepts.
+**Run it**:
+```bash
+# CLI version
+uv run examples/01-cli/01_declarative_pizza.py
 
-## 📂 Repository Structure
-
-The examples are organized progressively to help you learn step-by-step:
-
-*   **`01-getting-started/`**: The absolute basics. Run your first agent in minutes and see the declarative approach in action (e.g., *Wacky Title Generator*, *Alien Pet Profile Creator*).
-*   **`02-core-concepts/`**: Understand fundamental Flock ideas with simple, focused examples (e.g., *Declarative Haiku Bot*, *Pydantic Fantasy Character Sheet*, *Simple Recipe->Shopping List Chain*).
-*   **`03-intermediate-guides/`**: Tackle common practical tasks and combine core concepts (e.g., *Custom Dad Joke Tool*, *Customer Support Router*, *Basic RAG Bot*, *Saving/Loading Flocks*).
-*   **`04-advanced-features/`**: Explore powerful capabilities like batch processing, evaluation, streaming, hierarchical memory, and API/CLI interactions (e.g., *Social Post Variations*, *Evaluating RAG*, *Live Story Stream*).
-*   **`05-full-projects/`**: See larger, multi-file examples integrating multiple Flock features into mini-applications (e.g., *AI Dungeon Master's Assistant*, *Codebase Documenter*, *Emoji Adventure Game*).
-*   **`cookbook/`**:  Small, focused code snippets for specific patterns or configurations.
-
-Each numbered directory contains a `README.md` explaining the concepts covered in that section.
-
-## 🚀 Getting Started
-
-Ready to take flight? Follow these steps:
-
-1.  **Prerequisites:**
-    *   Python 3.10 or higher.
-    *   `git` installed.
-    *   `pip` or preferably `uv` ([Install uv](https://docs.astral.sh/uv/getting-started/installation/)) for package management.
-
-2.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/whiteducksoftware/flock-showcase.git
-    cd flock-showcase
-    ```
-
-3.  **Set up Virtual Environment (without `uv`):**
-    *   Using standard `venv`:
-        ```bash
-        python -m venv .venv
-        source .venv/bin/activate  # Linux/macOS
-        # .\.venv\Scripts\activate  # Windows (cmd)
-        # .\.venv\Scripts\Activate.ps1 # Windows (PowerShell)
-        ```
-
-4.  **Install Dependencies:**
-    ```bash
-    # Using uv (recommended)
-    uv sync
-
-    # Using pip
-    pip install -r requirements.txt
-    ```
-    *(`requirements.txt` should ideally include `flock-core[all]` and any other specific libraries used in the examples like `pandas`, `datasets`, `nltk`, etc.)*
-
-5.  **Configure API Keys:**
-    *   Copy the example environment file:
-        ```bash
-        cp .env.example .env
-        ```
-    *   **IMPORTANT:** Open the `.env` file in your text editor and add your API keys for the LLM providers (OpenAI, Anthropic, Google Gemini, etc.) and any tools (Tavily, GitHub PAT, Azure Search) used by the examples you want to run. Flock uses `litellm`, so refer to their documentation for required environment variable names.
-
-## ▶️ Running Examples
-
-1.  **Activate your virtual environment** (if not already active):
-    ```bash
-    source .venv/bin/activate # Or your specific activation command
-    ```
-2.  **Navigate** to the directory of the example you want to run:
-    ```bash
-    cd 01-getting-started/
-    ```
-3.  **Execute** the Python script:
-    ```bash
-    python 01-hello-flock.py
-
-    # or
-
-    uv run 01-hello-flock.py
-    ```
-4.  **Observe!** See Flock in action. Remember that examples using specific tools or LLMs require the corresponding API key to be set in your `.env` file.
-
-## 💡 Examples Overview
-
-*   **01 Getting Started:** Your first agent, basic typed output, simple tool use.
-*   **02 Core Concepts:** Declarative approach, Pydantic types, basic chaining, multi-tool agents, modules, context.
-*   **03 Intermediate Guides:** Custom tools, dynamic routing (LLM/Agent), basic RAG, knowledge graph memory, saving/loading.
-*   **04 Advanced Features:** Batch processing, agent evaluation, streaming, hierarchical memory, API/CLI interaction.
-*   **05 Full Projects:** Complete mini-applications demonstrating integrated Flock usage.
-*   **Cookbook:** Quick solutions for specific tasks.
-
-## 🤝 Contributing
-
-Contributions are welcome! If you have ideas for new examples, improvements to existing ones, or find bugs, please feel free to:
-
-*   Open an [Issue](https://github.com/YOUR_USERNAME/flock-showcase/issues).
-*   Submit a [Pull Request](https://github.com/YOUR_USERNAME/flock-showcase/pulls).
-
-Please follow standard coding practices and ensure examples are clear and runnable.
-
-## 📜 License
-
-This showcase repository is licensed under the [MIT License](LICENSE). <!-- Update LICENSE if different -->
-
-## 🔗 Links
-
-*   **Flock Core Repository:** [https://github.com/whiteducksoftware/flock](https://github.com/whiteducksoftware/flock)
-*   **Flock Documentation:** [https://whiteducksoftware.github.io/flock/](https://whiteducksoftware.github.io/flock/)
-*   **white duck GmbH:** [https://whiteduck.de](https://whiteduck.de)
+# Dashboard version
+uv run examples/02-dashboard/01_declarative_pizza.py
+```
 
 ---
 
-Happy Flocking! 🐦‍⬛💨
+### 02 - Input and Output 📝
+**Concept**: Structured data with Pydantic models
+
+Learn how to use Pydantic models for type-safe input and output. Shows you:
+- Defining custom message types with `@flock_type`
+- Simple request/response pattern
+- Type validation and structured data
+
+**Run it**:
+```bash
+uv run examples/01-cli/02_input_and_output.py
+uv run examples/02-dashboard/02_input_and_output.py
+```
+
+---
+
+### 03 - Code Detective 🔍
+**Concept**: Complex structured outputs
+
+A bug diagnosis agent that outputs detailed structured analysis. Demonstrates:
+- Rich Pydantic models with nested data
+- Field descriptions and constraints
+- Real-world structured output patterns
+
+**Run it**:
+```bash
+uv run examples/01-cli/03_code_detective.py
+uv run examples/02-dashboard/03_code_detective.py
+```
+
+---
+
+### 04 - Input and Output (Advanced) 📊
+**Concept**: Multi-field structured data
+
+More complex input/output patterns with multiple fields and validation. Shows:
+- Advanced Pydantic field types
+- Validation constraints
+- Complex data transformation patterns
+
+**Run it**:
+```bash
+uv run examples/01-cli/04_input_and_output.py
+uv run examples/02-dashboard/04_input_and_output.py
+```
+
+---
+
+### 05 - MCP and Tools 🛠️
+**Concept**: MCP (Model Context Protocol) integration
+
+Connect your agents to external tools and capabilities. Demonstrates:
+- Enabling MCP servers
+- Tool usage in agents
+- Extending agent capabilities beyond pure LLM reasoning
+
+**Run it**:
+```bash
+uv run examples/01-cli/05_mcp_and_tools.py
+uv run examples/02-dashboard/05_mcp_and_tools.py
+```
+
+---
+
+### 06 - MCP Roots 📂
+**Concept**: Advanced MCP configuration with filesystem access
+
+Control what parts of your filesystem agents can access. Shows:
+- MCP server configuration with roots
+- Filesystem security boundaries
+- Custom MCP server options
+
+**Run it**:
+```bash
+uv run examples/01-cli/06_mcp_roots.py
+uv run examples/02-dashboard/06_mcp_roots.py
+```
+
+---
+
+### 07 - Web Detective 🌐
+**Concept**: MCP + Tools working together
+
+A research agent that combines web search with file tools. Demonstrates:
+- Multiple MCP servers in one application
+- Agents using different tools in concert
+- Real-world research workflow
+
+**Run it**:
+```bash
+uv run examples/01-cli/07_web_detective.py
+uv run examples/02-dashboard/07_web_detective.py
+```
+
+---
+
+### 08 - Band Formation 🎸
+**Concept**: Linear multi-agent pipeline
+
+Three agents working in sequence: recruiter → audition → band manager. Shows:
+- Agent-to-agent communication
+- Linear workflow pipelines
+- Message passing between agents
+
+**Run it**:
+```bash
+uv run examples/01-cli/08_band_formation.py
+uv run examples/02-dashboard/08_band_formation.py
+```
+
+---
+
+### 09 - Debate Club 🗣️
+**Concept**: Parallel agent execution
+
+Three agents working simultaneously: debater_pro, debater_con, and judge. Demonstrates:
+- Parallel agent activation
+- Multiple agents consuming the same message type
+- Consensus building patterns
+
+**Run it**:
+```bash
+uv run examples/01-cli/09_debate_club.py
+uv run examples/02-dashboard/09_debate_club.py
+```
+
+---
+
+### 10 - News Agency 📰
+**Concept**: Complex multi-agent pipeline with multiple inputs
+
+A news organization with reporter, editor, and publisher. Shows:
+- Agents consuming multiple message types
+- Complex coordination patterns
+- Real-world workflow modeling
+
+**Run it**:
+```bash
+uv run examples/01-cli/10_news_agency.py
+uv run examples/02-dashboard/10_news_agency.py
+```
+
+---
+
+### 11 - Tracing Detective 🔬
+**Concept**: Observability with traced runs
+
+Track and debug your multi-agent workflows. Demonstrates:
+- Using `flock.traced_run()` for observability
+- Execution tracing
+- Debugging complex agent interactions
+- Trace storage in `.flock/traces.duckdb`
+
+**Run it**:
+```bash
+uv run examples/01-cli/11_tracing_detective.py
+uv run examples/02-dashboard/11_tracing_detective.py
+```
+
+---
+
+### 12 - Secret Agents 🕵️
+**Concept**: Visibility controls for sensitive data
+
+Intelligence agency with classified and public information flows. Shows:
+- `Visibility.PRIVATE` for sensitive data
+- `Visibility.PUBLIC` for shareable information
+- Security boundaries in multi-agent systems
+- Protecting classified information while sharing public statements
+
+**Run it**:
+```bash
+uv run examples/01-cli/12_secret_agents.py
+uv run examples/02-dashboard/12_secret_agents.py
+```
+
+---
+
+## 🚀 Quick Start
+
+1. **Install Flock**:
+   ```bash
+   uv pip install -e .
+   ```
+
+2. **Pick an example** (start with 01):
+   ```bash
+   uv run examples/01-cli/01_declarative_pizza.py
+   ```
+
+3. **Try the dashboard version**:
+   ```bash
+   uv run examples/02-dashboard/01_declarative_pizza.py
+   ```
+
+4. **Work through the examples in order** - each builds on concepts from the previous ones!
+
+## 💡 Tips
+
+- **Start with CLI** - See detailed output and understand what's happening
+- **Switch to Dashboard** - Visualize complex multi-agent interactions
+- **Read the code** - Each example is intentionally minimal and well-commented
+- **Experiment** - Modify examples to see how Flock responds
+- **Check traces** - After running example 11, explore `.flock/traces.duckdb`
+
+## 🎯 Key Concepts Progression
+
+```
+Simple → Complex
+Single Agent → Multi-Agent
+Synchronous → Parallel
+Unstructured → Structured
+Local → External Tools
+Open → Secured
+```
+
+## 📚 Next Steps
+
+After completing these examples, you're ready to:
+- Build your own multi-agent systems
+- Integrate custom MCP servers
+- Design complex agent workflows
+- Implement security controls
+- Debug with tracing
+
+**Happy building! 🦆**

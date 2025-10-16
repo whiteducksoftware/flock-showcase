@@ -15,7 +15,7 @@ class UserRequest(BaseModel):
 @flock_type
 class Response(BaseModel):
     answer: str
-    confidence: float = Field(ge=0.0, le=100)
+    confidence: float = Field(ge=0.0, le=1.0)
     sources: list[str]
 
 
