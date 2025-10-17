@@ -28,6 +28,7 @@ class Movie(BaseModel):
 
 @flock_type
 class MovieScript(BaseModel):
+    title: str
     characters: list[str] = Field(min_length=5)
     chapter_headings: list[str] = Field(min_length=5)
     scenes: list[str] = Field(min_length=5)
@@ -36,6 +37,7 @@ class MovieScript(BaseModel):
 
 @flock_type
 class MovieCampaign(BaseModel):
+    title: str
     taglines: list[str] = Field(..., description="Catchy phrases to promote the movie. IN ALL CAPS")
     poster_descriptions: list[str] = Field(max_length=3)
 
@@ -52,6 +54,17 @@ multi_master = (
     flock.agent("multi_master").consumes(Idea).publishes(Movie, MovieScript, MovieCampaign, fan_out=3)
 )
 
+# compare with
+
+# multi_master = (
+#     flock.agent("multi_master").consumes(Idea).publishes(Movie, MovieScript, MovieCampaign).publishes(Movie, MovieScript, MovieCampaign).publishes(Movie, MovieScript, MovieCampaign)
+# )
+
+# or
+
+# multi_master = (
+#     flock.agent("multi_master").consumes(Idea).publishes(Movie, fan_out=3).publishes(MovieScript, fan_out=3).publishes(MovieCampaign, fan_out=3)
+# )
 
 async def main():
     idea = Idea(story_idea="An action thriller set in space")

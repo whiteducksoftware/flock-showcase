@@ -1,9 +1,24 @@
+"""
+Getting Started: Input and Output
+
+This example shows how to create agents that consume input and produce output,
+with proper type definitions and documentation.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 
 from pydantic import BaseModel, Field
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -29,7 +44,8 @@ assistant = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     request = UserRequest(
         message="What are the key benefits of async programming?", priority="high"
     )
@@ -48,6 +64,18 @@ async def main():
         print(f"📚 Sources: {len(response.sources)}")
         for i, source in enumerate(response.sources, 1):
             print(f"   {i}. {source}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

@@ -1,3 +1,12 @@
+"""
+Getting Started: News Agency
+
+This example demonstrates a realistic multi-agent workflow simulating a news
+organization with reporters, editors, and publishers.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 from datetime import datetime, timezone
 
@@ -5,6 +14,12 @@ from pydantic import BaseModel, Field
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -70,7 +85,8 @@ publisher = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     event = NewsEvent(
         headline="Major Tech Company Announces Breakthrough in Quantum Computing",
         location="Silicon Valley, CA",
@@ -92,6 +108,18 @@ async def main():
         print(f"   {story.final_headline}")
         print(f"   Channels: {', '.join(story.distribution_channels)}")
         print(f"   Expected reach: {story.expected_reach:,}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

@@ -1,9 +1,24 @@
+"""
+Getting Started: Tracing Detective
+
+This example demonstrates the unified tracing feature that captures complete
+execution history for debugging and analysis. Shows how to use traced_run() wrapper.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 
 from pydantic import BaseModel
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -51,7 +66,8 @@ prosecutor = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     print("🔍 Starting traced investigation workflow...\n")
 
     async with flock.traced_run("mystery_cases"):
@@ -82,6 +98,18 @@ async def main():
         print(f"   Recommendation: {report.recommendation}")
 
     print("\n💡 Check .flock/traces.duckdb for complete execution tracing!")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

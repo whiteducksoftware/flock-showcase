@@ -1,3 +1,12 @@
+"""
+Getting Started: Code Detective
+
+This example demonstrates analyzing structured data (bug reports) and generating
+detailed diagnoses with multiple output fields.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 from datetime import datetime
 
@@ -5,6 +14,12 @@ from pydantic import BaseModel, Field
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -35,7 +50,8 @@ code_detective = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     bug_reports = [
         BugReport(
             title="App crashes when user clicks submit",
@@ -64,6 +80,18 @@ async def main():
         print(f"   Fix: {diagnosis.suggested_fix}")
         print(f"   Hotfix: {diagnosis.requires_hotfix}")
         print(f"   Confidence: {diagnosis.confidence_score:.2f}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

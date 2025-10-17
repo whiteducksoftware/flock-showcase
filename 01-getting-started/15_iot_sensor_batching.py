@@ -1,13 +1,10 @@
 """
-Combined Features: JoinSpec + BatchSpec for IoT Sensor Processing
+Getting Started: IoT Sensor Batching
 
-Real-world scenario: Smart factory monitors temperature and pressure sensors
-from multiple machines. System correlates readings from same machine (JoinSpec),
-then batches 5 correlated readings together for bulk analysis (BatchSpec).
+This example demonstrates combining JoinSpec + BatchSpec for complex real-world scenarios:
+correlates sensor readings by device, then batches them for bulk analysis.
 
-This combines:
-- JoinSpec: Correlate temp + pressure by device_id
-- BatchSpec: Batch 5 correlated pairs for efficient processing
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
 """
 
 import asyncio
@@ -18,6 +15,12 @@ from pydantic import BaseModel, Field
 from flock.orchestrator import Flock
 from flock.registry import flock_type
 from flock.subscription import BatchSpec, JoinSpec
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -98,7 +101,8 @@ async def simulate_device_readings(
     )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     print("🏭 Smart Factory IoT Sensor Processing")
     print("=" * 60)
     print("📡 Combined JoinSpec + BatchSpec for efficient monitoring\n")
@@ -187,6 +191,18 @@ async def main():
     print("   1️⃣  JoinSpec: Correlates temp + pressure by device")
     print("   2️⃣  BatchSpec: Batches 5 correlations for bulk analysis")
     print("   3️⃣  Efficient: Processes multiple devices together!")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

@@ -1,11 +1,10 @@
 """
-JoinSpec Example: Medical Diagnostic Correlation
+Getting Started: Medical Diagnostics with JoinSpec
 
-Real-world scenario: Hospital diagnostic system that correlates X-ray images
-with lab results for the same patient before sending to radiologist for analysis.
+This example demonstrates JoinSpec: correlating multiple artifact types (X-ray + Lab results)
+for the same entity (patient) before processing together.
 
-JoinSpec ensures both diagnostics arrive and are correlated by patient_id
-within a 5-minute window.
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
 """
 
 import asyncio
@@ -16,6 +15,12 @@ from pydantic import BaseModel, Field
 from flock.orchestrator import Flock
 from flock.registry import flock_type
 from flock.subscription import JoinSpec
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -64,7 +69,8 @@ radiologist = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     print("🏥 Medical Diagnostic Correlation System")
     print("=" * 50)
     print("📋 Scenario: X-ray + Lab results correlation\n")
@@ -150,6 +156,18 @@ async def main():
     print("⏳ Patient C-003 still waiting for lab results...")
     print("\n💡 KEY FEATURE: JoinSpec ensures both diagnostics arrive")
     print("   before sending to radiologist for analysis!")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

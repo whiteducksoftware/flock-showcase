@@ -1,3 +1,12 @@
+"""
+Getting Started: MCP Roots
+
+This example demonstrates using MCP with the roots feature for filesystem access,
+allowing agents to search and analyze files within specified directories.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 from pathlib import Path
 
@@ -6,6 +15,12 @@ from pydantic import BaseModel
 from flock.mcp import StdioServerParameters
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -82,7 +97,8 @@ except Exception as e:
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     request = FileSearchRequest(
         filename="README.md",
         analysis_request="Summarize the project's purpose and list the main features",
@@ -109,6 +125,18 @@ async def main():
     else:
         print("❌ No analysis was generated!")
         print("💡 Make sure the filesystem MCP is installed (see prerequisites)")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

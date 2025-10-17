@@ -24,7 +24,7 @@ class Movie(BaseModel):
 flock = Flock()
 
 # Single Publish
-fan_out_movie_master = flock.agent("fan_out_movie_master").consumes(Idea).publishes(Movie, fan_out=4)
+fan_out_movie_master = flock.agent("fan_out_movie_master").consumes(Idea).publishes(Movie,fan_out=4)
 
 
 async def main():

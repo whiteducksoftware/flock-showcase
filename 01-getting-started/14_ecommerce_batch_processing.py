@@ -1,11 +1,10 @@
 """
-BatchSpec Example: E-commerce Order Batch Processing
+Getting Started: E-commerce Batch Processing
 
-Real-world scenario: Online store batches payment processing to reduce
-transaction fees. Instead of processing one order at a time ($0.30/transaction),
-batch 25 orders together for bulk discount ($0.10/transaction).
+This example demonstrates BatchSpec: grouping multiple artifacts (orders)
+together for efficient batch processing to reduce costs.
 
-Cost savings: 25 orders x $0.20 saved = $5.00 per batch!
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
 """
 
 import asyncio
@@ -16,6 +15,12 @@ from pydantic import BaseModel, Field
 from flock.orchestrator import Flock
 from flock.registry import flock_type
 from flock.subscription import BatchSpec
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -74,7 +79,8 @@ async def simulate_orders(flock: Flock, count: int):
             print(f"   📦 Received {i} orders...")
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     print("🛒 E-Commerce Batch Payment Processing")
     print("=" * 60)
     print("💰 Cost Optimization: Batching reduces transaction fees!\n")
@@ -142,6 +148,18 @@ async def main():
     print(f"💵 TOTAL SAVINGS: ${total_savings:.2f}")
     print("\n💡 KEY FEATURE: BatchSpec optimizes costs by batching!")
     print("   Size threshold OR timeout - whichever comes first wins!")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

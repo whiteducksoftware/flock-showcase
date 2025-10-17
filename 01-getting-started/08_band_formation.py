@@ -1,9 +1,24 @@
+"""
+Getting Started: Band Formation
+
+This example demonstrates a multi-agent pipeline where each agent depends on
+the output of the previous one, creating a complete workflow.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 
 from pydantic import BaseModel
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -63,7 +78,8 @@ marketer = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     concept = BandConcept(
         genre="Folk-Electronic Fusion",
         target_audience="Millennials who love both nature and technology",
@@ -84,6 +100,18 @@ async def main():
         print(f"   Press Release: {copy.press_release[:200]}...")
         print(f"   Social Hooks: {copy.social_media_hooks[:2]}")
         print(f"   Demographics: {copy.target_demographics}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

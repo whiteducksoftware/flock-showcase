@@ -1,3 +1,12 @@
+"""
+Getting Started: Debate Club
+
+This example demonstrates complex agent interactions with conditional subscriptions
+(where clauses) and feedback loops where agents can re-run based on outcomes.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 from typing import Literal
 
@@ -5,6 +14,12 @@ from pydantic import BaseModel, Field
 
 from flock.orchestrator import Flock
 from flock.registry import flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -78,4 +93,42 @@ judge = (
     .publishes(DebateVerdict)
 )
 
-asyncio.run(flock.serve(dashboard=True), debug=True)
+
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
+    topic = DebateTopic(
+        statement="Blackboard multi-agent systems will revolutionize AI development and are way cooler than traditional graph based architectures.",
+        context="The AI agent system of the future",
+        stakes="Future of humanity depends on it",
+    )
+
+    print(f"⚖️  Starting debate: {topic.statement}\n")
+
+    await flock.publish(topic)
+    await flock.run_until_idle()
+
+    verdicts = await flock.store.get_by_type(DebateVerdict)
+
+    if verdicts:
+        verdict = verdicts[0]
+        print("🏆 VERDICT:")
+        print(f"   Winner: {verdict.winner}")
+        print(f"   Reasoning: {verdict.reasoning}")
+        print(f"   Key Factors: {verdict.key_factors}")
+        print(f"   Vote Margin: {verdict.vote_margin}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

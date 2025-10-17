@@ -1,3 +1,12 @@
+"""
+Getting Started: Movie Generation with Validation
+
+This example demonstrates creating complex structured outputs with nested types
+and field validation rules.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 from typing import Literal
 
@@ -6,13 +15,16 @@ from pydantic import BaseModel, Field
 from flock.orchestrator import Flock
 from flock.registry import flock_type
 
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
+
 
 @flock_type
 class MovieIdea(BaseModel):
-    idea: str = Field(
-        default="A movie about cat owners during the rise of AI",
-        description="A short description of a movie idea",
-    )
+    idea: str
 
 
 @flock_type
@@ -72,4 +84,26 @@ movie_master = (
 )
 
 
-asyncio.run(flock.serve(dashboard=True), debug=True)
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
+    movie_idea = MovieIdea(idea="A movie about cat owners during the rise of AI")
+    await flock.publish(movie_idea)
+    await flock.run_until_idle()
+    movies = await flock.store.get_by_type(Movie)
+    print(f"🎬 Title: {movies[0].fun_title}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
+
+
+if __name__ == "__main__":
+    asyncio.run(main(), debug=True)

@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "flock-core>=0.5.8",
+    "flock-core>=0.5.10",
 ]
 
 

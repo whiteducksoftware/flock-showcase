@@ -1,3 +1,12 @@
+"""
+Getting Started: Secret Agents
+
+This example demonstrates visibility controls in Flock, where different agents
+have different access levels to artifacts (public vs private vs classified).
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 
 from pydantic import BaseModel, Field
@@ -5,6 +14,12 @@ from pydantic import BaseModel, Field
 from flock.orchestrator import Flock
 from flock.registry import flock_type
 from flock.visibility import Visibility
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_type
@@ -65,7 +80,8 @@ press_secretary = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     mission = Mission(
         codename="Operation Nightfall",
         target="Foreign intelligence network",
@@ -92,6 +108,18 @@ async def main():
         print("\n📢 PUBLIC INFORMATION:")
         print(f"   {statement.headline}")
         print(f"   {statement.official_response[:100]}...")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":

@@ -1,3 +1,12 @@
+"""
+Getting Started: Web Detective
+
+This example demonstrates multi-agent workflows where agents consume and produce
+in a chain, with each agent building on previous results.
+
+🎛️  CONFIGURATION: Set USE_DASHBOARD to switch between CLI and Dashboard modes
+"""
+
 import asyncio
 
 from pydantic import BaseModel, Field
@@ -5,6 +14,12 @@ from pydantic import BaseModel, Field
 from flock.mcp import StdioServerParameters
 from flock.orchestrator import Flock
 from flock.registry import flock_tool, flock_type
+
+# ============================================================================
+# 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
+# ============================================================================
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+# ============================================================================
 
 
 @flock_tool
@@ -86,7 +101,8 @@ web_digger = (
 )
 
 
-async def main():
+async def main_cli():
+    """CLI mode: Run agents and display results in terminal"""
     query = ResearchQuery(
         topic="Are blackboard multi agent systems the future of AI?",
         depth="comprehensive and detailed",
@@ -113,6 +129,18 @@ async def main():
         print(f"   Sources: {len(report.sources)}")
         print(f"   Confidence: {report.confidence_level:.2f}")
         print(f"   Saved to: {report.file_path}")
+
+
+async def main_dashboard():
+    """Dashboard mode: Serve with interactive web interface"""
+    await flock.serve(dashboard=True)
+
+
+async def main():
+    if USE_DASHBOARD:
+        await main_dashboard()
+    else:
+        await main_cli()
 
 
 if __name__ == "__main__":
