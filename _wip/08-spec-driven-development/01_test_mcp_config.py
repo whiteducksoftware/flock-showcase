@@ -8,7 +8,7 @@ This tests filesystem MCP access before building the full workflow.
 import asyncio
 from pathlib import Path
 
-from flock.orchestrator import Flock
+from flock import Flock
 
 from agents import create_specialist_agents
 from artifacts import AnalyzeRequest

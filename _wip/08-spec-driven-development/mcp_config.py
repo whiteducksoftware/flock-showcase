@@ -10,7 +10,7 @@ This module configures the MCP tools that our orchestrators and specialists need
 from pathlib import Path
 
 from flock.mcp import StdioServerParameters
-from flock.orchestrator import Flock
+from flock import Flock
 
 
 def configure_mcps(flock: Flock) -> dict[str, bool]:

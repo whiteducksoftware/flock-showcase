@@ -15,7 +15,7 @@ would include SDD and PLAN phases, review cycles, and user confirmations.
 import asyncio
 from pathlib import Path
 
-from flock.orchestrator import Flock
+from flock import Flock
 
 from agents import create_specialist_agents
 from artifacts import (

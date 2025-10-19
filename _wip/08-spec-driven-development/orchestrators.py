@@ -7,7 +7,7 @@ publishing work items, collecting results, and coordinating specialist agents.
 
 from datetime import timedelta
 
-from flock.orchestrator import Flock
+from flock import Flock
 from flock.subscription import BatchSpec, JoinSpec
 
 from artifacts import (

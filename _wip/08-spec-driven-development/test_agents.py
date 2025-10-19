@@ -4,7 +4,7 @@ Test specialist agents and their subscription patterns.
 
 import asyncio
 
-from flock.orchestrator import Flock
+from flock import Flock
 
 from agents import create_specialist_agents
 from artifacts import (

@@ -1379,7 +1379,7 @@ uv run python examples/03-the-dashboard/01_declarative_pizza.py  # Start dashboa
 
 **Create orchestrator:**
 ```python
-from flock.orchestrator import Flock
+from flock import Flock
 orchestrator = Flock("openai/gpt-4o")
 ```
 

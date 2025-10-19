@@ -11,13 +11,13 @@ import asyncio
 
 from pydantic import BaseModel, Field
 
-from flock.orchestrator import Flock
+from flock import Flock
 from flock.registry import flock_type
 
 # ============================================================================
 # 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
 # ============================================================================
-USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
+USE_DASHBOARD = True  # Set to True for dashboard mode, False for CLI mode
 # ============================================================================
 
 

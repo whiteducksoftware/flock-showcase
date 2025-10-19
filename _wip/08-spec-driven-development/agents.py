@@ -5,7 +5,7 @@ This module defines all specialist agents that work together through the blackbo
 to accomplish specification, analysis, implementation, and refactoring tasks.
 """
 
-from flock.orchestrator import Flock
+from flock import Flock
 
 from artifacts import (
     AnalyzeRequest,

@@ -13,7 +13,7 @@ This shows how the blackboard pattern enables emergent discovery.
 import asyncio
 from pathlib import Path
 
-from flock.orchestrator import Flock
+from flock import Flock
 
 from agents import create_specialist_agents
 from artifacts import AnalyzeRequest, DocumentationUpdate, PatternDiscovery

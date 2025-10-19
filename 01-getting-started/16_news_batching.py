@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, Field
 
 from flock.mcp import StdioServerParameters
-from flock.orchestrator import Flock
+from flock import Flock
 from flock.registry import flock_type
 from flock.subscription import BatchSpec
 
