@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 from flock import Flock
 from flock.registry import flock_type
-from flock.visibility import Visibility
+from flock.core.visibility import Visibility
 
 
 @flock_type

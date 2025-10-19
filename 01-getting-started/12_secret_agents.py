@@ -13,7 +13,7 @@ from pydantic import BaseModel, Field
 
 from flock import Flock
 from flock.registry import flock_type
-from flock.visibility import Visibility
+from flock.core.visibility import PrivateVisibility, PublicVisibility
 
 # ============================================================================
 # 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
@@ -62,21 +62,21 @@ field_agent = (
     flock.agent("field_agent")
     .description("Gathers intelligence and assesses threats in the field")
     .consumes(Mission)
-    .publishes(IntelReport, visibility=Visibility.PRIVATE)
+    .publishes(IntelReport, visibility=PrivateVisibility(agents={"analyst"}))
 )
 
 analyst = (
     flock.agent("analyst")
     .description("Analyzes intelligence reports for strategic planning")
-    .consumes(IntelReport, visibility=Visibility.PRIVATE)
-    .publishes(ClassifiedBriefing, visibility=Visibility.PRIVATE)
+    .consumes(IntelReport)
+    .publishes(ClassifiedBriefing)
 )
 
 press_secretary = (
     flock.agent("press_secretary")
     .description("Creates public statements while protecting classified information")
     .consumes(Mission)
-    .publishes(PublicStatement, visibility=Visibility.PUBLIC)
+    .publishes(PublicStatement)
 )
 
 
