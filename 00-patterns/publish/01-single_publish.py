@@ -21,10 +21,10 @@ class Movie(BaseModel):
 
 
 @flock_type
-class Book(BaseModel):
+class MovieScript(BaseModel):
     title: str
-    author: str
-    genre: str
+    acts: list[str]
+    chapters: list[str]
     summary: str
 
 
@@ -32,10 +32,11 @@ flock = Flock()
 
 # Single Publish
 single_movie_master = flock.agent("single_movie_master").consumes(Idea).publishes(Movie)
+single_script_master = flock.agent("single_script_master").consumes(Movie).publishes(MovieScript)
 
 
 async def main():
-    idea = Idea(story_idea="A romantic comedy set in a pizza shop")
+    idea = Idea(story_idea="A romantic comedy set in a cat cafe")
     await flock.publish(idea)
     await flock.run_until_idle()
 

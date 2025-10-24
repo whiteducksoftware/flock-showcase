@@ -48,7 +48,7 @@ class Pizza(BaseModel):
 # "pizza_master" is looking for "MyPizzaIdea" messages on the blackboard
 # and will itself pin "Pizza" messages to the board
 # ============================================================================
-flock = Flock("openai/gpt-5")
+flock = Flock("openai/gpt-4.1")
 
 pizza_master = flock.agent("pizza_master").consumes(MyPizzaIdea).publishes(Pizza)
 
