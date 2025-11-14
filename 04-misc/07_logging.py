@@ -4,6 +4,18 @@ from pydantic import BaseModel
 
 from flock import Flock
 from flock.registry import flock_type
+from flock.logging.logging import configure_logging, get_logger
+
+configure_logging(
+    flock_level="DEBUG",
+    external_level="ERROR",
+    specific_levels={
+        "flock.engines.dspy_engine": "DEBUG",  # Enable detailed streaming logs
+    }
+)
+
+
+logger = get_logger(__name__)
 
 
 @flock_type
@@ -21,10 +33,10 @@ class Movie(BaseModel):
 
 
 @flock_type
-class MovieScript(BaseModel):
+class Book(BaseModel):
     title: str
-    acts: list[str]
-    chapters: list[str]
+    author: str
+    genre: str
     summary: str
 
 
@@ -32,11 +44,11 @@ flock = Flock()
 
 # Single Publish
 single_movie_master = flock.agent("single_movie_master").consumes(Idea).publishes(Movie)
-single_script_master = flock.agent("single_script_master").consumes(Movie).publishes(MovieScript)
 
 
 async def main():
-    idea = Idea(story_idea="A romantic comedy set in a cat cafe")
+    logger.info("Starting main function")
+    idea = Idea(story_idea="A romantic comedy set in a pizza shop")
     await flock.publish(idea)
     await flock.run_until_idle()
 

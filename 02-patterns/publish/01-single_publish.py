@@ -20,15 +20,22 @@ class Movie(BaseModel):
     plot_summary: str
 
 
+@flock_type
+class Book(BaseModel):
+    title: str
+    author: str
+    genre: str
+    summary: str
+
 
 flock = Flock()
 
 # Single Publish
-fan_out_movie_master = flock.agent("fan_out_movie_master").consumes(Idea).publishes(Movie,fan_out=4)
+single_movie_master = flock.agent("single_movie_master").consumes(Idea).publishes(Movie)
 
 
 async def main():
-    idea = Idea(story_idea="A sci-fi about cats discovering how to use AI")
+    idea = Idea(story_idea="A romantic comedy set in a pizza shop")
     await flock.publish(idea)
     await flock.run_until_idle()
 

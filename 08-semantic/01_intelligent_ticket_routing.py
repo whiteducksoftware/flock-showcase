@@ -25,7 +25,7 @@ from flock.registry import flock_type
 # ============================================================================
 # 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
 # ============================================================================
-USE_DASHBOARD = True  # Set to True for dashboard mode, False for CLI mode
+USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
 # ============================================================================
 
 
@@ -80,7 +80,7 @@ flock = Flock()
 # Matches: "SQL injection", "XSS attack", "data breach", "unauthorized access"
 security_team = (
     flock.agent("security_team")
-    .consumes(SupportTicket, semantic_match="security vulnerability exploit breach", semantic_threshold=0.35)
+    .consumes(SupportTicket, semantic_match="security vulnerability exploit breach")
     .publishes(SecurityAlert)
 )
 
@@ -89,7 +89,7 @@ security_team = (
 billing_team = (
     flock.agent("billing_team")
     .consumes(
-        SupportTicket, semantic_match="payment charge refund billing subscription", semantic_threshold=0.35
+        SupportTicket, semantic_match="payment charge refund billing subscription"
     )
     .publishes(BillingResponse)
 )
@@ -98,7 +98,7 @@ billing_team = (
 # Matches: "can't login", "error message", "not working", "broken feature"
 tech_support = (
     flock.agent("tech_support")
-    .consumes(SupportTicket, semantic_match="technical issue error bug problem device", semantic_threshold=0.35)
+    .consumes(SupportTicket, semantic_match="technical issue error bug problem device")
     .publishes(TechnicalResponse)
 )
 

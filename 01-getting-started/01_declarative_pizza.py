@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 from flock import Flock
 from flock.registry import flock_type
 
+
 # ============================================================================
 # 🎛️  CONFIGURATION: Switch between CLI and Dashboard modes
 # ============================================================================
@@ -30,7 +31,8 @@ USE_DASHBOARD = False  # Set to True for dashboard mode, False for CLI mode
 @flock_type
 class MyPizzaIdea(BaseModel):
     pizza_idea: str = Field(
-        default="Pizza with pineapple", description="A short description of your dream pizza"
+        default="Pizza with pineapple",
+        description="A short description of your dream pizza",
     )
 
 
@@ -48,7 +50,7 @@ class Pizza(BaseModel):
 # "pizza_master" is looking for "MyPizzaIdea" messages on the blackboard
 # and will itself pin "Pizza" messages to the board
 # ============================================================================
-flock = Flock("openai/gpt-4.1")
+flock = Flock()
 
 pizza_master = flock.agent("pizza_master").consumes(MyPizzaIdea).publishes(Pizza)
 
