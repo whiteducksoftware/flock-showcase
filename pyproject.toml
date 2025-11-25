@@ -1,11 +1,11 @@
 [project]
 name = "flock-showcase"
-version = "0.5.33"
+version = "0.5.39"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "flock-core[semantic]>=0.5.33",
+    "flock-core[semantic]>=0.5.39",
 ]
 
 
